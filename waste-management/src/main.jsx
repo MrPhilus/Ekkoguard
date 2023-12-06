@@ -4,11 +4,16 @@ import App from "./App.jsx";
 import "./index.css";
 import { store } from "./redux/store.js";
 import { Provider } from "react-redux";
+import { ToastContainer } from "react-toastify";
+import { BrowserRouter as Router } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router>
+        <App />
+        <ToastContainer />
+      </Router>
     </Provider>
   </React.StrictMode>
 );

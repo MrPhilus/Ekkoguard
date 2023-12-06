@@ -1,6 +1,13 @@
+import { Link } from "react-router-dom";
 import styles from "./CustomButton.module.css";
 
-const CustomButton = ({ onClick, containerStyle, buttonText, disabled }) => {
+const CustomButton = ({
+  onClick,
+  containerStyle,
+  buttonText,
+  disabled,
+  buttonLink,
+}) => {
   return (
     <button
       disabled={disabled}
@@ -8,7 +15,7 @@ const CustomButton = ({ onClick, containerStyle, buttonText, disabled }) => {
       // className={`btn${containerStyle}`}
       onClick={onClick}
     >
-      {buttonText}
+      <Link to={buttonLink}>{buttonText}</Link>
     </button>
   );
 };

@@ -8,6 +8,7 @@ const Card = ({
   cardTitle,
   disabled,
   buttonText,
+  buttonLink,
   onClick,
 }) => {
   return (
@@ -22,6 +23,7 @@ const Card = ({
             disabled={disabled}
             onClick={onClick}
             containerStyle={styles.button}
+            buttonLink={buttonLink}
             buttonText={buttonText}
           />
         </div>
