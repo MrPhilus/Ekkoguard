@@ -32,10 +32,9 @@ const Services = () => {
           <FaRegUserCircle className={styles.user} />
         ) : (
           // <CustomButton buttonText="Log In" />
-          <button className="btn btn-outline text-rose-500">Accent</button>
+          <button className="btn btn-outline text-rose-500">Log In</button>
         )}
       </section>
-      <p className="text-red-500 text-2xl">howdy</p>
       <section className={styles.main}>
         <Card
           src={cardImages["disposal"]}
