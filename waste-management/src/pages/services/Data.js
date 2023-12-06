@@ -44,7 +44,7 @@ export const services = [
   },
   {
     imgSrc: cardImages["newsfeed"],
-    cardTitle: "news Feed",
+    cardTitle: "News Feed",
     cardHeader: "Stay Updated",
     cardText: "Get the latest information, share your views...",
     buttonText: "Coming soon",
