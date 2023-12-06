@@ -5,6 +5,7 @@ const CustomButton = ({ onClick, containerStyle, buttonText, disabled }) => {
     <button
       disabled={disabled}
       className={!disabled ? ` ${containerStyle}` : `${styles.disabled}`}
+      // className={`btn${containerStyle}`}
       onClick={onClick}
     >
       {buttonText}
