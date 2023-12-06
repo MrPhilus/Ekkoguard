@@ -6,13 +6,14 @@ const CustomButton = ({
   containerStyle,
   buttonText,
   disabled,
-  buttonLink,
+  icon,
+  iconRight,
+  isLoading = false,
 }) => {
   return (
     <button
       disabled={disabled}
       className={!disabled ? ` ${containerStyle}` : `${styles.disabled}`}
-      // className={`btn${containerStyle}`}
       onClick={onClick}
     >
       <Link to={buttonLink}>{buttonText}</Link>
