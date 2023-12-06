@@ -13,8 +13,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
-      <Route path="signup" element={<SignUp />} />
-      <Route path="login" element={<Login />} />
+      <Route path="/signup" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
       <Route path="pagenotfound" element={<PageNotFound />} />
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}
