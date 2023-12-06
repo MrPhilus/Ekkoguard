@@ -1,18 +1,19 @@
 .main {
-  padding: 7rem;
+  padding: 0rem;
   display: flex;
+  width: 70%;
+  margin: auto;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 4rem;
-  border: 1px solid red;
 }
 
 .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 2rem;
+  padding: 1rem;
   padding-left: 3rem;
   padding-right: 3rem;
 }

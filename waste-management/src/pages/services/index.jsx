@@ -23,22 +23,6 @@ const Services = () => {
     console.log("clicked");
   };
 
-  // const [dropDown, setDropDown] = useState(false);
-  const [user, setUser] = useState("");
-
-  const logIn = () => {
-    dispatch(userLogIn(user));
-    navigate(`/services/${user}`);
-  };
-
-  // const Login = () => {
-  //   navigate();
-  // };
-
-  // const toggleUserDropdown = () => {
-  //   setDropDown(!dropDown);
-  // };
-
   return (
     <div>
       <section className={styles.header}>
@@ -46,12 +30,7 @@ const Services = () => {
 
         <h1>SERVICES</h1>
 
-        {/* {!dropDown ? (
-          <FaRegUserCircle className={styles.user} onClick={logIn} />
-        ) : (
-          <CustomButton buttonText={"Login"} />
-        )} */}
-        <FaRegUserCircle className={styles.user} onClick={logIn} />
+        <FaRegUserCircle className={styles.user} />
       </section>
 
       <section className={styles.main}>
@@ -84,27 +63,30 @@ const Services = () => {
         />
 
         <Card
+          disabled
           src={cardImages["history"]}
           cardTitle={"Schedule History"}
           cardHeader={"View History"}
           cardText={"View your past schedules, Check your history..."}
-          buttonText={"Proceed"}
+          buttonText={"Coming Soon"}
         />
 
         <Card
-          src={cardImages["history"]}
-          cardTitle={"Schedule History"}
-          cardHeader={"View History"}
-          cardText={"View your past schedules, Check your history..."}
-          buttonText={"Proceed"}
+          disabled
+          src={cardImages["resources"]}
+          cardTitle={"Resources"}
+          cardHeader={"View Resources"}
+          cardText={"View resources to help understand recycling..."}
+          buttonText={"Coming Soon"}
         />
 
         <Card
-          src={cardImages["history"]}
-          cardTitle={"Schedule History"}
-          cardHeader={"View History"}
-          cardText={"View your past schedules, Check your history..."}
-          buttonText={"Proceed"}
+          disabled
+          src={cardImages["newsfeed"]}
+          cardTitle={"News Feed"}
+          cardHeader={"Stay Updated"}
+          cardText={"Get the latest information, share your views..."}
+          buttonText={"Coming Soon"}
         />
       </section>
     </div>

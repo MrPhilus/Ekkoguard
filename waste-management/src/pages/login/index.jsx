@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CustomButton from "../../components/CustomButton";
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase.config";
+
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const Login = () => {
@@ -10,23 +9,6 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate(); // Get the navigate function
-
-  const login = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      await signInWithEmailAndPassword(auth, email, password);
-      // Login successful
-      console.log("Login successful");
-      console.log(auth, email, password);
-
-      // Redirect to the services page
-      navigate("/services");
-    } catch (error) {
-      // Handle any login errors here
-      console.error("Login error:", error);
-    }
-  };
 
   return (
     <div>
