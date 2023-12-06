@@ -6,6 +6,7 @@ const CustomButton = ({
   containerStyle,
   buttonText,
   disabled,
+  buttonLink,
   icon,
   iconRight,
   isLoading = false,

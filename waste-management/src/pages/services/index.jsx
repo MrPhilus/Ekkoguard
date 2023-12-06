@@ -27,14 +27,15 @@ const Services = () => {
       <section className={styles.header}>
         <IoMdArrowRoundBack className={styles.back} onClick={handleBackClick} />
 
-        <h1 className="text-2xl font-extrabold">SERVICES</h1>
+        {/* <h1 className="text-2xl font-extrabold">SERVICES</h1> */}
 
         {isLoggedIn ? (
           <FaRegUserCircle className={styles.user} />
         ) : (
           <CustomButton
-            containerStyle="btn btn-outline btn-sm text-black"
+            containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-24"
             buttonText="Log In"
+            buttonLink={'/login'}
           />
         )}
       </section>

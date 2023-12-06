@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CustomButton from "../../components/CustomButton";
+import CustomInput from "../../components/customInputs/CustomInputs";
 
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 
@@ -12,8 +13,9 @@ const Login = () => {
 
   return (
     <div>
-      <form action="" onSubmit={login}>
+      <form action="">
         <label htmlFor="">Email</label>
+        <CustomInput/>
         <input
           type="email"
           placeholder="Enter Email"
