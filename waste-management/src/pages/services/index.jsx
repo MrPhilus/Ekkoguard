@@ -3,16 +3,14 @@ import Card from "../../components/card";
 import styles from "./services.module.css";
 import { useNavigate } from "react-router-dom";
 import { cardImages } from "./images";
-import { useSelector, useDispatch } from "react-redux";
 
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
-import { userLogIn } from "../../redux/slices/authSlice";
 import CustomButton from "../../components/CustomButton";
 
 const Services = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch();
 
   const handleBackClick = () => {
     navigate("/");
@@ -30,7 +28,11 @@ const Services = () => {
 
         <h1>SERVICES</h1>
 
-        <FaRegUserCircle className={styles.user} />
+        {isLoggedIn ? (
+          <FaRegUserCircle className={styles.user} />
+        ) : (
+          <button className="btn btn-outline text-rose-500">Accent</button>
+        )}
       </section>
 
       <section className={styles.main}>
