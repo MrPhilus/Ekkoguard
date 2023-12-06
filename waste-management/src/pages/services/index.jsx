@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
+import CustomButton from "../../components/CustomButton";
 
 import { services } from "./Data";
 
