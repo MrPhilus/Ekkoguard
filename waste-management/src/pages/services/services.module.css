@@ -1,0 +1,24 @@
+.main {
+  padding: 7rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  border: 1px solid red;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2rem;
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.back,
+.user {
+  cursor: pointer;
+  font-size: 3vmax;
+}
