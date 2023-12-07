@@ -11,6 +11,8 @@ import Login from "./pages/login";
 import ForgotPassword from "./pages/passwordReset/ForgotPassword";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
 import Blog from "./pages/Blog/Index";
+import Feedback from "./pages/feedBack";
+// import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -22,11 +24,13 @@ function App() {
       <Route path="/passwordreset" element={<PasswordReset />} />
       <Route path="/pagenotfound" element={<PageNotFound />} />
       <Route path="/newsfeed" element={<Blog />} />
+      <Route path="feedback" element={<Feedback />} />
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}
       {/* </Route> */}
 
       <Route path="disposal" element={<Disposal />} />
+      {/* <Route path="profile" element={<Profile />} /> */}
       <Route path="/services" element={<Services />}>
         <Route path="disposal" element={<Disposal />} />
         <Route path="recycling" element={<WasteRecyclingPage />} />
