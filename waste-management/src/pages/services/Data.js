@@ -47,7 +47,7 @@ export const services = [
     cardTitle: "News Feed",
     cardHeader: "Stay Updated",
     cardText: "Get the latest information, share your views...",
-    buttonText: "Coming soon",
+    buttonText: "Proceed",
     buttonLink: "/newsfeed",
   },
 ];

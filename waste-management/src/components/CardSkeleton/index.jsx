@@ -1,38 +1,108 @@
+import React, { useState, useEffect } from "react";
 import "./styles.css";
+import { newsFeed } from "../../pages/newsFeed/Data";
 
+const CardSkeleton = ({
+  img,
+  title,
+  profileImg,
+  postId,
+  id,
+  name,
+  authorName,
+  email,
+  body,
+  fetchDataCallback,
+  ...rest
+}) => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState(null);
 
-const CardSkeleton = () => {
+  useEffect(() => {
+    const fetchData = async () => {
+      // Simulate API fetch after 3 seconds
+      setTimeout(async () => {
+        try {
+          const dummyData = {
+            title: "Title",
+            body: "Body",
+            authorName: "Author",
+          };
+
+          setData(dummyData);
+          setIsLoading(false);
+          if (fetchDataCallback) {
+            fetchDataCallback(dummyData); // You can pass the data to a callback function if needed
+          }
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      }, 3000); // Simulate 3 seconds delay
+    };
+
+    fetchData();
+  }, [fetchDataCallback]);
+
   return (
     <>
-      <div className="card" style={{marginBottom: '2em'}}>
-        <div className="card-header animated-bg" id="header">
-          &nbsp;
-        </div>
-        <div className="card-content">
-          <h3 className="card-title animated-bg animated-bg-text" id="title">
+      {isLoading ? (
+        <div className="card" style={{ marginBottom: "2em" }}>
+          <div className="card-header animated-bg">
             &nbsp;
-          </h3>
-          <p className="card-excerpt" id="excerpt">
-            &nbsp;
-            <span className="animated-bg animated-bg-text">&nbsp;</span>
-            <span className="animated-bg animated-bg-text">&nbsp;</span>
-            <span className="animated-bg animated-bg-text">&nbsp;</span>
-          </p>
-          <div className="author">
-            <div className="profile-img animated-bg" id="profile_img">
+          </div>
+          <div className="card-content">
+            <h3 className="card-title animated-bg animated-bg-text" id="title">
               &nbsp;
-            </div>
-            <div className="author-info">
-              <strong className="animated-bg animated-bg-text" id="name">
-                &nbsp;
-              </strong>
-              <small className="animated-bg animated-bg-text" id="date">
-                &nbsp;
-              </small>
+            </h3>
+            <p className="card-excerpt" id="excerpt">
+              &nbsp;
+              <span className="animated-bg animated-bg-text">&nbsp;</span>
+              <span className="animated-bg animated-bg-text">&nbsp;</span>
+              <span className="animated-bg animated-bg-text">&nbsp;</span>
+            </p>
+            <div className="author">
+              <div className="profile-img animated-bg" id="profile_img">
+              &nbsp;
+              </div>
+              <div className="author-info">
+                <strong className="animated-bg animated-bg-text">
+                  &nbsp;
+                </strong>
+                <small className="animated-bg animated-bg-text" >
+                  &nbsp;
+                </small>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="card" style={{ marginBottom: "2em" }}>
+          <div className="card-header" id="header">
+            <img src={img} alt="" />
+          </div>
+          <div className="card-content">
+            <h3 className="card-title" id="title">
+              {title}
+            </h3>
+            <p className="card-excerpt" id="excerpt">
+              {body}
+            </p>
+            <div className="author">
+              <div className="profile-img" id="profile_img">
+                <img src={profileImg} alt="" />
+              </div>
+              <div className="author-info">
+                <strong className="" id="name">
+                  {authorName}
+                </strong>
+                <small className="" id="date">
+                  {email}
+                </small>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

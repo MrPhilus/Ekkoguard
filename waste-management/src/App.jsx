@@ -10,9 +10,9 @@ import SignUp from "./pages/signUp";
 import Login from "./pages/login";
 import ForgotPassword from "./pages/passwordReset/ForgotPassword";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
-import Blog from "./pages/Blog/Index";
 import Feedback from "./pages/feedBack";
 // import Profile from "./pages/profile";
+import NewsFeed from "./pages/newsFeed";
 
 function App() {
   return (
@@ -23,7 +23,7 @@ function App() {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/passwordreset" element={<PasswordReset />} />
       <Route path="/pagenotfound" element={<PageNotFound />} />
-      <Route path="/newsfeed" element={<Blog />} />
+      <Route path="/newsfeed" element={<NewsFeed />} />
       <Route path="feedback" element={<Feedback />} />
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}

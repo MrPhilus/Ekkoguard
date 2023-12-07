@@ -1,9 +1,38 @@
-import React from "react";
+import CardSkeleton from "../../components/CardSkeleton";
+
+import img from "../../assets/images/coming-soon-bg.jpg";
+import { newsFeed } from "./Data";
 
 const NewsFeed = () => {
   return (
     <div>
-      <h1>News</h1>
+      <div className="flex flex-col items-center justify-center mb-14">
+        <h1 className="text-3xl">page under construction!</h1>
+        <h2 className="text-xl">stay tuned on!</h2>
+      </div>
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          // border: "2px solid red",
+          placeItems: "center",
+        }}
+      >
+        {newsFeed.map((feed) => {
+          return (
+            <CardSkeleton
+              key={feed.id}
+              img={img}
+              title={feed.title}
+              body={feed.body}
+              profileImg={img}
+              authorName={feed.author}
+              email={feed.email}
+            />
+          );
+        })}
+        <h1></h1>
+      </div>
     </div>
   );
 };
