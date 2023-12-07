@@ -12,7 +12,7 @@ import ForgotPassword from "./pages/passwordReset/ForgotPassword";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
 import Blog from "./pages/Blog/Index";
 import Feedback from "./pages/feedBack";
-import Profile from "./pages/profile";
+// import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -30,7 +30,7 @@ function App() {
       {/* </Route> */}
 
       <Route path="disposal" element={<Disposal />} />
-      <Route path="profile" element={<Profile />} />
+      {/* <Route path="profile" element={<Profile />} /> */}
       <Route path="/services" element={<Services />}>
         <Route path="disposal" element={<Disposal />} />
         <Route path="recycling" element={<WasteRecyclingPage />} />
