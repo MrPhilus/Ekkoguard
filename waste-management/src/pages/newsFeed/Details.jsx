@@ -11,7 +11,7 @@ const Details = () => {
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center p-10">
       {isLoading ? (
-        <div className=" w-full h-full flex flex-col gap-4 border justify-evenly p-2">
+        <div className=" w-full h-full flex flex-col gap-4 justify-evenly p-2">
           <div className="skeleton h-80 w-full"></div>
           <div className="skeleton h-4 w-28"></div>
           <div className="flex flex-col gap-4">
@@ -23,12 +23,12 @@ const Details = () => {
           </div>
         </div>
       ) : (
-        <div className=" w-full h-full flex flex-col gap-4 border justify-between p-2">
+        <div className=" w-full h-full flex flex-col gap-4 justify-between">
           <div className="h-80 w-full">
             <img className="w-full h-full" src={img} alt="" />
           </div>
-          <div className=" h-4 w-28">Lorem, ipsum.</div>
           <div className="flex flex-col gap-4">
+          <div className="">Lorem, ipsum.</div>
             <div className=" h-full w-full">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
               eaque quibusdam voluptate hic ut omnis, itaque at sed pariatur
@@ -73,22 +73,7 @@ const Details = () => {
               Sint laborum esse sit doloribus ratione reprehenderit itaque sequi
               blanditiis impedit nobis distinctio, reiciendis obcaecati, omnis
               debitis sapiente vitae harum? Quod assumenda quos ad officiis fuga
-              vitae itaque quasi, doloremque, consequuntur ducimus corporis
-              libero quidem iure et modi distinctio voluptate corrupti at, nemo
-              odit? Recusandae cumque, neque magni non consequuntur unde quis.
-              Natus, voluptate amet laboriosam excepturi facere et quae earum
-              porro voluptatibus sapiente, voluptatum, vel cumque illo hic.
-              Neque mollitia porro rem quos nobis. Beatae nobis dolorum quo
-              deserunt dolore quas libero praesentium ipsam consequuntur maiores
-              esse explicabo pariatur quia illum natus nemo veniam vero,
-              dignissimos ullam fugit impedit asperiores officiis fugiat? Esse
-              ut laboriosam est et delectus, nam itaque dolorem quibusdam,
-              excepturi, atque eos dolore. Accusamus natus, recusandae velit
-              labore, enim totam iure et quis ea, reiciendis consequatur. Rem
-              nemo esse doloremque quod eveniet cupiditate quidem a, ut ex
-              excepturi fugiat consectetur illum corrupti molestias non eum
-              pariatur, minima eaque expedita. Fugit esse numquam omnis.
-              Voluptas, itaque non?
+              vitae itaque quasi, doloremque
             </div>
           </div>
         </div>
