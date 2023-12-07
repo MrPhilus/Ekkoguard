@@ -21,6 +21,13 @@ export const DisposalForm = () => {
   });
 };
 
+export const FeedbackForm = () => {
+  return Yup.object({
+    feedbackSubject: Yup.string().required("Enter your subject"),
+    feedbackMessage: Yup.string().required("Enter your message"),
+  });
+};
+
 export const SignupSchemaEmail = () => {
   return Yup.object({
     organizationName: Yup.string().required("This field is required"),

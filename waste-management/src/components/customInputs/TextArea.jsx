@@ -1,4 +1,4 @@
-import ErrorMark from '../../assets/svg/redError.svg';
+import ErrorMark from "../../assets/svg/redError.svg";
 
 const TextArea = ({
   id,
@@ -15,24 +15,14 @@ const TextArea = ({
   readOnly,
 }) => {
   return (
-    <div className="form-control w-full ">
-      <label className="label" htmlFor={id}>
-        <span className="label-text text-gray-900 font-medium">{labelText}</span>
-        <span className="label-text-alt">{labelRightText}</span>
-      </label>
-
-      <div className="relative">
-        <textarea
-          name={name}
-          onBlur={onBlur}
-          onChange={onChange}
-          readOnly={readOnly}
-          value={value}
-          className={`textarea textarea-bordered w-1/3 ${inputError ? 'input-error' : ''} ${className || ''}`}
-          placeholder={placeholder}
-        ></textarea>
+    <label className="form-control">
+      <div className="label">
+        <span className="label-text font-bold">{labelText}</span>
       </div>
-
+      <textarea
+        className="textarea textarea-bordered h-24"
+        placeholder={placeholder}
+      ></textarea>
       {inputError && (
         <label className="label">
           <span className="label-text-alt text-red-600 flex gap-1">
@@ -42,7 +32,7 @@ const TextArea = ({
           <span className="label-text-alt">{inputErrorRight}</span>
         </label>
       )}
-    </div>
+    </label>
   );
 };
 
