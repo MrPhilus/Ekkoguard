@@ -10,6 +10,7 @@ import SignUp from "./pages/signUp";
 import Login from "./pages/login";
 import ForgotPassword from "./pages/passwordReset/ForgotPassword";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
+import Feedback from "./pages/feedBack";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/passwordreset" element={<PasswordReset />} />
       <Route path="pagenotfound" element={<PageNotFound />} />
+      <Route path="feedback" element={<Feedback />} />
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}
       {/* </Route> */}

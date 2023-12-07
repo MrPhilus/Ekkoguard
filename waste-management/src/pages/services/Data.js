@@ -15,8 +15,8 @@ export const services = [
     cardTitle: "Waste Recycling",
     cardHeader: "Schedule Recycling",
     cardText: "Separate your recyclables, Request a collection...",
-    buttonText: "Proceed",
-    buttonLink: "/recycling",
+    buttonText: "Coming Soon",
+    buttonLink: "/pagenotfound",
   },
   {
     imgSrc: cardImages["wallet"],
