@@ -1,5 +1,5 @@
 import CardSkeleton from "../../components/CardSkeleton";
-
+import { Link } from "react-router-dom";
 import img from "../../assets/images/coming-soon-bg.jpg";
 import { newsFeed } from "./Data";
 
@@ -20,15 +20,16 @@ const NewsFeed = () => {
       >
         {newsFeed.map((feed) => {
           return (
-            <CardSkeleton
-              key={feed.id}
-              img={img}
-              title={feed.title}
-              body={feed.body}
-              profileImg={img}
-              authorName={feed.author}
-              email={feed.email}
-            />
+            <Link key={feed.id} to='/details'>
+              <CardSkeleton
+                img={img}
+                title={feed.title}
+                body={feed.body}
+                profileImg={img}
+                authorName={feed.author}
+                email={feed.email}
+              />
+            </Link>
           );
         })}
         <h1></h1>

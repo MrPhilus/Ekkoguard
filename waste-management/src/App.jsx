@@ -15,6 +15,7 @@ import Feedback from "./pages/feedBack";
 import NewsFeed from "./pages/newsFeed";
 import ComingSoon from "./pages/comingSoon/Index";
 import Profile from "./pages/profile";
+import Details from "./pages/newsFeed/Details";
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
       <Route path="/pagenotfound" element={<PageNotFound />} />
       <Route path="/comingsoon" element={<ComingSoon />} />
       <Route path="/newsfeed" element={<NewsFeed />} />
+      <Route path="/details" element={<Details />} />
       <Route path="feedback" element={<Feedback />} />
       <Route path="profile" element={<Profile />} />
       {/* <Route path="/services" element={<Services />} /> */}
