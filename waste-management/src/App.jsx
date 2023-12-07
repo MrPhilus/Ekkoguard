@@ -13,6 +13,7 @@ import PasswordReset from "./pages/passwordReset/PasswordReset";
 import Feedback from "./pages/feedBack";
 // import Profile from "./pages/profile";
 import NewsFeed from "./pages/newsFeed";
+import Details from "./pages/newsFeed/Details";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
       <Route path="/passwordreset" element={<PasswordReset />} />
       <Route path="/pagenotfound" element={<PageNotFound />} />
       <Route path="/newsfeed" element={<NewsFeed />} />
+      <Route path="/details" element={<Details />} />
       <Route path="feedback" element={<Feedback />} />
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}
