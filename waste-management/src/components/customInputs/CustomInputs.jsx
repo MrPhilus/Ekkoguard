@@ -27,9 +27,7 @@ const CustomInput = ({
   return (
     <div className="form-control w-full ">
       <label className="label" htmlFor={id}>
-        <span className="label-text text-gray-900 font-medium">
-          {labelText}
-        </span>
+        <span className="label-text text-gray-900 font-bold">{labelText}</span>
         <span className="label-text-alt">{labelRightText}</span>
       </label>
 

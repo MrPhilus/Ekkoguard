@@ -22,6 +22,7 @@ const Disposal = () => {
   });
   return (
     <AuthLayout>
+      <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
         <CustomSelect
           name={"binQuantity"}
