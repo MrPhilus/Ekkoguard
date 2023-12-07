@@ -40,7 +40,7 @@ const AuthLayout = ({ children }) => {
   return (
     <div className="bg-authImage bg-contain bg-left bg-no-repeat w-screen flex items-center gap-32 bg-white md:p-5 lg:p-0">
       <ErrorBoundary FallbackComponent={ErrorUI}>
-        <div className="flex align-middle border justify-center h-screen w-2/5  sm:w-2/5  hidden lg:block">
+        <div className="align-middle border justify-center h-screen w-2/5  sm:w-2/5  hidden lg:block">
           <img src={truck} alt="truck" />
         </div>
 
