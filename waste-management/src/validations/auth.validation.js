@@ -1,10 +1,32 @@
 import * as Yup from "yup";
 
+export const DisposalForm = () => {
+  return Yup.object({
+    binRequest: Yup.boolean().oneOf(
+      [true],
+      "Please accept the terms of service"
+    ),
+    binQuantity: Yup.number()
+      .positive()
+      .integer()
+      .required("Quantity must be a positive number"),
+    location: Yup.string()
+      .oneOf(
+        ["Alimosho", "Yaba", "Ilupeju", "Ketu"],
+        "Invalid Location Selected"
+      )
+      .required("Required"),
+    pickupAddress: Yup.string()
+      .min(5, "Address must be at least 5 characters long")
+      .required("Required"),
+  });
+};
+
 export const SignupSchemaEmail = () => {
   return Yup.object({
-    firstName: Yup.string().required("This field is required"),
-    lastName: Yup.string().required("This field is required"),
-    otherName: Yup.string().required("This field is required"),
+    organizationName: Yup.string().required("This field is required"),
+    adminFirstName: Yup.string().required("This field is required"),
+    adminLastName: Yup.string().required("This field is required"),
     email: Yup.string()
       .required("This field is required")
       .email("Invalid email address"),
