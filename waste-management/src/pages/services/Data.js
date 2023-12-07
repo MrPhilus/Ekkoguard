@@ -40,7 +40,7 @@ export const services = [
     cardHeader: "View Resources",
     cardText: "View resources to help understand recycling...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/resources",
   },
   {
     imgSrc: cardImages["newsfeed"],
@@ -48,6 +48,6 @@ export const services = [
     cardHeader: "Stay Updated",
     cardText: "Get the latest information, share your views...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/newsfeed",
   },
 ];

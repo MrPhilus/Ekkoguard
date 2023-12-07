@@ -20,8 +20,8 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/forgotpassword" element={<ForgotPassword />} />
       <Route path="/passwordreset" element={<PasswordReset />} />
-      <Route path="pagenotfound" element={<PageNotFound />} />
-      <Route path="blog" element={<Blog />} />
+      <Route path="/pagenotfound" element={<PageNotFound />} />
+      <Route path="/newsfeed" element={<Blog />} />
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}
       {/* </Route> */}
@@ -31,6 +31,7 @@ function App() {
         <Route path="disposal" element={<Disposal />} />
         <Route path="recycling" element={<WasteRecyclingPage />} />
       </Route>
+      <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
 }

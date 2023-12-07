@@ -1,22 +1,16 @@
 import CardSkeleton from "../../components/CardSkeleton";
-import { useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 const Blog = () => {
   const params = useParams();
   console.log(params);
-  // console.log(van);
 
   return (
-    <div
-    // style={{
-    //   display: "flex",
-    //   flexDirection: "column",
-    //   alignItems: "center",
-    //   justifyContent: "center",
-    // }}
-    >
-      <p>page under construction!</p>
-      <p>stay tuned on articles on truck and van maintainance!</p>
+    <div>
+      <div className="flex flex-col items-center justify-center mb-14">
+        <h1 className="text-3xl">page under construction!</h1>
+        <h2 className="text-xl">stay tuned on!</h2>
+      </div>
       <div
         style={{
           display: "grid",
