@@ -10,7 +10,6 @@ const CustomButton = ({
   icon,
   iconRight,
   isLoading = false,
-  buttonLink,
 }) => {
   return (
     <button

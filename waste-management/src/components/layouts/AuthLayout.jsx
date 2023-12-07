@@ -1,7 +1,9 @@
 import { ErrorBoundary } from 'react-error-boundary';
 import { Link, useLocation } from 'react-router-dom';
 import { ErrorUI } from '../error/ErrorUi';
-import { ReactComponent as ArrowNarrowLeft } from '../../assets/svg/arrow_narrow_left.svg';
+import truck from '../../assets/videos/truck.gif'
+// import { ReactComponent as ArrowNarrowLeft } from '../../assets/svg/arrow_narrow_left.svg';
+
 
 const AuthLayout = ({ children }) => {
   const location = useLocation();
@@ -39,12 +41,14 @@ const AuthLayout = ({ children }) => {
   return (
     <div className="bg-authImage bg-contain bg-left bg-no-repeat w-screen flex items-center gap-32 bg-white md:p-5 lg:p-0">
       <ErrorBoundary FallbackComponent={ErrorUI}>
-        <div className=" h-screen w-2/5  sm:w-2/5  hidden lg:block"></div>
+        <div className="flex align-middle border justify-center h-screen w-2/5  sm:w-2/5  hidden lg:block">
+          <img  src={truck} alt="truck" />
+        </div>
 
         <div className="sm:w-2/5 w-full flex-col items-end sm:p-2 p-4">
           <Link to={location.pathname.includes('forgotpassword') ? '/signin' : '/'}>
             <span className="text-black font-medium text-small flex gap-2 items-center">
-              <ArrowNarrowLeft /> {location.pathname.includes('forgotpassword') ? 'Go back to login' : 'Go Home'}
+              --- {location.pathname.includes('forgotpassword') ? 'Go back to login' : 'Go Home'}
             </span>
           </Link>
           <h1 className="my-2 lg:text-xl-heading text-green-500 font-semibold md:text-xl"> {header()}</h1>

@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars */
 
 import React, { useState, useEffect } from 'react';
-import { ReactComponent as Checkmark } from '../../assets/svg/greyCheck.svg';
-import { ReactComponent as Error } from '../../assets/svg/redError.svg';
-import { ReactComponent as GreenCheck } from '../../assets/svg/greenCheck.svg';
+// import { ReactComponent as Checkmark } from '../../assets/svg/greyCheck.svg';
+// import { ReactComponent as Error } from '../../assets/svg/redError.svg';
+// import { ReactComponent as GreenCheck } from '../../assets/svg/greenCheck.svg';
 import { hasCaps, hasDigit, hasLowerCase, hasSpecialCharacter } from '../../utils/constants';
 
 const ErrorTexts = ({ text, isError, formik }) => (
   <div className={'flex items-center gap-2 px-1'}>
-    {formik.values.password === '' ? <Checkmark /> : isError ? <Error /> : <GreenCheck />}
+    {/* {formik.values.password === '' ? <Checkmark /> : isError ? <Error /> : <GreenCheck />} */}
     <span
       className={`text-labels ${formik.values.password === '' ? 'text-gray-300' : isError ? 'text-red-500' : 'text-green-500'}`}
     >

@@ -1,4 +1,4 @@
-import { ReactComponent as Checkmark } from '../../assets/svg/greyCheck.svg';
+import Checkmark from '../../assets/svg/greyCheck.svg';
 import { ReactComponent as Error } from '../../assets/svg/redError.svg';
 import { ReactComponent as GreenCheck } from '../../assets/svg/greenCheck.svg';
 
