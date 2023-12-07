@@ -10,7 +10,7 @@ import { DisposalForm } from "../../validations";
 const Disposal = () => {
   const formik = useFormik({
     initialValues: {
-      binRequest: false,
+      binRequest: "",
       binQuantity: "",
       location: "",
       pickupAddress: "",
@@ -20,20 +20,30 @@ const Disposal = () => {
       console.log(values);
     },
   });
+  const optionsForBinRequest = [
+    { position: 1, value: "Yes", label: "Yes" },
+    { position: 2, value: "No", label: "No" },
+  ];
+
+  const optionsForLocation = [
+    { position: 1, value: "Alimosho", label: "Alimosho" },
+    { position: 2, value: "Yaba", label: "Yaba" },
+  ];
   return (
     <AuthLayout>
       <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
         <CustomSelect
-          name={"binQuantity"}
-          labelText={"Quantity of Bins"}
-          placeholder={"Enter bin quantity"}
+          name={"binRequest"}
+          labelText={"Bin Request"}
+          optionText={"Select an option"}
           required={true}
           type={"text"}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          value={formik.values.binQuantity}
-          inputError={formik.touched.binQuantity && formik.errors.binQuantity}
+          value={formik.values.binRequest}
+          options={optionsForBinRequest}
+          errorText={formik.touched.binRequest && formik.errors.binRequest}
         />
 
         <CustomInput
@@ -46,6 +56,19 @@ const Disposal = () => {
           onChange={formik.handleChange}
           value={formik.values.binQuantity}
           inputError={formik.touched.binQuantity && formik.errors.binQuantity}
+        />
+        <CustomSelect
+          name={"location"}
+          labelText={"Location"}
+          placeholder={"Select Location"}
+          required={true}
+          optionText={"Select an option"}
+          type={"text"}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.location}
+          options={optionsForLocation}
+          inputError={formik.touched.location && formik.errors.location}
         />
         <CustomInput
           name={"pickupAddress"}

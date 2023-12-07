@@ -2,10 +2,9 @@ import * as Yup from "yup";
 
 export const DisposalForm = () => {
   return Yup.object({
-    binRequest: Yup.boolean().oneOf(
-      [true],
-      "Please accept the terms of service"
-    ),
+    binRequest: Yup.string()
+      .oneOf(["Yes", "No"], "Please select an option")
+      .required("Required"),
     binQuantity: Yup.number()
       .positive()
       .integer()
