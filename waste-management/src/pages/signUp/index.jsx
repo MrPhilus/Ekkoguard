@@ -10,9 +10,9 @@ import { showToast } from "../../utils";
 const GettingStarted = () => {
   const formik = useFormik({
     initialValues: {
-      organizationName: "",
-      adminFirstName: "",
-      adminLastName: "",
+      firstName: "",
+      lastName: "",
+      otherName: "",
       email: "",
       password: "",
     },
@@ -91,42 +91,36 @@ const GettingStarted = () => {
     <AuthLayout>
       <form className="flex flex-col gap-1" onSubmit={formik.handleSubmit}>
         <CustomInput
-          inputError={
-            formik.touched.organizationName && formik.errors.organizationName
-          }
+          inputError={formik.touched.firstName && formik.errors.firstName}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          value={formik.values.organizationName}
+          value={formik.values.firstName}
           type="text"
-          labelText="Organization Name"
-          placeholder={"Enter organisation name"}
-          name="organizationName"
-        />
-
-        <CustomInput
-          inputError={
-            formik.touched.adminFirstName && formik.errors.adminFirstName
-          }
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.adminFirstName}
-          type="text"
-          labelText="Admin First Name"
+          labelText="First Name"
           placeholder={"Enter first name"}
-          name="adminFirstName"
+          name="firstName"
         />
 
         <CustomInput
-          inputError={
-            formik.touched.adminLastName && formik.errors.adminLastName
-          }
+          inputError={formik.touched.lastName && formik.errors.lastName}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
-          value={formik.values.adminLastName}
+          value={formik.values.lastName}
           type="text"
-          labelText="Admin Last Name"
+          labelText="Last Name"
           placeholder={"Enter last name"}
-          name="adminLastName"
+          name="lastName"
+        />
+
+        <CustomInput
+          inputError={formik.touched.otherName && formik.errors.otherName}
+          onBlur={formik.handleBlur}
+          onChange={formik.handleChange}
+          value={formik.values.otherName}
+          type="text"
+          labelText="Other Name"
+          placeholder={"Enter other name"}
+          name="otherName"
         />
 
         <CustomInput

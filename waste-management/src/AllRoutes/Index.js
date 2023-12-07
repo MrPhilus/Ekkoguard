@@ -6,6 +6,7 @@ import ProtectedRoute from "../pages/ProtectedRoute";
 import Disposal from "../pages/disposal";
 import SignUp from "../pages/signUp";
 import Login from "../pages/login";
+import ForgotPassword from "../pages/passwordReset/ForgotPassword";
 
 function AllRoutes() {
   return (
@@ -13,6 +14,9 @@ function AllRoutes() {
       <Route path="/" element={<Home />} />
       <Route path="signup" element={<SignUp />} />
       <Route path="login" element={<Login />} />
+      <Route path="forgotpassword" element={<ForgotPassword />} />
+      <Route path="/passwordreset" element={<PasswordReset />} />
+
       {/* <Route path="/services" element={<Services />} /> */}
       {/* <Route element={<ProtectedRoute />}> */}
       {/* </Route> */}
