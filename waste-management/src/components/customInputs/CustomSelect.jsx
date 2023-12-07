@@ -1,4 +1,4 @@
-import ErrorMark from '../../assets/svg/redError.svg';
+import ErrorMark from "../../assets/svg/redError.svg";
 
 const CustomSelect = ({
   onBlur,
@@ -14,7 +14,6 @@ const CustomSelect = ({
   value,
 }) => {
   const hasError = errorText !== undefined;
-
   return (
     <div>
       <div className="form-control w-full">
@@ -28,7 +27,9 @@ const CustomSelect = ({
           onBlur={onBlur}
           onChange={onChange}
           value={value}
-          className={`select select-bordered w-full ${hasError && !value ? 'select-error' : ''} ${className || ''}`}
+          className={`select select-bordered w-full ${
+            hasError && !value ? "select-error" : ""
+          } ${className || ""}`}
         >
           <option disabled value="">
             {optionText}

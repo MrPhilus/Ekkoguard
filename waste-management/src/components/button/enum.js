@@ -1,5 +1,5 @@
 export const ButtonState = {
-  PRIMARY: 'rounded-lg flex justify-center items-center text-white bg-green-700 font-medium text-md-headline my-1',
+  PRIMARY: 'rounded-lg flex justify-center items-center text-white bg-olive-500 font-medium text-md-headline my-1',
   SECONDARY: 'rounded-lg  flex justify-center items-center text-white bg-red-600 text-md my-1',
   TRANSPARENT: 'rounded-lg border flex justify-center items-center text-white  text-md my-1',
 };

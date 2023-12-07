@@ -40,8 +40,8 @@ const AuthLayout = ({ children }) => {
   return (
     <div className="flex-col lg:bg-authImage bg-contain bg-left bg-no-repeat h-screen w-screen flex items-center gap-6 bg-white md:p-5 lg:p-0">
       <ErrorBoundary FallbackComponent={ErrorUI}>
-        <div className="border col-span-1">
-          <img className="m-auto" src={truck} alt="truck" />
+        <div className=" col-span-1 mt-3">
+          <img className="m-auto w-3/4" src={truck} alt="truck" />
         </div>
 
         <div className="sm:w-2/5 w-full flex-col items-end sm:p-2 p-4">
@@ -55,16 +55,19 @@ const AuthLayout = ({ children }) => {
                 : "Go Home"}
             </span>
           </Link>
-          <h1 className="my-2 lg:text-xl-heading text-green-500 font-semibold md:text-xl">
+          <h1 className="my-2 lg:text-xl-heading text-olive-500 font-semibold md:text-xl">
             {" "}
             {header()}
           </h1>
-          <p className="mb-2 text-gray-900 md:text-sm"> {subHeader()}</p>
+          <p className="mb-2 text-gray-900 font-semibold md:text-md">
+            {" "}
+            {subHeader()}
+          </p>
           <div>
             {children}
             {(location.pathname === "/signup" ||
               location.pathname === "/login") && (
-              <p className=" text-black text-sm font-medium">
+              <p className=" text-black text-sm font-bold my-1">
                 Have an account?{" "}
                 <Link to={linkTo} className="text-green-500">
                   {location.pathname === "/signup" ? "Sign In" : "Sign Up"}
