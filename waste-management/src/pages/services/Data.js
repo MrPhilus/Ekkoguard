@@ -16,7 +16,7 @@ export const services = [
     cardHeader: "Schedule Recycling",
     cardText: "Separate your recyclables, Request a collection...",
     buttonText: "Coming Soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["wallet"],
@@ -24,7 +24,7 @@ export const services = [
     cardHeader: "View Balance & Rewards",
     cardText: "Check your balance, Redeem rewards...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["history"],
@@ -32,7 +32,7 @@ export const services = [
     cardHeader: "View History",
     cardText: "View your past schedules, Check your history...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["resources"],

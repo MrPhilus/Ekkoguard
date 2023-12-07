@@ -19,7 +19,10 @@ const Services = () => {
 
   const goToLogin = () => {
     navigate("/login");
-    console.log("clicked");
+  };
+
+  const goToProfile = () => {
+    navigate("/profile");
   };
 
   return (
@@ -38,7 +41,7 @@ const Services = () => {
               >
                 Feedback
               </Link>
-              <FaRegUserCircle className={styles.user} />
+              <FaRegUserCircle className={styles.user} onClick={goToProfile} />
             </div>
           </>
         ) : (
