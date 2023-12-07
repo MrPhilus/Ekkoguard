@@ -1,16 +1,33 @@
 /* eslint-disable no-unused-vars */
 
-import React, { useState, useEffect } from 'react';
-// import { ReactComponent as Checkmark } from '../../assets/svg/greyCheck.svg';
-// import { ReactComponent as Error } from '../../assets/svg/redError.svg';
-// import { ReactComponent as GreenCheck } from '../../assets/svg/greenCheck.svg';
-import { hasCaps, hasDigit, hasLowerCase, hasSpecialCharacter } from '../../utils/constants';
+import React, { useState, useEffect } from "react";
+import Checkmark from "../../assets/svg/greyCheck.svg";
+import Error from "../../assets/svg/redError.svg";
+import GreenCheck from "../../assets/svg/greenCheck.svg";
+import {
+  hasCaps,
+  hasDigit,
+  hasLowerCase,
+  hasSpecialCharacter,
+} from "../../utils/constants";
 
 const ErrorTexts = ({ text, isError, formik }) => (
-  <div className={'flex items-center gap-2 px-1'}>
-    {/* {formik.values.password === '' ? <Checkmark /> : isError ? <Error /> : <GreenCheck />} */}
+  <div className={"flex items-center gap-2 px-1"}>
+    {formik.values.password === "" ? (
+      <img src={Checkmark} alt="check" />
+    ) : isError ? (
+      <img src={Error} alt="error" />
+    ) : (
+      <img src={GreenCheck} alt="green checks" />
+    )}
     <span
-      className={`text-labels ${formik.values.password === '' ? 'text-gray-300' : isError ? 'text-red-500' : 'text-green-500'}`}
+      className={`text-labels ${
+        formik.values.password === ""
+          ? "text-gray-300"
+          : isError
+          ? "text-red-500"
+          : "text-green-500"
+      }`}
     >
       {text}
     </span>
@@ -38,10 +55,26 @@ const ErrorFields = ({ password, formik, className }) => {
 
   return (
     <div className={className}>
-      <ErrorTexts text="At least 10 characters" isError={!errors.minLength} formik={formik} />
-      <ErrorTexts text="At least one uppercase letter" isError={!errors.uppercase} formik={formik} />
-      <ErrorTexts text="At least one lowercase character" isError={!errors.lowercase} formik={formik} />
-      <ErrorTexts text="At least one number" isError={!errors.number} formik={formik} />
+      <ErrorTexts
+        text="At least 10 characters"
+        isError={!errors.minLength}
+        formik={formik}
+      />
+      <ErrorTexts
+        text="At least one uppercase letter"
+        isError={!errors.uppercase}
+        formik={formik}
+      />
+      <ErrorTexts
+        text="At least one lowercase character"
+        isError={!errors.lowercase}
+        formik={formik}
+      />
+      <ErrorTexts
+        text="At least one number"
+        isError={!errors.number}
+        formik={formik}
+      />
       <ErrorTexts
         text="Inclusion of at least one special character, e.g., ! @ # ?"
         isError={!errors.specialCharacter}

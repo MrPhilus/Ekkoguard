@@ -86,7 +86,7 @@ const SignIn = () => {
           placeholder={"Enter password"}
           required={true}
           type={showPassword ? "text" : "password"}
-          icon={<Eyelash onClick={togglePassword} />}
+          icon={<img src={Eyelash} alt="eye" onClick={togglePassword} />}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.password}

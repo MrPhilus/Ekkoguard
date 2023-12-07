@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import ErrorMark from '../../assets/svg/redError.svg';
-// import { ReactComponent as VisibilityOnIcon } from '../../assets/svg/eyeslash.svg';
-// import { ReactComponent as VisibilityOffIcon } from '../../assets/svg/eyeVisible.svg';
+import { useState } from "react";
+import ErrorMark from "../../assets/svg/redError.svg";
+import VisibilityOnIcon from "../../assets/svg/eyeslash.svg";
+import VisibilityOffIcon from "../../assets/svg/eyeVisible.svg";
 
 const CustomInput = ({
   type,
@@ -27,29 +27,37 @@ const CustomInput = ({
   return (
     <div className="form-control w-full ">
       <label className="label" htmlFor={id}>
-        <span className="label-text text-gray-900 font-medium">{labelText}</span>
+        <span className="label-text text-gray-900 font-medium">
+          {labelText}
+        </span>
         <span className="label-text-alt">{labelRightText}</span>
       </label>
 
       <div className="relative">
         <input
-          type={isPasswordVisible ? 'text' : type}
+          type={isPasswordVisible ? "text" : type}
           placeholder={placeholder}
           name={name}
           onBlur={onBlur}
           onChange={onChange}
           readOnly={readOnly}
           value={value}
-          className={`input input-bordered w-full  ${inputError ? 'input-error' : ''} ${className || ''}`}
+          className={`input input-bordered w-full  ${
+            inputError ? "input-error" : ""
+          } ${className || ""}`}
         />
 
-        {type === 'password' && (
+        {type === "password" && (
           <button
             type="button"
             onClick={handleTogglePasswordVisibility}
             className="absolute inset-y-0 right-0 px-2 flex items-center"
           >
-            {isPasswordVisible ? "show" : "hide"}
+            {isPasswordVisible ? (
+              <img src={VisibilityOnIcon} alt="Hide password" />
+            ) : (
+              <img src={VisibilityOffIcon} alt="Show password" />
+            )}
           </button>
         )}
       </div>
