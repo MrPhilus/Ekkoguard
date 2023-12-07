@@ -93,7 +93,7 @@ const SignIn = () => {
           inputError={formik.touched.password && formik.errors.password}
         />
         <Link to={"/forgotpassword"}>
-          <span className="w-full flex justify-end text-green-500 text-sm">
+          <span className="w-full flex justify-end text-olive-500 text-sm">
             {" "}
             Forgot Password?
           </span>

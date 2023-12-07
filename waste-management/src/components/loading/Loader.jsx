@@ -1,7 +1,7 @@
 const Loader = ({ size }) => {
   return (
     <div>
-      <span className={`loading loading-spinner ${size} bg-green-700`}></span>
+      <span className={`loading loading-spinner ${size} bg-olive-500`}></span>
     </div>
   );
 };

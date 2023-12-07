@@ -55,7 +55,7 @@ const AuthLayout = ({ children }) => {
                 : "Go Home"}
             </span>
           </Link>
-          <h1 className="my-2 lg:text-xl-heading text-green-500 font-semibold md:text-xl">
+          <h1 className="my-2 lg:text-xl-heading text-olive-500 font-semibold md:text-xl">
             {" "}
             {header()}
           </h1>
