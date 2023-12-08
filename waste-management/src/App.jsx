@@ -29,6 +29,7 @@ function App() {
       <Routes>
         <Route path="/" element={ <Home /> } />
         <Route path="/signup" element={ <SignUp /> } />
+        <Route path="/verification" element={ <OTPVerification /> } />
         <Route path="/login" element={ <Login /> } />
         <Route path="/forgotpassword" element={ <ForgotPassword /> } />
         <Route path="/passwordreset" element={ <PasswordReset /> } />

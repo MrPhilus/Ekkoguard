@@ -37,24 +37,19 @@ const AuthLayout = ({ children }) => {
     } else if (location.pathname === "/forgotpassword") {
       return "Please provide your email address to initiate the password reset process.";
     } else if (location.pathname === "/passwordreset") {
-      return `To ensure unauthorised access is prevented, kindly reset 
-      your password using strong characters.`;
-    } else if (location.pathname === "/verification") {
-      return `Enter the four-digit code phone sent to +234 ${
-        phoneNumber.substring(0, 3) + " XXX X" + phoneNumber.substring(8)
-      }`;
+      return `To ensure unauthorised access is prevented, kindly reset your password using strong characters.`;
     }
   };
 
   return (
     <div className="flex-col lg:bg-authImage bg-contain bg-left bg-no-repeat h-screen w-full flex items-center gap-6 bg-white md:p-5 lg:p-0">
-      <ErrorBoundary FallbackComponent={ErrorUI}>
+      <ErrorBoundary FallbackComponent={ ErrorUI }>
         <div className=" col-span-1 mt-3">
-          {location.pathname === "/feedback" ? (
-            <img className="m-auto w-3/4 mt-2" src={feedback} alt="feedback" />
+          { location.pathname === "/feedback" ? (
+            <img className="m-auto w-3/4 mt-2" src={ feedback } alt="feedback" />
           ) : (
-            <img className="m-auto w-3/4" src={truck} alt="truck" />
-          )}
+            <img className="m-auto w-3/4" src={ truck } alt="truck" />
+          ) }
         </div>
 
         <div className="sm:w-2/5 w-full flex-col items-end sm:p-2 p-4">
@@ -66,31 +61,31 @@ const AuthLayout = ({ children }) => {
             }
           >
             <span className="text-black font-medium text-small flex gap-2 items-center">
-              <img src={ArrowNarrowLeft} alt="" />{" "}
-              {location.pathname.includes("forgotpassword")
+              <img src={ ArrowNarrowLeft } alt="" />{ " " }
+              { location.pathname.includes("forgotpassword")
                 ? "Go back to login"
-                : "Services"}
+                : "Services" }
             </span>
           </Link>
           <h1 className="my-2 lg:text-xl-heading text-olive-500 font-semibold md:text-xl">
-            {" "}
-            {header()}
+            { " " }
+            { header() }
           </h1>
           <p className="mb-2 text-gray-900 font-semibold md:text-md">
-            {" "}
-            {subHeader()}
+            { " " }
+            { subHeader() }
           </p>
           <div>
-            {children}
-            {(location.pathname === "/signup" ||
+            { children }
+            { (location.pathname === "/signup" ||
               location.pathname === "/login") && (
-              <p className=" text-black text-sm font-bold my-1">
-                Have an account?{" "}
-                <Link to={linkTo} className="text-green-500">
-                  {location.pathname === "/signup" ? "Sign In" : "Sign Up"}
-                </Link>
-              </p>
-            )}
+                <p className=" text-black text-sm font-bold my-1">
+                  Have an account?{ " " }
+                  <Link to={ linkTo } className="text-green-500">
+                    { location.pathname === "/signup" ? "Sign In" : "Sign Up" }
+                  </Link>
+                </p>
+              ) }
           </div>
         </div>
       </ErrorBoundary>
