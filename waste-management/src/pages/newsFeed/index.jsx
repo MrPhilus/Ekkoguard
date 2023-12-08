@@ -1,15 +1,27 @@
 import CardSkeleton from "../../components/CardSkeleton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/images/coming-soon-bg.jpg";
 import { newsFeed } from "./Data";
-import newsbanner from "../../assets/images/newsbanner.png";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const NewsFeed = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate("/services");
+  };
+
   return (
     <div>
-      <div className="flex flex-col items-center justify-center mb-4">
-        <img className="w-1/5" src={newsbanner} alt="news banner" />
-        <h1 className="text-xl font-bold">GET THE LATEST</h1>
+      <div className="flex items-center justify-around p-6">
+        <IoMdArrowRoundBack
+          className="text-3xl cursor-pointer"
+          onClick={handleBackClick}
+        />
+        <h1 className="text-xl font-bold lg:text-3xl whitespace-nowrap">
+          GET THE LATEST
+        </h1>
+        <div className="p-3"></div>
       </div>
       <div
         style={{

@@ -10,7 +10,7 @@ import CustomButton from "../../components/CustomButton";
 import { services } from "./Data";
 
 const Services = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
