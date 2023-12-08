@@ -8,26 +8,55 @@ const CustomSelect = ({
   rightLabel,
   optionText,
   rightErrorText,
+  pickUpDay,
   className,
   options = [],
   errorText,
   value,
 }) => {
   const hasError = errorText !== undefined;
+
+  const getDayForLocation = (selectedLocation) => {
+    switch (selectedLocation) {
+      case "Alimosho":
+        return "Monday";
+      case "Yaba":
+        return "Tuesday";
+      default:
+        return "";
+    }
+  };
+
+  const dayForLocation = getDayForLocation(value);
+
   return (
     <div>
       <div className="form-control w-full">
         <label className="label">
           <span className="label-text">{labelText}</span>
-          <span className="label-text-alt">{rightLabel}</span>
+          {dayForLocation && (
+          <div>
+            <span className="label-text-alt">
+              Day for {value}: {dayForLocation}
+            </span>
+          </div>
+        )}
         </label>
+
+        {/* {dayForLocation && (
+          <div>
+            <span className="label-text-alt">
+              Day for {value}: {dayForLocation}
+            </span>
+          </div>
+        )} */}
 
         <select
           name={name}
           onBlur={onBlur}
           onChange={onChange}
           value={value}
-          className={`select select-bordered w-full ${
+          className={`select select-bordered w-full font-bold ${
             hasError && !value ? "select-error" : ""
           } ${className || ""}`}
         >
@@ -35,7 +64,11 @@ const CustomSelect = ({
             {optionText}
           </option>
           {options.map((option) => (
-            <option key={option.position} value={option.value}>
+            <option
+              className="font-bold"
+              key={option.position}
+              value={option.value}
+            >
               {option.label}
             </option>
           ))}
