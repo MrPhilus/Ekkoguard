@@ -39,25 +39,11 @@ const CustomSelect = ({
           {dayForLocation && (
             <div>
               <span className="label-text-alt text-olive-500 font-bold">
-                Pick-up Day for {value}: {dayForLocation}
+                Pick up days for {value} are {dayForLocation}s
               </span>
             </div>
           )}
-          <div>
-            <span className="label-text-alt text-olive-500 font-bold">
-              Pick up days for  {value} are {dayForLocation}s
-            </span>
-          </div>
-        )}
         </label>
-
-        {/* {dayForLocation && (
-          <div>
-            <span className="label-text-alt">
-              Day for {value}: {dayForLocation}
-            </span>
-          </div>
-        )} */}
 
         <select
           name={name}
