@@ -4,7 +4,7 @@ import cookies from 'js-cookie';
 import { jwtDecode } from 'jwt-decode';
 import React from 'react';
 
-// const isBrowser = typeof window !== 'undefined';
+const isBrowser = typeof window !== 'undefined';
 // const host = global.window?.location.host;
 // const domainParts = host?.split('.');
 // domainParts?.shift();

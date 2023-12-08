@@ -6,11 +6,16 @@ export const apiSlice = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: import.meta.env.VITE_BACKEND_API_URL,
         prepareHeaders: async (headers, { getState }) => {
+            // var headers = new Headers();
+            // headers.append("Content-Type", "application/json");
+            // headers = new Headers()
             const token = _getTokenFromStorage("accessToken");
             if (token) {
                 headers.set("Authorization", `Bearer ${token}`);
             }
             headers.set("Content-Type", "application/json");
+
+            console.log(headers)
             return headers;
         },
     }),

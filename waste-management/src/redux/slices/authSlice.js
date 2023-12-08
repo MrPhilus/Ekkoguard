@@ -1,21 +1,28 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  isLoggedIn: false,
-  userName: "",
+  token: null,
+  otp: '',
+  phoneNumber: sessionStorage.getItem('newUserPhoneNumber') || '',
 };
 
-export const authSlice = createSlice({
+const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    userLogIn: (state, action) => {
-      state.isLoggedIn = true;
-      state.userName = action.payload;
+    setAuthToken: (state, action) => {
+      state.token = action.payload;
+    },
+    setOTP: (state, action) => {
+      state.otp = action.payload
+    },
+    setPhoneNumber: (state, action) => {
+      state.phoneNumber = action.payload
+      sessionStorage.setItem('newUserPhoneNumber', action.payload)
     },
   },
 });
 
-export const { userLogIn } = authSlice.actions;
+export const { setAuthToken, setOTP, setPhoneNumber } = authSlice.actions;
 
 export default authSlice.reducer;

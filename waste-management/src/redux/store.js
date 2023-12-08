@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { apiSlice } from './slices/apiSlice'
 import { useSelector } from 'react-redux';
-
 import authReducer from "./slices/authSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
+
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),
@@ -16,6 +16,7 @@ export const store = configureStore({
 export const RootState = store.getState;
 export const AppDispatch = store.dispatch;
 export const useAppSelector = useSelector;
+
 
 /*---------- RootState ----------*/
 // This export provides a function that returns the current state of the Redux store.

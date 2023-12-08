@@ -10,26 +10,33 @@ import SignUp from "./pages/signUp";
 import Login from "./pages/login";
 import ForgotPassword from "./pages/passwordReset/ForgotPassword";
 import PasswordReset from "./pages/passwordReset/PasswordReset";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
+import OTPVerification from "./pages/otpVerification";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/forgotpassword" element={<ForgotPassword />} />
-      <Route path="/passwordreset" element={<PasswordReset />} />
-      <Route path="pagenotfound" element={<PageNotFound />} />
-      {/* <Route path="/services" element={<Services />} /> */}
-      {/* <Route element={<ProtectedRoute />}> */}
-      {/* </Route> */}
+    <>
+      <ToastContainer />
+      <Routes>
+        <Route path="/" element={ <Home /> } />
+        <Route path="/signup" element={ <SignUp /> } />
+        <Route path="/verification" element={ <OTPVerification /> } />
+        <Route path="/login" element={ <Login /> } />
+        <Route path="/forgotpassword" element={ <ForgotPassword /> } />
+        <Route path="/passwordreset" element={ <PasswordReset /> } />
+        <Route path="*" element={ <PageNotFound /> } />
+        {/* <Route path="/services" element={<Services />} /> */ }
+        {/* <Route element={<ProtectedRoute />}> */ }
+        {/* </Route> */ }
 
-      <Route path="disposal" element={<Disposal />} />
-      <Route path="/services" element={<Services />}>
-        <Route path="disposal" element={<Disposal />} />
-        <Route path="recycling" element={<WasteRecyclingPage />} />
-      </Route>
-    </Routes>
+        <Route path="disposal" element={ <Disposal /> } />
+        <Route path="/services" element={ <Services /> }>
+          <Route path="disposal" element={ <Disposal /> } />
+          <Route path="recycling" element={ <WasteRecyclingPage /> } />
+        </Route>
+      </Routes>
+    </>
   );
 }
 

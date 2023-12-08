@@ -1,20 +1,22 @@
 /* eslint-disable no-undef */
-import { apiSlice } from "../store/apiSlice";
+import { apiSlice } from "../redux/slices/apiSlice";
 import { storageService } from "./index";
 
 const extendedApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         login: builder.mutation({
-            query: (request) => ({
+            query: (credentials) => ({
                 url: "/auth/login",
                 method: "POST",
+                body: JSON.stringify(credentials)
             }),
         }),
 
         signUp: builder.mutation({
-            query: (request) => ({
+            query: (credentials) => ({
                 url: '/auth/signup',
-                method: 'POST'
+                method: 'POST',
+                body: JSON.stringify(credentials),
             })
         }),
 
