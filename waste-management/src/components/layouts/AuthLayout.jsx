@@ -37,10 +37,7 @@ const AuthLayout = ({ children }) => {
     } else if (location.pathname === "/forgotpassword") {
       return "Please provide your email address to initiate the password reset process.";
     } else if (location.pathname === "/passwordreset") {
-      return `To ensure unauthorised access is prevented, kindly reset 
-      your password using strong characters.`;
-    } else if (location.pathname === "/verification") {
-      return `Enter the four-digit code phone sent to +234 ${phoneNumber.substring(0, 3) + ' XXX X' + phoneNumber.substring(8)}`;
+      return `To ensure unauthorised access is prevented, kindly reset your password using strong characters.`;
     }
   };
 

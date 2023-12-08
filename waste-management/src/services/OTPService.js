@@ -4,10 +4,10 @@ import { storageService } from "./index";
 
 const extendedApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
-        sendOTP: builder.query({
+        sendOTP: builder.mutation({
             query: (credentials) => ({
                 url: "/otp/sendOtp",
-                method: "GET",
+                method: "POST",
                 body: JSON.stringify(credentials)
             }),
         }),
@@ -23,11 +23,10 @@ const extendedApi = apiSlice.injectEndpoints({
         async onQueryStarted(_, { queryFulfilled }) {
             try {
                 const { data } = await queryFulfilled
-
                 console.log(data)
-                // if (data.endpoint === 'login') {
-                //     storageService.saveAuthData(data.payload);
-                // }
+                if (data.endpoint === 'login') {
+                    storageService.saveAuthData(data.payload);
+                }
             } catch (err) {
                 alert('An error occurred. Please try again.')
                 console.error(err)
@@ -36,4 +35,4 @@ const extendedApi = apiSlice.injectEndpoints({
     }),
 })
 
-export const { useSendOTPQuery, useVerifyOTPMutation } = extendedApi
+export const { useSendOTPMutation, useVerifyOTPMutation } = extendedApi

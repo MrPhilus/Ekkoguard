@@ -15,7 +15,6 @@ export const apiSlice = createApi({
             }
             headers.set("Content-Type", "application/json");
 
-            console.log(headers)
             return headers;
         },
     }),

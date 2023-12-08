@@ -32,6 +32,7 @@ const successdata = {
 const GettingStarted = () => {
   const [formError, setFormError] = useState()
   const [signUp, { data, error, isLoading }] = useSignUpMutation()
+  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const formikAttributes = {
@@ -55,10 +56,10 @@ const GettingStarted = () => {
         phoneNumber: '234' + values.phoneNumber,
         password: values.password,
       }
+      dispatch(setPhoneNumber(v.phoneNumber))
 
       try {
         await signUp(v)
-        dispatch(setPhoneNumber(v.phoneNumber))
       } catch (err) {
         console.log(err.message)
         setFormError(err.message)
@@ -69,19 +70,20 @@ const GettingStarted = () => {
   useEffect(() => {
     if (error) showToast(error.data.detail, 'error', error.data.title)
     if (data && data?.status === "CREATED") (
-      setUser(data.data.phoneNumber),
+      dispatch(setPhoneNumber(data.data.phoneNumber)),
       showToast("Verify phone number to continue!", 'success', "Account Created Successfully")
     )
+    // console.log(auth.phoneNumber)
   }, [error, data])
 
-  if (data && data?.status === "CREATED") return <Navigate to={ '/validation' } />
+  if (data && data?.status === "CREATED") return <Navigate to={ '/verification' } />
 
   return (
     <AuthLayout>
       { formError || error ?
         <div div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
           <strong>An error occured!</strong>
-          { (formError || error.data.details) ?? <p>Please <Link className={ `link ` }>Verify your account</Link> or use a different phone number</p>
+          { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
           }
         </div> : ''
       }
@@ -158,7 +160,7 @@ const GettingStarted = () => {
                   { formError || error ?
                     <div div className="mt-4 px-4 py-8 bg-error/25 rounded-box flex flex-col">
                       <strong>An error occured!</strong>
-                      { (formError || error.data.details) ?? <p>Please <Link className={ `link ` }>Verify your account</Link> or use a different phone number</p>
+                      { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
                       }
                     </div> : ''
                   }
