@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 
-const index = () => {
+const Profile = () => {
   return (
     <div className="flex my-auto items-center h-screen justify-center">
       <div className="card w-[27rem] bg-base-100 shadow-xl">
@@ -44,4 +44,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Profile;
