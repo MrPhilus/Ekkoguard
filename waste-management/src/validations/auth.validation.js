@@ -21,21 +21,33 @@ export const DisposalForm = () => {
   });
 };
 
-export const SignupSchemaEmail = () => {
+export const FeedbackForm = () => {
   return Yup.object({
-    organizationName: Yup.string().required("This field is required"),
-    adminFirstName: Yup.string().required("This field is required"),
-    adminLastName: Yup.string().required("This field is required"),
+    feedbackSubject: Yup.string().required("Enter your subject"),
+    feedbackMessage: Yup.string().required("Enter your message"),
+  });
+};
+
+export const SignupSchema = () => {
+  return Yup.object({
+    firstName: Yup.string().required("This field is required"),
+    lastName: Yup.string().required("This field is required"),
+    otherName: Yup.string(),
+    phoneNumber: Yup.string().required("Enter your phone number").matches(/^[^0].*$/, "Do not include the leading '0'").matches(/^[789]\d{9}$/, "Enter a valid phone number"),
     email: Yup.string()
       .required("This field is required")
       .email("Invalid email address"),
     password: Yup.string()
       .required("This field is required")
-      .min(10, "Password must be 10 characters long")
-      .matches(/[A-Z]/, "Password requires an uppercase letter")
-      .matches(/[a-z]/, "Password requires a lowercase letter")
-      .matches(/[0-9]/, "Password requires a number")
-      .matches(/[^\w]/, "Password requires a special character"),
+      .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\w]).{10,}$/, "Must match the specificatioins below"),
+    // .min(10, "Password must be 10 characters long")
+    // .matches(/[A-Z]/, "Password requires an uppercase letter")
+    // .matches(/[a-z]/, "Password requires a lowercase letter")
+    // .matches(/[0-9]/, "Password requires a number")
+    // .matches(/[^\w]/, "Password requires a special character"),
+    confirmPassword: Yup.string()
+      .required("Confirm your password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
   });
 };
 

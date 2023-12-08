@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Card from "../../components/card";
 import styles from "./services.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -17,9 +17,12 @@ const Services = () => {
     navigate("/");
   };
 
-  const goToDisposal = () => {
-    navigate("/disposal");
-    console.log("clicked");
+  const goToLogin = () => {
+    navigate("/login");
+  };
+
+  const goToProfile = () => {
+    navigate("/profile");
   };
 
   return (
@@ -29,13 +32,24 @@ const Services = () => {
 
         {/* <h1 className="text-2xl font-extrabold">SERVICES</h1> */}
 
-        {isLoggedIn ? (
-          <FaRegUserCircle className={styles.user} />
+        {!isLoggedIn ? (
+          <>
+            <div className="flex items-center gap-4">
+              <Link
+                className="font-semibold hover:text-olive-500"
+                to={"/feedback"}
+              >
+                Feedback
+              </Link>
+              <FaRegUserCircle className={styles.user} onClick={goToProfile} />
+            </div>
+          </>
         ) : (
           <CustomButton
             containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-24"
             buttonText="Log In"
-            buttonLink={'/login'}
+            onClick={goToLogin}
+            buttonLink={"/login"}
           />
         )}
       </section>

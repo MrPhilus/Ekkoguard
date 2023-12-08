@@ -15,8 +15,8 @@ export const services = [
     cardTitle: "Waste Recycling",
     cardHeader: "Schedule Recycling",
     cardText: "Separate your recyclables, Request a collection...",
-    buttonText: "Proceed",
-    buttonLink: "/recycling",
+    buttonText: "Coming Soon",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["wallet"],
@@ -24,7 +24,7 @@ export const services = [
     cardHeader: "View Balance & Rewards",
     cardText: "Check your balance, Redeem rewards...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["history"],
@@ -32,7 +32,7 @@ export const services = [
     cardHeader: "View History",
     cardText: "View your past schedules, Check your history...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["resources"],
@@ -40,14 +40,14 @@ export const services = [
     cardHeader: "View Resources",
     cardText: "View resources to help understand recycling...",
     buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonLink: "/resources",
   },
   {
     imgSrc: cardImages["newsfeed"],
     cardTitle: "News Feed",
     cardHeader: "Stay Updated",
     cardText: "Get the latest information, share your views...",
-    buttonText: "Coming soon",
-    buttonLink: "/pagenotfound",
+    buttonText: "Proceed",
+    buttonLink: "/newsfeed",
   },
 ];
