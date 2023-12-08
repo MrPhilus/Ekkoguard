@@ -22,6 +22,8 @@ const CustomSelect = ({
         return "Monday";
       case "Yaba":
         return "Tuesday";
+      case "Surulere":
+        return "Wednesday";
       default:
         return "";
     }
@@ -33,11 +35,17 @@ const CustomSelect = ({
     <div>
       <div className="form-control w-full">
         <label className="label">
-          <span className="label-text">{labelText}</span>
+          <span className="label-text font-bold">{labelText}</span>
           {dayForLocation && (
+            <div>
+              <span className="label-text-alt text-olive-500 font-bold">
+                Pick-up Day for {value}: {dayForLocation}
+              </span>
+            </div>
+          )}
           <div>
             <span className="label-text-alt text-olive-500 font-bold">
-              Pick up days for  {value} is on {dayForLocation}s
+              Pick up days for  {value} are {dayForLocation}s
             </span>
           </div>
         )}
@@ -56,7 +64,7 @@ const CustomSelect = ({
           onBlur={onBlur}
           onChange={onChange}
           value={value}
-          className={`select select-bordered w-full font-bold ${
+          className={`select select-bordered w-full font-medium ${
             hasError && !value ? "select-error" : ""
           } ${className || ""}`}
         >
