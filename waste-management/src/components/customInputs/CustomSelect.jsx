@@ -36,8 +36,8 @@ const CustomSelect = ({
           <span className="label-text">{labelText}</span>
           {dayForLocation && (
           <div>
-            <span className="label-text-alt">
-              Day for {value}: {dayForLocation}
+            <span className="label-text-alt text-olive-500 font-bold">
+              Pick up days for  {value} is on {dayForLocation}s
             </span>
           </div>
         )}
