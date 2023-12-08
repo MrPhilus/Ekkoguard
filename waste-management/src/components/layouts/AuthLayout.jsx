@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 const AuthLayout = ({ children }) => {
   const location = useLocation();
   const linkTo = location.pathname === "/signup" ? "/login" : "/signup";
-  const { phoneNumber } = useSelector(state => state.auth)
+  const { phoneNumber } = useSelector((state) => state.auth);
 
   const header = () => {
     if (location.pathname === "/signup") {
@@ -37,10 +37,7 @@ const AuthLayout = ({ children }) => {
     } else if (location.pathname === "/forgotpassword") {
       return "Please provide your email address to initiate the password reset process.";
     } else if (location.pathname === "/passwordreset") {
-      return `To ensure unauthorised access is prevented, kindly reset 
-      your password using strong characters.`;
-    } else if (location.pathname === "/verification") {
-      return `Enter the four-digit code phone sent to +234 ${phoneNumber.substring(0, 3) + ' XXX X' + phoneNumber.substring(8)}`;
+      return `To ensure unauthorised access is prevented, kindly reset your password using strong characters.`;
     }
   };
 
@@ -48,7 +45,11 @@ const AuthLayout = ({ children }) => {
     <div className="flex-col lg:bg-authImage bg-contain bg-left bg-no-repeat h-screen w-full flex items-center gap-6 bg-white md:p-5 lg:p-0">
       <ErrorBoundary FallbackComponent={ ErrorUI }>
         <div className=" col-span-1 mt-3">
-          <img className="m-auto w-3/4" src={ truck } alt="truck" />
+          { location.pathname === "/feedback" ? (
+            <img className="m-auto w-3/4 mt-2" src={ feedback } alt="feedback" />
+          ) : (
+            <img className="m-auto w-3/4" src={ truck } alt="truck" />
+          ) }
         </div>
 
         <div className="sm:w-2/5 w-full flex-col items-end sm:p-2 p-4">

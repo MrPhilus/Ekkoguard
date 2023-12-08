@@ -1,38 +1,139 @@
 import { useEffect, useState } from "react"
 import OTPInput from "../../components/customInputs/OTPInput"
 import AuthLayout from "../../components/layouts/AuthLayout"
-import { useSendOTPQuery, useVerifyOTPMutation } from "../../services/OTPService"
-import { useSelector } from "react-redux"
+import { useSendOTPMutation, useVerifyOTPMutation } from "../../services/OTPService"
+import { useDispatch, useSelector } from "react-redux"
+import { Navigate, redirect, useNavigate } from "react-router-dom"
+import { Form, Formik } from "formik"
+import { TextInput } from "../../components/customInputs/CustomTextInput"
+import { setPhoneNumber } from "../../redux/slices/authSlice"
+import * as Yup from 'yup'
+import { showToast } from "../../utils"
 
 const OTPVerification = () => {
     const { otp, phoneNumber } = useSelector(state => state.auth)
     const [resendTime, setResendTime] = useState(60)
+    const [resendDisabled, setResendDisabled] = useState(false);
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
-    const { data: OTPSend, error: sendOTPError, isLoading: sendingOTP } = useSendOTPQuery({
-        query: {
-            credentials: {
-                phoneNumber
-            }
-        }
-    })
-    const [verifyOTP, { data: verificationResponse, error: verificationError, isLoading: verifyingOTP }] = useVerifyOTPMutation()
+    const [sendOTP, { data: OTPData, error: sendOTPError, isLoading: sendingOTP }] = useSendOTPMutation()
+    const [verifyOTP, { data: verificationData, error: verificationError, isLoading: verifyingOTP }] = useVerifyOTPMutation()
+
+    function handleResendOTP() {
+        setResendTime(60);
+        setResendDisabled(true); // Disable the resend button
+        sendOTP({ destinationNumber: phoneNumber });
+    }
 
     useEffect(() => {
-        if (resendTime > 0) {
-            const timer = setTimeout(() => {
-                setResendTime(prev => prev - 1)
-            }, 1000)
+        const interval = setInterval(() => {
+            if (resendTime > 0) {
+                setResendTime(prevTime => prevTime - 1);
+            } else {
+                setResendDisabled(false); // Enable the resend button when the countdown reaches 0
+                clearInterval(interval);
+            }
+        }, 1000);
+
+        return () => clearInterval(interval); // Cleanup the interval on component unmount
+    }, [resendTime]);
+
+    useEffect(() => {
+        if (otp.length === 4) verifyOTP({
+            destinationNumber: phoneNumber,
+            pin: otp
+        })
+    }, [otp])
+
+    useEffect(() => {
+        if (verificationError) showToast(verificationError.data.detail, 'error', verificationError.data.title)
+        if (verificationData && verificationData?.status === "OK") {
+            showToast("You will be redirected shortly", 'success', "Verification successful!")
+            setTimeout(() => {
+                navigate('/login')
+            }, 3000)
+        } else if (verificationData && verificationData?.status !== "OK") {
+            showToast("You will be redirected shortly", 'success', "Verification successful!")
         }
-    }, [])
+        // console.log(auth.phoneNumber)
+    }, [verificationError, verificationData, OTPData])
 
     return (
         <AuthLayout>
-            <OTPInput />
-            <p className="mt-6">Didn't receive the code?</p>
-            <button className={ `btn btn-neutral w-full mt-4` }
+            { verificationError && <p className={ `bg-error/50 text-error-content py-2 px-4 rounded-md` }>An error occured: ({ verificationError?.data?.title }). Please try again with a different OTP</p> }
+            { sendOTPError && <p className={ `bg-error/50 text-error-content py-2 px-4 rounded-md` }>Error sending OTP: ({ sendOTPError?.data?.title }). Please try again.</p> }
 
-            >Resend { 'in ' + resendTime }</button>
+            { phoneNumber === '' ? (
+                // Render phone number entry form
+                <Formik
+                    initialValues={ { phone: '' } }
+                    validationSchema={ Yup.object({
+                        phone: Yup.string()
+                            .required("Enter phone number to verify")
+                            .matches(/^[^0].*$/, "Do not include the leading '0'")
+                            .matches(/^[789]\d{9}$/, "Enter a valid phone number"),
+                    }) }
+                    onSubmit={ ({ phone }) => {
+                        const formattedPhoneNumber = '234' + phone;
+                        dispatch(setPhoneNumber(formattedPhoneNumber));
+                        handleResendOTP(); // Corrected: added parentheses to call the function
+                    } }
+                >
+                    { (formik) => (
+                        <Form>
+                            {/* Render phone number input */ }
+                            <TextInput
+                                name={ "phone" }
+                                type={ "tel" }
+                                placeholder={ "eg. 80XXXXXXXX" }
+                            />
+                            {/* Render submit button */ }
+                            <button
+                                onClick={ formik.submitForm }
+                                className="btn btn-neutral w-full mt-4"
+                                type="submit"
+                            >
+                                Send OTP
+                            </button>
+                        </Form>
+                    ) }
+                </Formik>
+            ) : (
+                // Render OTP verification form
+                <>
+                    <p>{ `Enter the four-digit code sent to +${phoneNumber.substring(0, 3) + ' ' + phoneNumber.substring(3, 6) + ' XXX XX' + phoneNumber.substring(11)}` }</p>
+
+                    {/* Render OTP input */ }
+                    <OTPInput />
+
+                    {/* Render verify button */ }
+                    <button
+                        className={ `btn btn-neutral w-full mt-4` }
+                        onClick={ () => verifyOTP({
+                            destinationNumber: phoneNumber,
+                            pin: otp
+                        }) }
+                        disabled={ verifyingOTP || sendingOTP || otp === '' }
+                    >
+                        { verifyingOTP ? <span className="loading loading-ring" /> : 'Verify' }
+                    </button>
+
+                    {/* Render resend button */ }
+                    <p className="mt-4">
+                        Didn't receive the code?{ " " }
+                        <button
+                            className={ ` mt-2 font-semibold py-2 ${resendTime === 0 ? 'link link-hover italic' : 'opacity-50'
+                                }` }
+                            onClick={ handleResendOTP }
+                            disabled={ resendDisabled || sendingOTP || verifyingOTP }
+                        >
+                            Resend { resendTime === 0 ? 'now' : 'in ' + resendTime }
+                        </button>
+                    </p>
+                </>
+            ) }
         </AuthLayout>
-    )
+    );
 }
 export default OTPVerification

@@ -47,9 +47,7 @@ const CardSkeleton = ({
     <>
       {isLoading ? (
         <div className="card" style={{ marginBottom: "2em" }}>
-          <div className="card-header animated-bg">
-            &nbsp;
-          </div>
+          <div className="card-header animated-bg">&nbsp;</div>
           <div className="card-content">
             <h3 className="card-title animated-bg animated-bg-text" id="title">
               &nbsp;
@@ -62,15 +60,11 @@ const CardSkeleton = ({
             </p>
             <div className="author">
               <div className="profile-img animated-bg" id="profile_img">
-              &nbsp;
+                &nbsp;
               </div>
               <div className="author-info">
-                <strong className="animated-bg animated-bg-text">
-                  &nbsp;
-                </strong>
-                <small className="animated-bg animated-bg-text" >
-                  &nbsp;
-                </small>
+                <strong className="animated-bg animated-bg-text">&nbsp;</strong>
+                <small className="animated-bg animated-bg-text">&nbsp;</small>
               </div>
             </div>
           </div>
@@ -81,7 +75,7 @@ const CardSkeleton = ({
             <img src={img} alt="" />
           </div>
           <div className="card-content">
-            <h3 className="card-title" id="title">
+            <h3 className="card-title text-2xl " id="title">
               {title}
             </h3>
             <p className="card-excerpt" id="excerpt">

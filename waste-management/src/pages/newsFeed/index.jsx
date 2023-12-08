@@ -1,26 +1,38 @@
 import CardSkeleton from "../../components/CardSkeleton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import img from "../../assets/images/coming-soon-bg.jpg";
 import { newsFeed } from "./Data";
+import { IoMdArrowRoundBack } from "react-icons/io";
 
 const NewsFeed = () => {
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate("/services");
+  };
+
   return (
     <div>
-      <div className="flex flex-col items-center justify-center mb-14">
-        <h1 className="text-3xl">page under construction!</h1>
-        <h2 className="text-xl">stay tuned on!</h2>
+      <div className="flex items-center justify-around p-6">
+        <IoMdArrowRoundBack
+          className="text-3xl cursor-pointer"
+          onClick={handleBackClick}
+        />
+        <h1 className="text-xl font-bold lg:text-3xl whitespace-nowrap">
+          GET THE LATEST
+        </h1>
+        <div className="p-3"></div>
       </div>
       <div
         style={{
           display: "grid",
           gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
-          // border: "2px solid red",
           placeItems: "center",
         }}
       >
         {newsFeed.map((feed) => {
           return (
-            <Link key={feed.id} to='/details'>
+            <Link key={feed.id} to="/details">
               <CardSkeleton
                 img={img}
                 title={feed.title}
