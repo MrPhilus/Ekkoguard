@@ -28,6 +28,7 @@ const Disposal = () => {
   const optionsForLocation = [
     { position: 1, value: "Alimosho", label: "Alimosho" },
     { position: 2, value: "Yaba", label: "Yaba" },
+    { position: 3, value: "Surulere", label: "Surulere" },
   ];
 
   return (
@@ -40,7 +41,7 @@ const Disposal = () => {
           optionText={"Select an option"}
           required={true}
           type={"text"}
-          pickUpDay={'monday'}
+          pickUpDay={"monday"}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.binRequest}
