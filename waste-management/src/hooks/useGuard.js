@@ -1,33 +1,19 @@
-import { identityService, storageService } from "../services";
-import { useEffect, useState } from "react";
-import { suspend } from "../redux/actions/suspense.action";
+import { isAuthenticated } from "../services/identityService";
+import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
 
 export const useGuard = () => {
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	const navigate = useNavigate();
-	const [authorized, setAuthorized] = useState(false);
+	const authorized = isAuthenticated()
 
 	useEffect(() => {
-		dispatch(suspend(true));
-		const authData = storageService.getAuthData();
-		if (!authData.accessToken) {
+
+		if (!authorized) {
 			navigate("/login");
 		}
-		identityService
-			.isAuthenticated()
-			.then((authorized) => {
-				if (!authorized) {
-					navigate("/login");
-				}
-				setAuthorized(authorized);
-			})
-			.finally(() => {
-				dispatch(suspend(false));
-			});
-		// eslint-disable-next-line
+
 	}, []);
 
 	return authorized;
-};
+}

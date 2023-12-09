@@ -38,7 +38,7 @@ export const _setTokenToStorage = (key, value, expiresAt) => {
   return isBrowser && cookies.set(key, value, { path: '', expires: expiresAt });
 };
 
-export const _removeTokenFromStorage = (key) => isBrowser && cookies.remove(key, { domain: domain });
+export const _removeTokenFromStorage = (key) => isBrowser && cookies.remove(key, { path: '' });
 
 export const generateActions = (action) => {
   action = action.toUpperCase();

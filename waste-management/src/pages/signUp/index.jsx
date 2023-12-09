@@ -1,6 +1,6 @@
 import { Form, Formik } from "formik";
 import AuthLayout from "../../components/layouts/AuthLayout";
-import { SignupSchema as validationSchema } from "../../validations";
+import { SignupSchema } from "../../validations";
 import { InputCriteria, TextInput } from "../../components/customInputs/CustomTextInput";
 import { useSignUpMutation } from "../../services/identityService";
 import { showToast } from "../../utils/toastify";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPhoneNumber } from "../../redux/slices/authSlice";
 
 const GettingStarted = () => {
+  const validationSchema = SignupSchema()
   const [formError, setFormError] = useState()
   const [signUp, { data, error, isLoading }] = useSignUpMutation()
   const dispatch = useDispatch()

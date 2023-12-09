@@ -24,9 +24,6 @@ const extendedApi = apiSlice.injectEndpoints({
             try {
                 const { data } = await queryFulfilled
                 console.log(data)
-                if (data.endpoint === 'login') {
-                    storageService.saveAuthData(data.payload);
-                }
             } catch (err) {
                 alert('An error occurred. Please try again.')
                 console.error(err)
