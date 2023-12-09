@@ -12,19 +12,18 @@ import { setAuthData } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const validationSchema = LoginSchema()
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const [signUp, { data, error, isLoading }] = useLoginMutation()
   const [userName, setUserName] = useState('user');
   const isLoggedIn = isAuthenticated()
-  const navigate = useNavigate()
 
   const formikAttributes = {
     initialValues: {
       email: '',
       password: '',
     },
-    validationSchema,
+    validationSchema: LoginSchema(),
     onSubmit: async (values) => {
       // setFormError(null)
       setUserName(values.email)
@@ -39,7 +38,17 @@ const Login = () => {
   useEffect(() => {
     if (error) showToast(error?.data?.error, 'error')
     if (data && data?.status === "OK") {
-      dispatch(setAuthData({ userName, accessToken: data?.data.token }))
+      let timestamp = new Date(data?.timestamp)
+
+      dispatch(setAuthData({
+        userName,
+        firstName: data?.data.firstName,
+        lastName: data?.data.lastName,
+        email: data?.data.email,
+        loginDate: timestamp.toLocaleDateString() + ' ' + timestamp.toLocaleTimeString(),
+        address: data?.data.data.address,
+        accessToken: data?.data.token,
+      }))
       showToast("You will be redirected shortly", 'success', "Login Succesfull")
       setTimeout(() => {
         navigate('/services')
