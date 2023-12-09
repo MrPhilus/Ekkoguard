@@ -6,6 +6,7 @@ import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import CustomInput from "../../components/customInputs/CustomInputs";
 import TextArea from "../../components/customInputs/TextArea";
+import SampleModal from "../../components/modals/SampleModal";
 
 const Feedback = () => {
   const formik = useFormik({
@@ -57,6 +58,7 @@ const Feedback = () => {
           disabled={!formik.isValid || !formik.dirty}
         />
       </form>
+      <SampleModal/>
     </AuthLayout>
   );
 };

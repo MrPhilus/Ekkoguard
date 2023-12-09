@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import ReactDOM from "react-dom";
-import CloseIcon from "../../assets/svg/modal-close.svg";
+import CloseIcon from "../../assets/svg/bullets.svg";
 
 const Modal = ({ children, width, padding, onClose, ...rest }) => {
   const styles = {
@@ -37,7 +37,7 @@ const Modal = ({ children, width, padding, onClose, ...rest }) => {
         <div className={`modal__head relative`}>
           <button onClick={onClose} className={"modal__close"}>
             X {/* <CloseIcon /> */}
-			<img src={CloseIcon} alt="close"/>
+            <img src={CloseIcon} alt="close" />
           </button>
         </div>
         {children}
