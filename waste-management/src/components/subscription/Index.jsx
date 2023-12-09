@@ -1,53 +1,31 @@
-import Button from "../button";
-import { ButtonSize, ButtonState } from "../button/enum";
+import ModalCard from "../modalCard/ModalCard";
+import { PriceCards } from "../modalCard/Data";
 
 const Subscription = () => {
   return (
-    <div>
-      <div role="tablist" className="tabs tabs-lifted">
-        <a role="tab" className="tab">
-          <h1>Monthly</h1>
-        </a>
-        <div className="w-full border flex flex-col items-center justify-center">
-          <h2>7k</h2>
-          <Button
-            value={"Select Plan"}
-            size={ButtonSize.lg}
-            variant={ButtonState.PRIMARY}
-            type={"Button"}
-            className={"w-full mt-2"}
+    <div className="flex items-center justify-center gap-6">
+      {/* <ModalCard
+        header="Monthly"
+        details="Pay for the month"
+        price="7,000"
+        duration="month"
+        background="bg-rose-300"
+        buttonTextColor="text-rose-300"
+      /> */}
+
+      {PriceCards.map((PriceCard) => {
+        return (
+          <ModalCard
+            key={PriceCard.header}
+            header={PriceCard.header}
+            details={PriceCard.details}
+            price={PriceCard.price}
+            duration={PriceCard.duration}
+            background={PriceCard.background}
+            buttonTextColor={PriceCard.buttonTextColor}
           />
-        </div>
-        <a
-          role="tab"
-          className="tab tab-active [--tab-bg:orange] [--tab-border-color:black] text-white"
-        >
-          <h1>Quarterly</h1>
-        </a>
-        <div className="w-full border flex flex-col items-center justify-center">
-          <h2>24k</h2>
-          <Button
-            value={"Select Plan"}
-            size={ButtonSize.lg}
-            variant={ButtonState.PRIMARY}
-            type={"Button"}
-            className={"w-full mt-2"}
-          />
-        </div>
-        <a role="tab" className="tab">
-          <h1>Yearly</h1>
-        </a>
-        <div className="w-full border flex flex-col items-center justify-center">
-          <h2>70k</h2>
-          <Button
-            value={"Select Plan"}
-            size={ButtonSize.lg}
-            variant={ButtonState.PRIMARY}
-            type={"Button"}
-            className={"w-full mt-2"}
-          />
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 };

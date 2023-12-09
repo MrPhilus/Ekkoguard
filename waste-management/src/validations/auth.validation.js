@@ -7,7 +7,13 @@ export const DisposalForm = () => {
       .required("Required"),
     binQuantity: Yup.string()
       .oneOf(["1", "2"], "Please select an option")
-      .required("Required"),
+      .test("binQuantity", "Required", function (value) {
+        const { binRequest } = this.parent;
+        if (binRequest === "Yes" && !value) {
+          return false;
+        }
+        return true;
+      }),
     location: Yup.string()
       .oneOf(
         ["Alimosho", "Yaba", "Surulere", "Lagos Island", "Lekki"],

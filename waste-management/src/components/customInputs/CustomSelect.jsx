@@ -8,7 +8,6 @@ const CustomSelect = ({
   rightLabel,
   optionText,
   rightErrorText,
-  pickUpDay,
   className,
   options = [],
   errorText,

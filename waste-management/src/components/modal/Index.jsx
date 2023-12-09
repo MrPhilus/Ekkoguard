@@ -1,40 +1,20 @@
-// Modal.js
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { closeModal, selectIsModalOpen } from "../../redux/slices/modalSlice";
 
-const Modal = ({ children }) => {
-  const dispatch = useDispatch();
-  const isModalOpen = useSelector(selectIsModalOpen);
-
-  const handleClose = () => {
-    dispatch(closeModal());
-  };
-
+const Modal = ({ children, modalTitle }) => {
   return (
-    <>
-      {isModalOpen && (
-        <div  className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none w-full">
-          <div className="relative w-screen max-w-3xl mx-auto my-6">
-            {/* Modal content */}
-            <div style={{boxShadow: '0px 3px 5px -1px rgba(0,0,0,1)'}} className="relative flex flex-col w-full bg-white border-0 rounded-lg outline-none focus:outline-none p-10">
-              {/* Header */}
-              <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
-                <h3 className="text-3xl font-semibold">Modal Title</h3>
-                <button
-                  className="p-1 ml-auto border-0 text-red-600  float-right text-2xl leading-none font-semibold outline-none focus:outline-none"
-                  onClick={handleClose}
-                >
-                  <span className="text-3xl">x</span>
-                </button>
-              </div>
-              {/* Body */}
-              <div className="relative p-6 flex-auto">{children}</div>
-            </div>
-          </div>
+    <div>
+      <dialog id="my_modal_5" className="modal">
+        <div className="modal-box sm:flex-row w-full sm:w-3/4 md:w-1/2 lg:w-3/5 max-w-5xl">
+          <form method="dialog">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 text-red-550">
+              ✕
+            </button>
+          </form>
+          <h3 className="font-bold text-lg">{modalTitle}</h3>
+          <p className="py-8">{children}</p>
         </div>
-      )}
-    </>
+      </dialog>
+    </div>
   );
 };
 

@@ -5,16 +5,10 @@ import { useFormik } from "formik";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import Button from "../../components/button";
 import { DisposalForm } from "../../validations";
-import { useDispatch } from "react-redux";
-import { openModal } from "../../redux/slices/modalSlice";
 import Modal from "../../components/modal/Index";
 import Subscription from "../../components/subscription/Index";
 
 const Disposal = () => {
-  const dispatch = useDispatch();
-  const handleModal = () => {
-    dispatch(openModal());
-  };
   const formik = useFormik({
     initialValues: {
       binRequest: "",
@@ -55,7 +49,6 @@ const Disposal = () => {
           optionText={"Select an option"}
           required={true}
           type={"text"}
-          // pickUpDay={"monday"}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.binRequest}
@@ -64,17 +57,6 @@ const Disposal = () => {
         />
 
         {formik.values.binRequest === "Yes" && (
-          // <CustomInput
-          //   name={"binQuantity"}
-          //   labelText={"Quantity of Bins"}
-          //   placeholder={"Enter bin quantity"}
-          //   required={true}
-          //   type={"text"}
-          //   onBlur={formik.handleBlur}
-          //   onChange={formik.handleChange}
-          //   value={formik.values.binQuantity}
-          //   inputError={formik.touched.binQuantity && formik.errors.binQuantity}
-          // />
           <CustomSelect
             name={"binQuantity"}
             labelText={"Quantity of Bins Needed"}
@@ -122,12 +104,12 @@ const Disposal = () => {
           size={ButtonSize.lg}
           variant={ButtonState.PRIMARY}
           type={"Button"}
-          onClick={handleModal}
+          onClick={() => document.getElementById("my_modal_5").showModal()}
           className={"w-full mt-2"}
           disabled={!formik.isValid || !formik.dirty}
         />
 
-        <Modal>
+        <Modal modalTitle="Subscription Plans">
           <Subscription />
         </Modal>
       </form>
