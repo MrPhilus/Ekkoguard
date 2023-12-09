@@ -5,13 +5,12 @@ export const DisposalForm = () => {
     binRequest: Yup.string()
       .oneOf(["Yes", "No"], "Please select an option")
       .required("Required"),
-    binQuantity: Yup.number()
-      .positive()
-      .integer()
-      .required("Quantity must be a positive number"),
+    binQuantity: Yup.string()
+      .oneOf(["1", "2"], "Please select an option")
+      .required("Required"),
     location: Yup.string()
       .oneOf(
-        ["Alimosho", "Yaba", "Ilupeju", "Ketu"],
+        ["Alimosho", "Yaba", "Surulere", "Lagos Island", "Lekki"],
         "Invalid Location Selected"
       )
       .required("Required"),
@@ -33,13 +32,19 @@ export const SignupSchema = () => {
     firstName: Yup.string().required("This field is required"),
     lastName: Yup.string().required("This field is required"),
     otherName: Yup.string(),
-    phoneNumber: Yup.string().required("Enter your phone number").matches(/^[^0].*$/, "Do not include the leading '0'").matches(/^[789]\d{9}$/, "Enter a valid phone number"),
+    phoneNumber: Yup.string()
+      .required("Enter your phone number")
+      .matches(/^[^0].*$/, "Do not include the leading '0'")
+      .matches(/^[789]\d{9}$/, "Enter a valid phone number"),
     email: Yup.string()
       .required("This field is required")
       .email("Invalid email address"),
     password: Yup.string()
       .required("This field is required")
-      .matches(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\w]).{10,}$/, "Must match the specificatioins below"),
+      .matches(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\w]).{10,}$/,
+        "Must match the specificatioins below"
+      ),
     // .min(10, "Password must be 10 characters long")
     // .matches(/[A-Z]/, "Password requires an uppercase letter")
     // .matches(/[a-z]/, "Password requires a lowercase letter")
