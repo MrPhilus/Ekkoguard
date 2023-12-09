@@ -9,16 +9,17 @@ import {
 } from "../../services/identityService";
 import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { _setTokenToStorage } from "../../utils";
 import { storageService } from "../../services";
-import { useGuard } from "../../hooks/useGuard";
+import { useNavigate } from "react-router-dom";
+import { setAuthData } from "../../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const validationSchema = LoginSchema();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [signUp, { data, error, isLoading }] = useLoginMutation();
   const [userName, setUserName] = useState("user");
-  const auth = useSelector((state) => state.auth);
   const isLoggedIn = isAuthenticated();
 
   const formikAttributes = {
@@ -26,7 +27,7 @@ const Login = () => {
       email: "",
       password: "",
     },
-    validationSchema,
+    validationSchema: LoginSchema(),
     onSubmit: async (values) => {
       // setFormError(null)
       setUserName(values.email);
@@ -41,12 +42,30 @@ const Login = () => {
   useEffect(() => {
     if (error) showToast(error?.data?.error, "error");
     if (data && data?.status === "OK") {
-      storageService.saveAuthData({ userName, accessToken: data?.data.token });
+      let timestamp = new Date(data?.timestamp);
+
+      dispatch(
+        setAuthData({
+          userName,
+          firstName: data?.data.firstName,
+          lastName: data?.data.lastName,
+          email: data?.data.email,
+          loginDate:
+            timestamp.toLocaleDateString() +
+            " " +
+            timestamp.toLocaleTimeString(),
+          address: data?.data.data.address,
+          accessToken: data?.data.token,
+        })
+      );
       showToast(
         "You will be redirected shortly",
         "success",
         "Login Succesfull"
       );
+      setTimeout(() => {
+        navigate("/services");
+      }, 3000);
     }
   }, [error, data]);
 

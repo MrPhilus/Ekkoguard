@@ -1,8 +1,11 @@
 import React from "react";
 import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
+  const { authData } = useSelector(state => state.auth)
+
   return (
     <div className="flex my-auto items-center h-screen justify-center">
       <div className="card w-[27rem] bg-base-100 shadow-xl">
@@ -29,13 +32,13 @@ const Profile = () => {
         </div>
         <div className="flex gap-6 justify-between py-7 px-8">
           <Button
-            variant={ButtonState.SECONDARY}
-            size={ButtonSize.md}
+            variant={ ButtonState.SECONDARY }
+            size={ ButtonSize.md }
             value="Sign Out"
           />
           <Button
-            variant={ButtonState.PRIMARY}
-            size={ButtonSize.md}
+            variant={ ButtonState.PRIMARY }
+            size={ ButtonSize.md }
             value="Update Profile"
           />
         </div>
