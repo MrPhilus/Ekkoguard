@@ -5,7 +5,7 @@ import { useFormik } from "formik";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import Button from "../../components/button";
 import { DisposalForm } from "../../validations";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { openModal } from "../../redux/slices/modalSlice";
 import Modal from "../../components/modal/Index";
 import Subscription from "../../components/subscription/Index";
