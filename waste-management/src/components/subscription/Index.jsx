@@ -3,7 +3,7 @@ import { PriceCards } from "../modalCard/Data";
 
 const Subscription = () => {
   return (
-    <div className="flex items-center justify-center gap-6">
+    <div className="flex flex-col items-center justify-center gap-6 lg:flex-row">
       {PriceCards.map((PriceCard) => {
         return (
           <ModalCard
