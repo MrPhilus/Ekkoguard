@@ -5,18 +5,19 @@ import { TextInput } from "../../components/customInputs/CustomTextInput";
 import { isAuthenticated, logout, useLoginMutation } from "../../services/identityService";
 import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { _setTokenToStorage } from "../../utils";
 import { storageService } from "../../services";
-import { useGuard } from "../../hooks/useGuard";
-
+import { useNavigate } from "react-router-dom";
+import { setAuthData } from "../../redux/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const Login = () => {
   const validationSchema = LoginSchema()
+  const dispatch = useDispatch()
   const [signUp, { data, error, isLoading }] = useLoginMutation()
   const [userName, setUserName] = useState('user');
-  const auth = useSelector(state => state.auth)
   const isLoggedIn = isAuthenticated()
+  const navigate = useNavigate()
 
   const formikAttributes = {
     initialValues: {
@@ -38,8 +39,11 @@ const Login = () => {
   useEffect(() => {
     if (error) showToast(error?.data?.error, 'error')
     if (data && data?.status === "OK") {
-      storageService.saveAuthData({ userName, accessToken: data?.data.token })
+      dispatch(setAuthData({ userName, accessToken: data?.data.token }))
       showToast("You will be redirected shortly", 'success', "Login Succesfull")
+      setTimeout(() => {
+        navigate('/services')
+      }, 3000)
     }
   }, [error, data])
 
