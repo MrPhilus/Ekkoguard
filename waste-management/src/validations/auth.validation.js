@@ -51,6 +51,13 @@ export const SignupSchema = () => {
   });
 };
 
+export const LoginSchema = () => {
+  return Yup.object({
+    email: Yup.string().required("This field is required").email("Invalid email address"),
+    password: Yup.string().required("This field is required"),
+  });
+};
+
 export const LoginSchemaEmail = () => {
   return Yup.object({
     email: Yup.string().required("This field is required"),

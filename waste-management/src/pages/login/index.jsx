@@ -1,30 +1,22 @@
 import { Form, Formik } from "formik";
 import AuthLayout from "../../components/layouts/AuthLayout";
-import { SignupSchema as validationSchema } from "../../validations";
+import { LoginSchema } from "../../validations";
 import { TextInput } from "../../components/customInputs/CustomTextInput";
-import { useLoginMutation } from "../../services/identityService";
+import { isAuthenticated, logout, useLoginMutation } from "../../services/identityService";
 import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
-import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { setPhoneNumber } from "../../redux/slices/authSlice";
+import { _setTokenToStorage } from "../../utils";
+import { storageService } from "../../services";
+import { useGuard } from "../../hooks/useGuard";
 
-const loginDataSuccess = {
-  "status": "OK",
-  "message": "Successful",
-  "error": null,
-  "timestamp": "2023-12-09 08:53",
-  "debugMessage": null,
-  "data": {
-    "token": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJzZXlpdGVzdDFAZ21haWwuY29tIiwiaWF0IjoxNzAyMTEyMDM0LCJleHAiOjE3MDIxOTg0MzR9.kwcE2V_1AbZSKKefhSb-z7en_u225JQUfFBjLfPhLGcDS86uyWXnDuMElwOcUTKfLgVaAYgEHjd1nJR88sBJIw"
-  }
-}
 
-const GettingStarted = () => {
-  const [formError, setFormError] = useState()
+const Login = () => {
+  const validationSchema = LoginSchema()
   const [signUp, { data, error, isLoading }] = useLoginMutation()
+  const [userName, setUserName] = useState('user');
   const auth = useSelector(state => state.auth)
-  const dispatch = useDispatch()
+  const isLoggedIn = isAuthenticated()
 
   const formikAttributes = {
     initialValues: {
@@ -34,82 +26,78 @@ const GettingStarted = () => {
     validationSchema,
     onSubmit: async (values) => {
       // setFormError(null)
+      setUserName(values.email)
       try {
         await signUp(values)
       } catch (err) {
-        console.log(err.message)
-        setFormError(err.message)
+        console.log(err)
       }
     },
   }
 
   useEffect(() => {
-    if (error) showToast(error.data.detail, 'error', error.data.title)
-    if (data && data?.status === "CREATED") (
-      dispatch(setPhoneNumber(data.data.phoneNumber)),
-      showToast("Verify phone number to continue!", 'success', "Account Created Successfully")
-    )
-    // console.log(auth.phoneNumber)
+    if (error) showToast(error?.data?.error, 'error')
+    if (data && data?.status === "OK") {
+      storageService.saveAuthData({ userName, accessToken: data?.data.token })
+      showToast("You will be redirected shortly", 'success', "Login Succesfull")
+    }
   }, [error, data])
-
-  if ((data && data?.status === "OK") && data?.error === null) return <Navigate to={ '/verification' } />
 
   return (
     <AuthLayout>
-      { formError || error ?
+      { error ?
         <div div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
           <strong>An error occured!</strong>
-          { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
-          }
+          { error?.data?.error }
         </div> : ''
       }
 
-      <Formik { ...formikAttributes }>
-        {
-          (formik) => {
-            return (
-              <>
-                <Form>
-                  <TextInput
-                    label={ "Email address" }
-                    name={ "email" }
-                    type={ "email" }
-                    placeholder={ "Enter your email address" }
-                  />
-                  <TextInput
-                    label={ "Password" }
-                    name={ "password" }
-                    type={ "password" }
-                    placeholder={ "Choose a password" }
-                  />
-                  { formError || error ?
-                    <div div className="mt-4 px-4 py-8 bg-error/25 rounded-box flex flex-col">
-                      <strong>An error occured!</strong>
-                      { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
-                      }
-                    </div> : ''
-                  }
-                  <button
-                    className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6` }
-                    disabled={ formik.isSubmitting || !formik.isValid || !formik.dirty }
-                    type='submit'
-                  >
-                    {
-                      isLoading ?
-                        <>
-                          <span className={ `loading loading-bars` } />
-                        </> :
-                        "sign in"
-                    }
-                  </button>
-                </Form>
-              </>
-            )
-          }
-        }
-      </Formik>
+      {
+        isLoggedIn ?
+          <div div className="px-4 py-8 rounded-box">
+            <p className="text-xl font-bold">You are already logged in!</p>
+            <p>Do you want to <button className="link link-hover font-semibold" onClick={ logout }>Logout</button>?</p>
+          </div> :
+          <Formik { ...formikAttributes }>
+            {
+              (formik) => {
+                return (
+                  <>
+                    <Form>
+                      <TextInput
+                        label={ "Email address" }
+                        name={ "email" }
+                        type={ "email" }
+                        placeholder={ "Enter your email address" }
+                      />
+                      <TextInput
+                        label={ "Password" }
+                        name={ "password" }
+                        type={ "password" }
+                        placeholder={ "Choose a password" }
+                      />
+                      <button
+                        className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content` }
+                        disabled={ formik.isSubmitting || !formik.isValid || !formik.dirty }
+                        type='submit'
+                      >
+                        {
+                          isLoading ?
+                            <>
+                              <span className={ `loading loading-bars` } />
+                            </> :
+                            "sign in"
+                        }
+                      </button>
+                    </Form>
+                  </>
+                )
+              }
+            }
+          </Formik>
+      }
     </AuthLayout >
   );
 };
 
-export default GettingStarted;
+export default Login;

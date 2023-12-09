@@ -24,6 +24,8 @@ const AuthLayout = ({ children }) => {
       return "Create New Password.";
     } else if (location.pathname === "/verification") {
       return "Verify Your Phone Number.";
+    } else if (location.pathname === "/login") {
+      return "Login";
     }
   };
 

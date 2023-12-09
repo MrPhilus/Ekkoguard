@@ -22,12 +22,12 @@ const extendedApi = apiSlice.injectEndpoints({
 
         async onQueryStarted(_, { queryFulfilled }) {
             try {
-                const { data } = await queryFulfilled
-
-                if (data.endpoint === 'login') {
-                    console.log(data.payload)
-                    storageService.saveAuthData(data.payload);
-                }
+                const { data } = await queryFulfilled()
+                console.log(data.payload)
+                // if (data.endpoint === 'login') {
+                //     console.log(data.payload)
+                //     storageService.saveAuthData(data.payload);
+                // }
             } catch (err) {
                 alert('An error occurred. Please try again.')
                 console.error(err)
@@ -38,15 +38,14 @@ const extendedApi = apiSlice.injectEndpoints({
 
 export function logout() {
     storageService.clearCookieData();
-    return window.location.replace(import.meta.env.BASE_URL);
+    return window.location.replace(import.meta.env.BASE_URL + 'login');
 }
 
 export function isAuthenticated() {
     const authData = storageService.getAuthData();
     if (!authData.accessToken) {
         return false;
-    }
-    return true;
+    } else return true;
 }
 
 export const { useLoginMutation, useSignUpMutation } = extendedApi
