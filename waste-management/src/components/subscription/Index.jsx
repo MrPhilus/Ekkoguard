@@ -4,15 +4,6 @@ import { PriceCards } from "../modalCard/Data";
 const Subscription = () => {
   return (
     <div className="flex items-center justify-center gap-6">
-      {/* <ModalCard
-        header="Monthly"
-        details="Pay for the month"
-        price="7,000"
-        duration="month"
-        background="bg-rose-300"
-        buttonTextColor="text-rose-300"
-      /> */}
-
       {PriceCards.map((PriceCard) => {
         return (
           <ModalCard
