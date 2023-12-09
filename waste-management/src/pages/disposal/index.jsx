@@ -8,6 +8,7 @@ import { DisposalForm } from "../../validations";
 import { useDispatch, useSelector } from "react-redux";
 import { openModal } from "../../redux/slices/modalSlice";
 import Modal from "../../components/modal/Index";
+import Subscription from "../../components/subscription/Index";
 
 const Disposal = () => {
   const dispatch = useDispatch();
@@ -127,7 +128,7 @@ const Disposal = () => {
         />
 
         <Modal>
-          <h1>modal content</h1>
+          <Subscription />
         </Modal>
       </form>
     </AuthLayout>
