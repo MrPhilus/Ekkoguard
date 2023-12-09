@@ -21,7 +21,7 @@ const Feedback = () => {
 
   return (
     <AuthLayout>
-      <h1 className="font-extrabold text-xl">FEEDBACK</h1>
+      <h1 className="font-extrabold text-xl">SUGGESTIONS OR COMPLAINS</h1>
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
         <CustomInput
           name={"feedbackSubject"}
@@ -45,6 +45,9 @@ const Feedback = () => {
           value={formik.values.feedbackMessage}
           labelText={"Message"}
           placeholder={"Enter your message"}
+          inputError={
+            formik.touched.feedbackMessage && formik.errors.feedbackMessage
+          }
         />
 
         <Button

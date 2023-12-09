@@ -24,6 +24,10 @@ const CustomSelect = ({
         return "Tuesday";
       case "Surulere":
         return "Wednesday";
+      case "Lagos Island":
+        return "Thursday";
+      case "Lekki":
+        return "Friday";
       default:
         return "";
     }
@@ -39,7 +43,7 @@ const CustomSelect = ({
           {dayForLocation && (
             <div>
               <span className="label-text-alt text-olive-500 font-bold">
-                Pick up days for {value} are {dayForLocation}s
+                {` Pick up days for ${value} are ${dayForLocation}s`}
               </span>
             </div>
           )}

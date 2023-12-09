@@ -20,9 +20,18 @@ const TextArea = ({
         <span className="label-text font-bold">{labelText}</span>
       </div>
       <textarea
-        className="textarea textarea-bordered h-24"
+        id={id}
+        name={name}
+        // className="textarea textarea-bordered h-24"
+        className={`textarea textarea-bordered w-full h-24  ${
+          inputError ? "textarea-error" : ""
+        } ${className || ""}`}
         placeholder={placeholder}
-      ></textarea>
+        onBlur={onBlur}
+        onChange={onChange}
+      >
+        {value}
+      </textarea>
       {inputError && (
         <label className="label">
           <span className="label-text-alt text-red-600 flex gap-1">
