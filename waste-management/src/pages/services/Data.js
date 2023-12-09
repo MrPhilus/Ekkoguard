@@ -40,7 +40,7 @@ export const services = [
     cardHeader: "View Resources",
     cardText: "View resources to help understand recycling...",
     buttonText: "Coming soon",
-    buttonLink: "/resources",
+    buttonLink: "/comingsoon",
   },
   {
     imgSrc: cardImages["newsfeed"],

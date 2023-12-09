@@ -8,8 +8,13 @@ const Subscription = () => {
         <a role="tab" className="tab">
           <h1>Monthly</h1>
         </a>
-        <div className="w-full border flex flex-col items-center justify-center">
+        <div className="w-full border flex flex-col items-center justify-center p-4">
           <h2>7k</h2>
+          <p>
+            Join us in opening minds, bridging gaps, and making a lasting impact
+            on those in need. Together, let's rewrite stories and build a
+            brighter future for all.
+          </p>
           <Button
             value={"Select Plan"}
             size={ButtonSize.lg}
@@ -24,8 +29,13 @@ const Subscription = () => {
         >
           <h1>Quarterly</h1>
         </a>
-        <div className="w-full border flex flex-col items-center justify-center">
+        <div className="w-full border flex flex-col items-center justify-center p-4">
           <h2>24k</h2>
+          <p>
+            Join us in opening minds, bridging gaps, and making a lasting impact
+            on those in need. Together, let's rewrite stories and build a
+            brighter future for all.
+          </p>
           <Button
             value={"Select Plan"}
             size={ButtonSize.lg}
@@ -37,8 +47,13 @@ const Subscription = () => {
         <a role="tab" className="tab">
           <h1>Yearly</h1>
         </a>
-        <div className="w-full border flex flex-col items-center justify-center">
+        <div className="w-full border flex flex-col items-center justify-center p-4">
           <h2>70k</h2>
+          <p>
+            Join us in opening minds, bridging gaps, and making a lasting impact
+            on those in need. Together, let's rewrite stories and build a
+            brighter future for all.
+          </p>
           <Button
             value={"Select Plan"}
             size={ButtonSize.lg}

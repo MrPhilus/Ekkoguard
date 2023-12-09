@@ -64,17 +64,6 @@ const Disposal = () => {
         />
 
         {formik.values.binRequest === "Yes" && (
-          // <CustomInput
-          //   name={"binQuantity"}
-          //   labelText={"Quantity of Bins"}
-          //   placeholder={"Enter bin quantity"}
-          //   required={true}
-          //   type={"text"}
-          //   onBlur={formik.handleBlur}
-          //   onChange={formik.handleChange}
-          //   value={formik.values.binQuantity}
-          //   inputError={formik.touched.binQuantity && formik.errors.binQuantity}
-          // />
           <CustomSelect
             name={"binQuantity"}
             labelText={"Quantity of Bins Needed"}

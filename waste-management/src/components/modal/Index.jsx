@@ -17,7 +17,7 @@ const Modal = ({ children }) => {
         <div  className="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto outline-none focus:outline-none w-full">
           <div className="relative w-screen max-w-3xl mx-auto my-6">
             {/* Modal content */}
-            <div style={{boxShadow: '0px 3px 5px -1px rgba(0,0,0,1)'}} className="relative flex flex-col w-full bg-white border-0 rounded-lg outline-none focus:outline-none p-10">
+            <div style={{boxShadow: '0px 3px 5px -1px rgba(0,0,0,1)'}} className="relative flex flex-col w-full bg-white border-0 rounded-lg outline-none focus:outline-none ">
               {/* Header */}
               <div className="flex items-start justify-between p-5 border-b border-solid border-blueGray-200 rounded-t">
                 <h3 className="text-3xl font-semibold">Modal Title</h3>
