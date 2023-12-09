@@ -25,6 +25,7 @@ const extendedApi = apiSlice.injectEndpoints({
                 const { data } = await queryFulfilled
 
                 if (data.endpoint === 'login') {
+                    console.log(data.payload)
                     storageService.saveAuthData(data.payload);
                 }
             } catch (err) {

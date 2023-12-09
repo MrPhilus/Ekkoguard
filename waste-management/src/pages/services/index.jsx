@@ -27,46 +27,46 @@ const Services = () => {
 
   return (
     <div>
-      <section className={styles.header}>
-        <IoMdArrowRoundBack className={styles.back} onClick={handleBackClick} />
+      <section className={ styles.header }>
+        <IoMdArrowRoundBack className={ styles.back } onClick={ handleBackClick } />
 
-        {/* <h1 className="text-2xl font-extrabold">SERVICES</h1> */}
+        {/* <h1 className="text-2xl font-extrabold">SERVICES</h1> */ }
 
-        {!isLoggedIn ? (
+        { !isLoggedIn ? (
           <>
             <div className="flex items-center gap-4">
               <Link
                 className="font-semibold hover:text-olive-500"
-                to={"/feedback"}
+                to={ "/feedback" }
               >
                 Feedback
               </Link>
-              <FaRegUserCircle className={styles.user} onClick={goToProfile} />
+              <FaRegUserCircle className={ styles.user } onClick={ goToProfile } />
             </div>
           </>
         ) : (
           <CustomButton
             containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-24"
             buttonText="Log In"
-            onClick={goToLogin}
-            buttonLink={"/login"}
+            onClick={ goToLogin }
+            buttonLink={ "/login" }
           />
-        )}
+        ) }
       </section>
-      <section className={styles.main}>
-        {services.map((service) => {
+      <section className={ styles.main }>
+        { services.map((service) => {
           return (
             <Card
-              key={service.cardTitle}
-              src={service.imgSrc}
-              cardTitle={service.cardTitle}
-              cardHeader={service.cardHeader}
-              cardText={service.cardText}
-              buttonText={service.buttonText}
-              buttonLink={service.buttonLink}
+              key={ service.cardTitle }
+              src={ service.imgSrc }
+              cardTitle={ service.cardTitle }
+              cardHeader={ service.cardHeader }
+              cardText={ service.cardText }
+              buttonText={ service.buttonText }
+              buttonLink={ service.buttonLink }
             />
           );
-        })}
+        }) }
       </section>
     </div>
   );

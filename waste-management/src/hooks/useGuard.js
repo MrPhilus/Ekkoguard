@@ -13,13 +13,13 @@ export const useGuard = () => {
 		dispatch(suspend(true));
 		const authData = storageService.getAuthData();
 		if (!authData.accessToken) {
-			navigate("/signin");
+			navigate("/login");
 		}
 		identityService
 			.isAuthenticated()
 			.then((authorized) => {
 				if (!authorized) {
-					navigate("/signin");
+					navigate("/login");
 				}
 				setAuthorized(authorized);
 			})

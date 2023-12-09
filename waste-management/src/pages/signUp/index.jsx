@@ -9,30 +9,9 @@ import { Link, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { setPhoneNumber } from "../../redux/slices/authSlice";
 
-
-const successdata = {
-  data: {
-    address: null,
-    deleted: false,
-    email: "testagain@gmail.com",
-    firstName: "testagain",
-    gender: null,
-    lastName: "testagain",
-    otherName: "",
-    phoneNumber: "2349076183344",
-    subscribed: false,
-  },
-  debugMessage: null,
-  error: null,
-  message: "Successful",
-  status: "CREATED",
-  timestamp: "2023-12-07 23:15",
-}
-
 const GettingStarted = () => {
   const [formError, setFormError] = useState()
   const [signUp, { data, error, isLoading }] = useSignUpMutation()
-  const auth = useSelector(state => state.auth)
   const dispatch = useDispatch()
 
   const formikAttributes = {
@@ -165,7 +144,7 @@ const GettingStarted = () => {
                     </div> : ''
                   }
                   <button
-                    className={ `btn btn-primary xl:btn-lg w-full capitalize mt-6` }
+                    className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6` }
                     disabled={ formik.isSubmitting || !formik.isValid || !formik.dirty }
                     type='submit'
                   >
