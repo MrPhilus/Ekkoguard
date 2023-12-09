@@ -27,6 +27,7 @@ const OTPVerification = () => {
     }
 
     useEffect(() => {
+        if (sendOTPError) return
         const interval = setInterval(() => {
             if (resendTime > 0) {
                 setResendTime(prevTime => prevTime - 1);
@@ -49,22 +50,28 @@ const OTPVerification = () => {
     useEffect(() => {
         if (verificationError) showToast(verificationError.data.detail, 'error', verificationError.data.title)
         if (verificationData && verificationData?.status === "OK") {
-            showToast("You will be redirected shortly", 'success', "Verification successful!")
-            setTimeout(() => {
-                navigate('/login')
-            }, 3000)
-        } else if (verificationData && verificationData?.status !== "OK") {
-            showToast("You will be redirected shortly", 'success', "Verification successful!")
+            if (verificationData?.data.verified === true) {
+                showToast("You will be redirected shortly", 'success', "Verification successful!")
+                setTimeout(() => {
+                    navigate('/login')
+                }, 3000)
+            } else {
+                showToast("Provide correct OTP", 'Error', "Verification Failed!")
+            }
         }
+        if (sendingOTP) {
+            showToast("Sending OTP", "loading", "Please wait.")
+        }
+        // console.log(sendOTPError)
         // console.log(auth.phoneNumber)
     }, [verificationError, verificationData, OTPData])
 
     return (
         <AuthLayout>
             { verificationError && <p className={ `bg-error/50 text-error-content py-2 px-4 rounded-md` }>An error occured: ({ verificationError?.data?.title }). Please try again with a different OTP</p> }
-            { sendOTPError && <p className={ `bg-error/50 text-error-content py-2 px-4 rounded-md` }>Error sending OTP: ({ sendOTPError?.data?.title }). Please try again.</p> }
+            { sendOTPError && <p className={ `bg-error/50 text-error-content py-2 px-4 rounded-md` }>Error sending OTP: ({ sendOTPError?.error }). Please try again.</p> }
 
-            { phoneNumber === '' ? (
+            { (phoneNumber === '' || sendingOTP) && (!OTPData || OTPData.status !== "OK") ? (
                 // Render phone number entry form
                 <Formik
                     initialValues={ { phone: '' } }
@@ -83,19 +90,21 @@ const OTPVerification = () => {
                     { (formik) => (
                         <Form>
                             {/* Render phone number input */ }
-                            <TextInput
+                            { phoneNumber === '' && <TextInput
                                 name={ "phone" }
                                 type={ "tel" }
                                 placeholder={ "eg. 80XXXXXXXX" }
-                            />
+                            /> }
                             {/* Render submit button */ }
                             <button
                                 onClick={ formik.submitForm }
                                 className="btn btn-neutral w-full mt-4"
                                 type="submit"
+                                disabled={ sendingOTP }
                             >
-                                Send OTP
+                                { sendingOTP ? <span><span className={ `loading loading-bars` } /> Sending OTP</span> : `Send OTP` }
                             </button>
+
                         </Form>
                     ) }
                 </Formik>
@@ -108,17 +117,24 @@ const OTPVerification = () => {
                     <OTPInput />
 
                     {/* Render verify button */ }
-                    <button
-                        className={ `btn btn-neutral w-full mt-4` }
-                        onClick={ () => verifyOTP({
-                            destinationNumber: phoneNumber,
-                            pin: otp
-                        }) }
-                        disabled={ verifyingOTP || sendingOTP || otp === '' }
-                    >
-                        { verifyingOTP ? <span className="loading loading-ring" /> : 'Verify' }
-                    </button>
-
+                    {
+                        verifyingOTP ? (
+                            <div
+                                className={ `btn bg-olive-500 text-white w-full mt-4` }
+                            >
+                                <span className="loading loading-bars" /> Please Wait
+                            </div>) : (
+                            <button
+                                className={ `btn bg-olive-500 text-white w-full mt-4` }
+                                onClick={ () => verifyOTP({
+                                    destinationNumber: phoneNumber,
+                                    pin: otp
+                                }) }
+                                disabled={ verifyingOTP || sendingOTP || otp === '' }
+                            >
+                                { verifyingOTP ? <span className="loading loading-bars" /> : 'Verify' }
+                            </button>)
+                    }
                     {/* Render resend button */ }
                     <p className="mt-4">
                         Didn't receive the code?{ " " }
@@ -126,9 +142,9 @@ const OTPVerification = () => {
                             className={ ` mt-2 font-semibold py-2 ${resendTime === 0 ? 'link link-hover italic' : 'opacity-50'
                                 }` }
                             onClick={ handleResendOTP }
-                            disabled={ resendDisabled || sendingOTP || verifyingOTP }
+                            disabled={ (resendDisabled || sendingOTP || verifyingOTP) && (!sendOTPError || verificationError?.data.verified === false) }
                         >
-                            Resend { resendTime === 0 ? 'now' : 'in ' + resendTime }
+                            Resend { (resendTime === 0 || sendOTPError) ? 'now' : 'in ' + resendTime }
                         </button>
                     </p>
                 </>
