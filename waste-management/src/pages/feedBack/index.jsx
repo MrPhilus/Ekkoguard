@@ -6,23 +6,45 @@ import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import CustomInput from "../../components/customInputs/CustomInputs";
 import TextArea from "../../components/customInputs/TextArea";
-import SampleModal from "../../components/modals/SampleModal";
+import { showToast } from "../../utils";
+import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
+  const navigate = useNavigate()
   const formik = useFormik({
     initialValues: {
       feedbackSubject: "",
       feedbackMessage: "",
     },
     validationSchema: FeedbackForm,
-    onSubmit: (values) => {
-      console.log(values);
-    },
+    onSubmit: handleSubmit,
   });
+
+  function handleSubmit(values) {
+    showToast(
+      <>
+        Submitted <br />
+      </>,
+      "success",
+      {
+        position: "top-right",
+        autoClose: 3000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "rgba(4, 108, 78, 0.1)",
+          color: "#148519",
+          fontWeight: "bold",
+        },
+      }
+    );
+    console.log(values);
+  }
 
   return (
     <AuthLayout>
-      <h1 className="font-extrabold text-xl">FEEDBACK</h1>
+      <h1 className="font-extrabold text-xl">SUGGESTIONS OR COMPLAINS</h1>
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
         <CustomInput
           name={"feedbackSubject"}
@@ -46,6 +68,9 @@ const Feedback = () => {
           value={formik.values.feedbackMessage}
           labelText={"Message"}
           placeholder={"Enter your message"}
+          inputError={
+            formik.touched.feedbackMessage && formik.errors.feedbackMessage
+          }
         />
 
         <Button
@@ -53,12 +78,11 @@ const Feedback = () => {
           size={ButtonSize.lg}
           variant={ButtonState.PRIMARY}
           type={"Button"}
-          onClick={() => formik.handleSubmit()}
+          onClick={handleSubmit}
           className={"w-full mt-2"}
           disabled={!formik.isValid || !formik.dirty}
         />
       </form>
-      <SampleModal/>
     </AuthLayout>
   );
 };

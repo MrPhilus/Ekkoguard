@@ -1,4 +1,3 @@
-import React from "react";
 import CustomInput from "../../components/customInputs/CustomInputs";
 import CustomSelect from "../../components/customInputs/CustomSelect";
 import AuthLayout from "../../components/layouts/AuthLayout";
@@ -6,6 +5,8 @@ import { useFormik } from "formik";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import Button from "../../components/button";
 import { DisposalForm } from "../../validations";
+import Modal from "../../components/modal/Index";
+import Subscription from "../../components/subscription/Index";
 
 const Disposal = () => {
   const formik = useFormik({
@@ -25,10 +26,17 @@ const Disposal = () => {
     { position: 2, value: "No", label: "No" },
   ];
 
+  const optionsForBinQuantity = [
+    { position: 1, value: "1", label: "1" },
+    { position: 2, value: "2", label: "2" },
+  ];
+
   const optionsForLocation = [
     { position: 1, value: "Alimosho", label: "Alimosho" },
     { position: 2, value: "Yaba", label: "Yaba" },
     { position: 3, value: "Surulere", label: "Surulere" },
+    { position: 4, value: "Lagos Island", label: "Lagos Island" },
+    { position: 5, value: "Lekki", label: "Lekki" },
   ];
 
   return (
@@ -37,11 +45,10 @@ const Disposal = () => {
       <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
         <CustomSelect
           name={"binRequest"}
-          labelText={"Bin Request"}
+          labelText={"Do You Want a Bin?"}
           optionText={"Select an option"}
           required={true}
           type={"text"}
-          pickUpDay={"monday"}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.binRequest}
@@ -49,20 +56,24 @@ const Disposal = () => {
           errorText={formik.touched.binRequest && formik.errors.binRequest}
         />
 
-        <CustomInput
-          name={"binQuantity"}
-          labelText={"Quantity of Bins"}
-          placeholder={"Enter bin quantity"}
-          required={true}
-          type={"text"}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.binQuantity}
-          inputError={formik.touched.binQuantity && formik.errors.binQuantity}
-        />
+        {formik.values.binRequest === "Yes" && (
+          <CustomSelect
+            name={"binQuantity"}
+            labelText={"Quantity of Bins Needed"}
+            optionText={"Select an option"}
+            required={true}
+            type={"text"}
+            onBlur={formik.handleBlur}
+            onChange={formik.handleChange}
+            value={formik.values.binQuantity}
+            options={optionsForBinQuantity}
+            errorText={formik.touched.binQuantity && formik.errors.binQuantity}
+          />
+        )}
+
         <CustomSelect
           name={"location"}
-          labelText={"Location"}
+          labelText={"Area"}
           placeholder={"Select Location"}
           required={true}
           optionText={"Select an option"}
@@ -73,6 +84,7 @@ const Disposal = () => {
           options={optionsForLocation}
           inputError={formik.touched.location && formik.errors.location}
         />
+
         <CustomInput
           name={"pickupAddress"}
           labelText={"Pickup Address"}
@@ -92,10 +104,14 @@ const Disposal = () => {
           size={ButtonSize.lg}
           variant={ButtonState.PRIMARY}
           type={"Button"}
-          onClick={() => formik.handleSubmit()}
+          onClick={() => document.getElementById("my_modal_5").showModal()}
           className={"w-full mt-2"}
           disabled={!formik.isValid || !formik.dirty}
         />
+
+        <Modal modalTitle="Subscription Plans">
+          <Subscription />
+        </Modal>
       </form>
     </AuthLayout>
   );

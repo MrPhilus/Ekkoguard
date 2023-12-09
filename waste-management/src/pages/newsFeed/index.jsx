@@ -15,7 +15,7 @@ const NewsFeed = () => {
     <div>
       <div className="flex items-center justify-around p-6">
         <IoMdArrowRoundBack
-          className="text-3xl cursor-pointer"
+          className="text-3xl cursor-pointer hover:text-olive-500"
           onClick={handleBackClick}
         />
         <h1 className="text-xl font-bold lg:text-3xl whitespace-nowrap">
