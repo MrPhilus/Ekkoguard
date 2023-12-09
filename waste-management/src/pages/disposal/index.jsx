@@ -1,4 +1,3 @@
-import React from "react";
 import CustomInput from "../../components/customInputs/CustomInputs";
 import CustomSelect from "../../components/customInputs/CustomSelect";
 import AuthLayout from "../../components/layouts/AuthLayout";
@@ -6,8 +5,15 @@ import { useFormik } from "formik";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import Button from "../../components/button";
 import { DisposalForm } from "../../validations";
+import { useDispatch, useSelector } from "react-redux";
+import { openModal } from "../../redux/slices/modalSlice";
+import Modal from "../../components/modal/Index";
 
 const Disposal = () => {
+  const dispatch = useDispatch();
+  const handleModal = () => {
+    dispatch(openModal());
+  };
   const formik = useFormik({
     initialValues: {
       binRequest: "",
@@ -86,16 +92,18 @@ const Disposal = () => {
             formik.touched.pickupAddress && formik.errors.pickupAddress
           }
         />
-
         <Button
           value={"Submit"}
           size={ButtonSize.lg}
           variant={ButtonState.PRIMARY}
           type={"Button"}
-          onClick={() => formik.handleSubmit()}
+          onClick={handleModal}
           className={"w-full mt-2"}
           disabled={!formik.isValid || !formik.dirty}
         />
+        <Modal>
+          <h1>modal content</h1>
+        </Modal>
       </form>
     </AuthLayout>
   );
