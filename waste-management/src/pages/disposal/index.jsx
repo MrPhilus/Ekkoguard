@@ -28,7 +28,9 @@ const Disposal = () => {
   const optionsForLocation = [
     { position: 1, value: "Alimosho", label: "Alimosho" },
     { position: 2, value: "Yaba", label: "Yaba" },
+    { position: 3, value: "Surulere", label: "Surulere" },
   ];
+
   return (
     <AuthLayout>
       <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
@@ -39,6 +41,7 @@ const Disposal = () => {
           optionText={"Select an option"}
           required={true}
           type={"text"}
+          pickUpDay={"monday"}
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.binRequest}
