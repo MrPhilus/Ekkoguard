@@ -31,8 +31,8 @@ export const services = [
     cardTitle: "Schedule History",
     cardHeader: "View History",
     cardText: "View your past schedules, Check your history...",
-    buttonText: "Coming soon",
-    buttonLink: "/comingsoon",
+    buttonText: "Proceed",
+    buttonLink: "/history",
   },
   {
     imgSrc: cardImages["resources"],

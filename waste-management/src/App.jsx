@@ -21,35 +21,37 @@ import Details from "./pages/newsFeed/Details";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
 import OTPVerification from "./pages/otpVerification";
+import History from "./pages/history";
 
 function App() {
   return (
     <>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={ <Home /> } />
-        <Route path="/signup" element={ <SignUp /> } />
-        <Route path="/verification" element={ <OTPVerification /> } />
-        <Route path="/login" element={ <Login /> } />
-        <Route path="/forgotpassword" element={ <ForgotPassword /> } />
-        <Route path="/passwordreset" element={ <PasswordReset /> } />
-        <Route path="/pagenotfound" element={ <PageNotFound /> } />
-        <Route path="/comingsoon" element={ <ComingSoon /> } />
-        <Route path="/newsfeed" element={ <NewsFeed /> } />
-        <Route path="/details" element={ <Details /> } />
-        <Route path="feedback" element={ <Feedback /> } />
-        <Route path="profile" element={ <Profile /> } />
-        {/* <Route path="/services" element={<Services />} /> */ }
-        {/* <Route element={<ProtectedRoute />}> */ }
-        {/* </Route> */ }
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/verification" element={<OTPVerification />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/passwordreset" element={<PasswordReset />} />
+        <Route path="/pagenotfound" element={<PageNotFound />} />
+        <Route path="/comingsoon" element={<ComingSoon />} />
+        <Route path="/newsfeed" element={<NewsFeed />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="feedback" element={<Feedback />} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="history" element={<History />} />
+        {/* <Route path="/services" element={<Services />} /> */}
+        {/* <Route element={<ProtectedRoute />}> */}
+        {/* </Route> */}
 
-        <Route path="disposal" element={ <Disposal /> } />
-        {/* <Route path="profile" element={<Profile />} /> */ }
-        <Route path="/services" element={ <Services /> }>
-          <Route path="disposal" element={ <Disposal /> } />
-          <Route path="recycling" element={ <WasteRecyclingPage /> } />
+        <Route path="disposal" element={<Disposal />} />
+        {/* <Route path="profile" element={<Profile />} /> */}
+        <Route path="/services" element={<Services />}>
+          <Route path="disposal" element={<Disposal />} />
+          <Route path="recycling" element={<WasteRecyclingPage />} />
         </Route>
-        <Route path="*" element={ <PageNotFound /> } />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );
