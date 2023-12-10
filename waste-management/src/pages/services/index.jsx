@@ -61,6 +61,7 @@ const Services = () => {
           />
         )}
       </section>
+
       <section className={styles.main}>
         {services.map((service) => {
           return (

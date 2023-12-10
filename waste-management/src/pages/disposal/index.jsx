@@ -7,20 +7,29 @@ import Button from "../../components/button";
 import { DisposalForm } from "../../validations";
 import Modal from "../../components/modal/Index";
 import Subscription from "../../components/subscription/Index";
+import CustomButton from "../../components/CustomButton";
+import { useEffect, useState } from "react";
 
 const Disposal = () => {
+  const [selectedPrice, setSelectedPrice] = useState("");
+  const [selectedDuration, setSelectedDuration] = useState("");
+  const [isModalOpen, setModalOpen] = useState(true);
+
   const formik = useFormik({
     initialValues: {
       binRequest: "",
       binQuantity: "",
       location: "",
       pickupAddress: "",
+      selectedPrice: "",
+      selectedDuration: "",
     },
     validationSchema: DisposalForm(),
     onSubmit: (values) => {
       console.log(values);
     },
   });
+
   const optionsForBinRequest = [
     { position: 1, value: "Yes", label: "Yes" },
     { position: 2, value: "No", label: "No" },
@@ -39,37 +48,65 @@ const Disposal = () => {
     { position: 5, value: "Lekki", label: "Lekki" },
   ];
 
+  const firstTime = true;
+
+  const handlePriceSelection = (price, duration) => {
+    setSelectedPrice(price);
+    setSelectedDuration(duration);
+    setModalOpen(false);
+    formik.setValues({
+      ...formik.values,
+      selectedPrice: price,
+      selectedDuration: duration,
+    });
+    formik.handleSubmit();
+  };
   return (
     <AuthLayout>
-      <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
-      <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
-        <CustomSelect
-          name={"binRequest"}
-          labelText={"Do You Want a Bin?"}
-          optionText={"Select an option"}
-          required={true}
-          type={"text"}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.binRequest}
-          options={optionsForBinRequest}
-          errorText={formik.touched.binRequest && formik.errors.binRequest}
-        />
-
-        {formik.values.binRequest === "Yes" && (
-          <CustomSelect
-            name={"binQuantity"}
-            labelText={"Quantity of Bins Needed"}
-            optionText={"Select an option"}
-            required={true}
-            type={"text"}
-            onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
-            value={formik.values.binQuantity}
-            options={optionsForBinQuantity}
-            errorText={formik.touched.binQuantity && formik.errors.binQuantity}
+      <div className="flex items-center justify-between">
+        <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
+        {!firstTime && (
+          <CustomButton
+            containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
+            buttonText="Add New Location"
           />
         )}
+      </div>
+
+      <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
+        {firstTime ? (
+          <>
+            <CustomSelect
+              name={"binRequest"}
+              labelText={"Do You Want a Bin?"}
+              optionText={"Select an option"}
+              required={true}
+              type={"text"}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.binRequest}
+              options={optionsForBinRequest}
+              errorText={formik.touched.binRequest && formik.errors.binRequest}
+            />
+
+            {formik.values.binRequest === "Yes" && (
+              <CustomSelect
+                name={"binQuantity"}
+                labelText={"Quantity of Bins Needed"}
+                optionText={"Select an option"}
+                required={true}
+                type={"text"}
+                onBlur={formik.handleBlur}
+                onChange={formik.handleChange}
+                value={formik.values.binQuantity}
+                options={optionsForBinQuantity}
+                errorText={
+                  formik.touched.binQuantity && formik.errors.binQuantity
+                }
+              />
+            )}
+          </>
+        ) : null}
 
         <CustomSelect
           name={"location"}
@@ -83,6 +120,8 @@ const Disposal = () => {
           value={formik.values.location}
           options={optionsForLocation}
           errorText={formik.touched.location && formik.errors.location}
+          disabled={!firstTime}
+          style={{ cursor: "not-allowed", color: "#999" }}
         />
 
         <CustomInput
@@ -97,6 +136,7 @@ const Disposal = () => {
           inputError={
             formik.touched.pickupAddress && formik.errors.pickupAddress
           }
+          readOnly={!firstTime}
         />
 
         <Button
@@ -109,9 +149,11 @@ const Disposal = () => {
           disabled={!formik.isValid || !formik.dirty}
         />
 
-        <Modal modalTitle="Subscription Plans">
-          <Subscription />
-        </Modal>
+        {isModalOpen && (
+          <Modal modalTitle="Subscription Plans">
+            <Subscription onPriceSelect={handlePriceSelection} />
+          </Modal>
+        )}
       </form>
     </AuthLayout>
   );
