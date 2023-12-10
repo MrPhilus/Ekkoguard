@@ -1,6 +1,7 @@
 import { isAuthenticated } from "../services/identityService";
 import { useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
+import { showToast } from "../utils/toastify";
 
 export const useGuard = () => {
 	// const dispatch = useDispatch();
@@ -10,6 +11,7 @@ export const useGuard = () => {
 	useEffect(() => {
 
 		if (!authorized) {
+			showToast("Please login to continue.", "warn", "You're not logged in!")
 			navigate("/login");
 		}
 

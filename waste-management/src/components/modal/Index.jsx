@@ -10,8 +10,8 @@ const Modal = ({ children, modalTitle }) => {
               ✕
             </button>
           </form>
-          <h3 className="font-bold text-lg">{modalTitle}</h3>
-          <p className="py-8">{children}</p>
+          <h3 className="font-bold text-lg">{ modalTitle }</h3>
+          <div className="py-8">{ children }</div>
         </div>
       </dialog>
     </div>

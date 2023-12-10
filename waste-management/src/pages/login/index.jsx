@@ -42,12 +42,12 @@ const Login = () => {
 
       dispatch(setAuthData({
         userName,
-        firstName: data?.data.firstName,
-        lastName: data?.data.lastName,
-        email: data?.data.email,
+        firstName: data?.data?.firstName || '',
+        lastName: data?.data?.lastName || '',
+        email: data?.data?.email || '',
         loginDate: timestamp.toLocaleDateString() + ' ' + timestamp.toLocaleTimeString(),
-        address: data?.data.data.address,
-        accessToken: data?.data.token,
+        address: data?.data?.data?.address || '',
+        accessToken: data?.data.token || '',
       }))
       showToast("You will be redirected shortly", 'success', "Login Succesfull")
       setTimeout(() => {

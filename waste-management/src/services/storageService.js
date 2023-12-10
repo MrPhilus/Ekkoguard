@@ -12,6 +12,11 @@ export default class StorageService {
         const expirationTime = new Date(authData.expires_in * 1000);
         this.#saveItemIfProvided("accessToken", authData.accessToken, expirationTime);
         this.#saveItemIfProvided("userName", authData.userName, expirationTime);
+        this.#saveItemIfProvided("firstName", authData.firstName, expirationTime)
+        this.#saveItemIfProvided("lastName", authData.lastName, expirationTime)
+        this.#saveItemIfProvided("email", authData.email, expirationTime)
+        this.#saveItemIfProvided("address", authData.address, expirationTime)
+        this.#saveItemIfProvided("loginDate", authData.loginDate, expirationTime)
     }
 
     #saveItemIfProvided(key, value, expiresAt) {
@@ -26,11 +31,21 @@ export default class StorageService {
     clearAuthData() {
         _removeTokenFromStorage("accessToken");
         _removeTokenFromStorage("userName");
+        _removeTokenFromStorage("firstName");
+        _removeTokenFromStorage("lastName");
+        _removeTokenFromStorage("email");
+        _removeTokenFromStorage("address");
+        _removeTokenFromStorage("loginDate");
     }
 
     clearCookieData() {
         _removeTokenFromStorage("accessToken");
         _removeTokenFromStorage("userName");
+        _removeTokenFromStorage("firstName");
+        _removeTokenFromStorage("lastName");
+        _removeTokenFromStorage("email");
+        _removeTokenFromStorage("address");
+        _removeTokenFromStorage("loginDate");
     }
 
     set(key, value) {
@@ -49,6 +64,12 @@ export default class StorageService {
         return {
             accessToken: _getTokenFromStorage("accessToken"),
             userName: _getTokenFromStorage("userName"),
+            firstName: _getTokenFromStorage("firstName"),
+            lastName: _getTokenFromStorage("lastName"),
+            email: _getTokenFromStorage("email"),
+            address: _getTokenFromStorage("address"),
+            loginDate: _getTokenFromStorage("loginDate"),
+
         }
     }
 }
