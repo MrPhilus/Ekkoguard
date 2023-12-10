@@ -16,19 +16,19 @@ module.exports = Object.freeze({
     },
     {
       title: "Pick up at Lekki",
-      theme: "PURPLE",
+      theme: "GREEN",
       startTime: moment().add(-2, "d").startOf("day"),
       endTime: moment().add(-2, "d").endOf("day"),
     },
     {
       title: "Meeting with tech team",
-      theme: "BLUE",
+      theme: "PINK",
       startTime: moment().startOf("day"),
       endTime: moment().endOf("day"),
     },
     {
       title: "Product Call",
-      theme: "GREEN",
+      theme: "ORANGE",
       startTime: moment().startOf("day"),
       endTime: moment().endOf("day"),
     },
@@ -40,13 +40,13 @@ module.exports = Object.freeze({
     },
     {
       title: "Pickup at Surulere",
-      theme: "ORANGE",
+      theme: "GREEN",
       startTime: moment().add(3, "d").startOf("day"),
       endTime: moment().add(3, "d").endOf("day"),
     },
     {
       title: "Product meeting",
-      theme: "PINK",
+      theme: "ORANGE",
       startTime: moment().add(5, "d").startOf("day"),
       endTime: moment().add(5, "d").endOf("day"),
     },
@@ -79,6 +79,18 @@ module.exports = Object.freeze({
       theme: "BLUE",
       startTime: moment().add(12, "d").startOf("day"),
       endTime: moment().add(12, "d").endOf("day"),
+    },
+    {
+      title: "Pickup at Island",
+      theme: "GREEN",
+      startTime: moment().add(18, "d").startOf("day"),
+      endTime: moment().add(18, "d").endOf("day"),
+    },
+    {
+      title: "Sales meeting",
+      theme: "BLUE",
+      startTime: moment().add(19, "d").startOf("day"),
+      endTime: moment().add(19, "d").endOf("day"),
     },
     {
       title: "Client meeting",
