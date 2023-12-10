@@ -44,7 +44,7 @@ const Login = () => {
     if (data && data?.status === "OK") {
       let timestamp = new Date(data?.timestamp);
       dispatch(setAuthData({
-        userName,
+        id: data?.data?.user?.id,
         firstName: data?.data?.user?.firstName || '',
         lastName: data?.data?.user?.lastName || '',
         email: data?.data?.user?.email || '',
@@ -55,7 +55,7 @@ const Login = () => {
       showToast("You will be redirected shortly", 'success', "Login Succesfull")
       setTimeout(() => {
         navigate("/services");
-      }, 3000);
+      }, 300);
     }
   }, [error, data]);
 

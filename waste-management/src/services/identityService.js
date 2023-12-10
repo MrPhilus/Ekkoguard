@@ -21,9 +21,16 @@ const extendedApi = apiSlice.injectEndpoints({
         }),
 
         updateUser: builder.mutation({
-            query: (credentials) => ({
-                url: "/user/updated"
-            })
+            query: (credentials) => {
+                const { userId } = storageService.getAuthData()
+                console.log(userId)
+                return ({
+                    url: `/user/updated/${userId}`,
+                    method: "PUT",
+                    body: JSON.stringify(credentials)
+                })
+            }
+
         }),
 
         async onQueryStarted(_, { queryFulfilled }) {
@@ -54,4 +61,4 @@ export function isAuthenticated() {
     } else return true;
 }
 
-export const { useLoginMutation, useSignUpMutation } = extendedApi
+export const { useLoginMutation, useSignUpMutation, useUpdateUserMutation } = extendedApi
