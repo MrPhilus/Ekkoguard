@@ -38,7 +38,7 @@ const Profile = () => {
         <div className="">
           <div className="px-8">
             <h2 className="card-title capitalize">{ `${greeting}${firstName ? ', ' + firstName : ''}` }!</h2>
-            <p>{ email }</p>
+            <p>{ email ?? "Update your email address" }</p>
           </div>
           <div className="divide-y divide-light-blue-400 py-6 px-8">
             <div className="flex py-2 justify-between">
@@ -55,7 +55,7 @@ const Profile = () => {
             </div>
             <div></div>
           </div>
-        </div>''
+        </div>
         <div className="flex gap-6 justify-between py-7 px-8">
           <Button
             variant={ ButtonState.SECONDARY }

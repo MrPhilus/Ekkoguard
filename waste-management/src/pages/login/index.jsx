@@ -2,43 +2,46 @@ import { Form, Formik } from "formik";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { LoginSchema } from "../../validations";
 import { TextInput } from "../../components/customInputs/CustomTextInput";
-import { isAuthenticated, logout, useLoginMutation } from "../../services/identityService";
+import {
+  isAuthenticated,
+  logout,
+  useLoginMutation,
+} from "../../services/identityService";
 import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
 import { _setTokenToStorage } from "../../utils";
-import { storageService } from "../../services";
 import { useNavigate } from "react-router-dom";
 import { setAuthData } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const Login = () => {
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
-  const [signUp, { data, error, isLoading }] = useLoginMutation()
-  const [userName, setUserName] = useState('user');
-  const isLoggedIn = isAuthenticated()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [signUp, { data, error, isLoading }] = useLoginMutation();
+  const [userName, setUserName] = useState("user");
+  const isLoggedIn = isAuthenticated();
 
   const formikAttributes = {
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validationSchema: LoginSchema(),
     onSubmit: async (values) => {
       // setFormError(null)
-      setUserName(values.email)
+      setUserName(values.email);
       try {
-        await signUp(values)
+        await signUp(values);
       } catch (err) {
-        console.log(err)
+        console.log(err);
       }
     },
-  }
+  };
 
   useEffect(() => {
-    if (error) showToast(error?.data?.error, 'error')
+    if (error) showToast(error?.data?.error, "error");
     if (data && data?.status === "OK") {
-      let timestamp = new Date(data?.timestamp)
+      let timestamp = new Date(data?.timestamp);
 
       dispatch(setAuthData({
         userName,
@@ -51,65 +54,73 @@ const Login = () => {
       }))
       showToast("You will be redirected shortly", 'success', "Login Succesfull")
       setTimeout(() => {
-        navigate('/services')
-      }, 3000)
+        navigate("/services");
+      }, 3000);
     }
-  }, [error, data])
+  }, [error, data]);
 
   return (
     <AuthLayout>
-      { error ?
+      { error ? (
         <div div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
           <strong>An error occured!</strong>
           { error?.data?.error }
-        </div> : ''
-      }
+        </div>
+      ) : (
+        ""
+      ) }
 
-      {
-        isLoggedIn ?
-          <div div className="px-4 py-8 rounded-box">
-            <p className="text-xl font-bold">You are already logged in!</p>
-            <p>Do you want to <button className="link link-hover font-semibold" onClick={ logout }>Logout</button>?</p>
-          </div> :
-          <Formik { ...formikAttributes }>
-            {
-              (formik) => {
-                return (
-                  <>
-                    <Form>
-                      <TextInput
-                        label={ "Email address" }
-                        name={ "email" }
-                        type={ "email" }
-                        placeholder={ "Enter your email address" }
-                      />
-                      <TextInput
-                        label={ "Password" }
-                        name={ "password" }
-                        type={ "password" }
-                        placeholder={ "Choose a password" }
-                      />
-                      <button
-                        className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content` }
-                        disabled={ formik.isSubmitting || !formik.isValid || !formik.dirty }
-                        type='submit'
-                      >
-                        {
-                          isLoading ?
-                            <>
-                              <span className={ `loading loading-bars` } />
-                            </> :
-                            "sign in"
-                        }
-                      </button>
-                    </Form>
-                  </>
-                )
-              }
-            }
-          </Formik>
-      }
-    </AuthLayout >
+      { isLoggedIn ? (
+        <div div className="px-4 py-8 rounded-box">
+          <p className="text-xl font-bold">You are already logged in!</p>
+          <p>
+            Do you want to{ " " }
+            <button className="link link-hover font-semibold" onClick={ logout }>
+              Logout
+            </button>
+            ?
+          </p>
+        </div>
+      ) : (
+        <Formik { ...formikAttributes }>
+          { (formik) => {
+            return (
+              <>
+                <Form>
+                  <TextInput
+                    label={ "Email address" }
+                    name={ "email" }
+                    type={ "email" }
+                    placeholder={ "Enter your email address" }
+                  />
+                  <TextInput
+                    label={ "Password" }
+                    name={ "password" }
+                    type={ "password" }
+                    placeholder={ "Enter password" }
+                  />
+                  <button
+                    className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content` }
+                    disabled={
+                      formik.isSubmitting || !formik.isValid || !formik.dirty
+                    }
+                    type="submit"
+                  >
+                    { isLoading ? (
+                      <>
+                        <span className={ `loading loading-bars` } />
+                      </>
+                    ) : (
+                      "sign in"
+                    ) }
+                  </button>
+                </Form>
+              </>
+            );
+          } }
+        </Formik>
+      ) }
+    </AuthLayout>
   );
 };
 
