@@ -10,7 +10,7 @@ const Details = () => {
   }, []);
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center p-10">
-      {isLoading ? (
+      { isLoading ? (
         <div className=" w-full h-full flex flex-col gap-4 justify-evenly p-2">
           <div className="skeleton h-80 w-full"></div>
           <div className="skeleton h-4 w-28"></div>
@@ -28,7 +28,7 @@ const Details = () => {
             Lorem, ipsum consectetur adipisicing elit.
           </div>
           <div className="h-80 w-full">
-            <img className="w-full h-full" src={img} alt="" />
+            <img className="w-full h-full" src={ img } alt="" />
           </div>
           <div className="flex flex-col items-center justify-center">
             <div className="h-full w-full">
@@ -79,7 +79,7 @@ const Details = () => {
 
           <h1 className="text-black">COMMENTS</h1>
         </div>
-      )}
+      ) }
     </div>
   );
 };
