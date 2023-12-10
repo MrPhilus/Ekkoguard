@@ -13,6 +13,7 @@ import { _setTokenToStorage } from "../../utils";
 import { useNavigate, Link } from "react-router-dom";
 import { setAuthData } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
+import { BsXLg } from "react-icons/bs";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -42,26 +43,16 @@ const Login = () => {
     if (error) showToast(error?.data?.error, "error");
     if (data && data?.status === "OK") {
       let timestamp = new Date(data?.timestamp);
-
-      dispatch(
-        setAuthData({
-          userName,
-          firstName: data?.data?.firstName || "",
-          lastName: data?.data?.lastName || "",
-          email: data?.data?.email || "",
-          loginDate:
-            timestamp.toLocaleDateString() +
-            " " +
-            timestamp.toLocaleTimeString(),
-          address: data?.data?.data?.address || "",
-          accessToken: data?.data.token || "",
-        })
-      );
-      showToast(
-        "You will be redirected shortly",
-        "success",
-        "Login Succesfull"
-      );
+      dispatch(setAuthData({
+        userName,
+        firstName: data?.data?.user?.firstName || '',
+        lastName: data?.data?.user?.lastName || '',
+        email: data?.data?.user?.email || '',
+        loginDate: timestamp.toLocaleDateString() + ' ' + timestamp.toLocaleTimeString(),
+        address: data?.data?.user?.address || '',
+        accessToken: data?.data.token || '',
+      }))
+      showToast("You will be redirected shortly", 'success', "Login Succesfull")
       setTimeout(() => {
         navigate("/services");
       }, 3000);
@@ -70,73 +61,65 @@ const Login = () => {
 
   return (
     <AuthLayout>
-      {error ? (
-        <div div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
+      { error ? (
+        <div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
           <strong>An error occured!</strong>
-          {error?.data?.error}
+          { error?.data?.error || "We're working on it. Please try again later!" }
         </div>
-      ) : (
-        ""
-      )}
+      ) :
+        "" }
 
-      {isLoggedIn ? (
-        <div div className="px-4 py-8 rounded-box">
-          <p className="text-xl font-bold">You are already logged in!</p>
-          <p>
-            Do you want to{" "}
-            <button className="link link-hover font-semibold" onClick={logout}>
-              Logout
-            </button>
-            ?
-          </p>
-        </div>
-      ) : (
-        <Formik {...formikAttributes}>
-          {(formik) => {
-            return (
-              <>
-                <Form>
-                  <TextInput
-                    label={"Email address"}
-                    name={"email"}
-                    type={"email"}
-                    placeholder={"Enter your email address"}
-                  />
-                  <TextInput
-                    label={"Password"}
-                    name={"password"}
-                    type={"password"}
-                    placeholder={"Enter password"}
-                  />
-
-                  <Link to={"/forgotpassword"}>
-                    <span className="w-full flex justify-end text-olive-500 text-sm font-bold">
-                      {" "}
-                      Forgot Password?
-                    </span>
-                  </Link>
-
-                  <button
-                    className={`btn bg-olive-500 xl:btn-lg w-full capitalize mt-2 text-neutral-content`}
-                    disabled={
-                      formik.isSubmitting || !formik.isValid || !formik.dirty
-                    }
-                    type="submit"
-                  >
-                    {isLoading ? (
-                      <>
-                        <span className={`loading loading-bars bg-olive-500`} />
-                      </>
-                    ) : (
-                      "sign in"
-                    )}
-                  </button>
-                </Form>
-              </>
-            );
-          }}
-        </Formik>
-      )}
+      {
+        isLoggedIn ? (
+          <div className="px-4 py-8 rounded-box">
+            <p className="text-xl font-bold">You are already logged in!</p>
+            <p>
+              Do you want to{ " " }
+              <button className="link link-hover font-semibold" onClick={ logout }>
+                Logout
+              </button>
+              ?
+            </p>
+          </div>
+        ) :
+          (<Formik { ...formikAttributes }>
+            { (formik) => {
+              return (
+                <>
+                  <Form>
+                    <TextInput
+                      label={ "Email address" }
+                      name={ "email" }
+                      type={ "email" }
+                      placeholder={ "Enter your email address" }
+                    />
+                    <TextInput
+                      label={ "Password" }
+                      name={ "password" }
+                      type={ "password" }
+                      placeholder={ "Enter password" }
+                    />
+                    <button
+                      className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content` }
+                      disabled={
+                        formik.isSubmitting || !formik.isValid || !formik.dirty
+                      }
+                      type="submit"
+                    >
+                      { isLoading ? (
+                        <>
+                          <span className={ `loading loading-bars` } />
+                        </>
+                      ) : (
+                        "sign in"
+                      ) }
+                    </button>
+                  </Form>
+                </>
+              );
+            } }
+          </Formik>
+          ) }
     </AuthLayout>
   );
 };

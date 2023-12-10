@@ -64,7 +64,7 @@ export const showToast = (
                     <p>{ message }</p>
                 </div>,
                 {
-                    bodyClassName: `bg-error px-2 absolute inset-0`,
+                    bodyClassName: `px-2 absolute inset-0`,
                     closeButton: false,
                     hideProgressBar: true,
                 });
@@ -72,7 +72,7 @@ export const showToast = (
         default:
             toast(
                 <div className={ `ml-4` }>
-                    <strong className={ `flex items-center gap-1 text-info       capitalize` }><BsInfoCircleFill />{ title }</strong>
+                    <strong className={ `flex items-center gap-1 text-info-content capitalize` }><BsInfoCircleFill />{ title }</strong>
                     <p>{ message }</p>
                 </div>,
                 {
