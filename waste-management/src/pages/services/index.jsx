@@ -6,11 +6,12 @@ import { useNavigate, Link } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
 import CustomButton from "../../components/CustomButton";
+import { isAuthenticated } from "../../services/identityService";
 
 import { services } from "./Data";
 
 const Services = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = isAuthenticated();
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -33,7 +34,7 @@ const Services = () => {
           onClick={handleBackClick}
         />
 
-        {!isLoggedIn ? (
+        {isLoggedIn ? (
           <>
             <div className="flex items-center gap-4">
               <Link
@@ -57,6 +58,7 @@ const Services = () => {
           />
         )}
       </section>
+
       <section className={styles.main}>
         {services.map((service) => {
           return (

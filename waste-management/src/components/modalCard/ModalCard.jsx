@@ -140,7 +140,7 @@ const ModalCard = ({
         <div className="flex px-4 p-3 sm:px-6">
           <a
             aria-describedby="tier-starter"
-            className={`sm:items-center justify-center w-full px-2 sm:px-4 py-1 sm:py-2 text-center ${buttonTextColor} duration-200 bg-white border-2 border-white rounded-xl inline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm sm:text-xs focus-visible:ring-white`}
+            className={`font-bold sm:items-center justify-center w-full px-2 sm:px-4 py-1 sm:py-2 text-center ${buttonTextColor} duration-200 bg-white border-2 border-white rounded-xl inline-flex hover:bg-transparent hover:border-white hover:text-white focus:outline-none focus-visible:outline-white text-sm sm:text-xs focus-visible:ring-white`}
             href="#"
           >
             Select Plan

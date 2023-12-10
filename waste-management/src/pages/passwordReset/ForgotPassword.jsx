@@ -41,7 +41,7 @@ const ForgotPassword = () => {
     //     },
     //   }
     // );
-    dispatch(setEmail(values.email));
+    // dispatch(setEmail(values.email));
     console.log(values);
     navigate("/passwordreset");
   }

@@ -11,7 +11,7 @@ import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
 import { _setTokenToStorage } from "../../utils";
 import { storageService } from "../../services";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setAuthData } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 
@@ -58,11 +58,7 @@ const Login = () => {
           accessToken: data?.data.token,
         })
       );
-      showToast(
-        "You will be redirected shortly",
-        "success",
-        "Login Succesfull"
-      );
+      showToast("You will be redirected shortly", "success", "Login Succesful");
       setTimeout(() => {
         navigate("/services");
       }, 3000);
@@ -109,8 +105,16 @@ const Login = () => {
                     type={"password"}
                     placeholder={"Enter password"}
                   />
+
+                  <Link to={"/forgotpassword"}>
+                    <span className="w-full flex justify-end text-olive-500 text-sm font-bold">
+                      {" "}
+                      Forgot Password?
+                    </span>
+                  </Link>
+
                   <button
-                    className={`btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content`}
+                    className={`btn bg-olive-500 xl:btn-lg w-full capitalize mt-2 text-neutral-content`}
                     disabled={
                       formik.isSubmitting || !formik.isValid || !formik.dirty
                     }
@@ -118,7 +122,7 @@ const Login = () => {
                   >
                     {isLoading ? (
                       <>
-                        <span className={`loading loading-bars`} />
+                        <span className={`loading loading-bars bg-olive-500`} />
                       </>
                     ) : (
                       "sign in"

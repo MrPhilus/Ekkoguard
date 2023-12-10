@@ -82,7 +82,7 @@ const Disposal = () => {
           onChange={formik.handleChange}
           value={formik.values.location}
           options={optionsForLocation}
-          inputError={formik.touched.location && formik.errors.location}
+          errorText={formik.touched.location && formik.errors.location}
         />
 
         <CustomInput
