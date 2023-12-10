@@ -16,7 +16,7 @@ const Disposal = () => {
       location: "",
       pickupAddress: "",
     },
-    validationSchema: DisposalForm,
+    validationSchema: DisposalForm(),
     onSubmit: (values) => {
       console.log(values);
     },

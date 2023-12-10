@@ -20,6 +20,12 @@ const extendedApi = apiSlice.injectEndpoints({
             })
         }),
 
+        updateUser: builder.mutation({
+            query: (credentials) => ({
+                url: "/user/updated"
+            })
+        }),
+
         async onQueryStarted(_, { queryFulfilled }) {
             try {
                 const { data } = await queryFulfilled()

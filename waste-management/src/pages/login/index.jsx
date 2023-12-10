@@ -10,7 +10,6 @@ import {
 import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
 import { _setTokenToStorage } from "../../utils";
-import { storageService } from "../../services";
 import { useNavigate, Link } from "react-router-dom";
 import { setAuthData } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
@@ -47,18 +46,22 @@ const Login = () => {
       dispatch(
         setAuthData({
           userName,
-          firstName: data?.data.firstName,
-          lastName: data?.data.lastName,
-          email: data?.data.email,
+          firstName: data?.data?.firstName || "",
+          lastName: data?.data?.lastName || "",
+          email: data?.data?.email || "",
           loginDate:
             timestamp.toLocaleDateString() +
             " " +
             timestamp.toLocaleTimeString(),
-          address: data?.data.data.address,
-          accessToken: data?.data.token,
+          address: data?.data?.data?.address || "",
+          accessToken: data?.data.token || "",
         })
       );
-      showToast("You will be redirected shortly", "success", "Login Succesful");
+      showToast(
+        "You will be redirected shortly",
+        "success",
+        "Login Succesfull"
+      );
       setTimeout(() => {
         navigate("/services");
       }, 3000);
