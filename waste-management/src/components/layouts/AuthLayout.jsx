@@ -4,12 +4,12 @@ import { ErrorUI } from "../error/ErrorUi";
 import truck from "../../assets/videos/Wastecollection-truck.gif";
 import feedback from "../../assets/images/wewantfeedback.png";
 import ArrowNarrowLeft from "../../assets/svg/arrow_narrow_left.svg";
-import { useSelector } from "react-redux";
+import { isAuthenticated } from "../../services/identityService";
 
 const AuthLayout = ({ children }) => {
   const location = useLocation();
   const linkTo = location.pathname === "/signup" ? "/login" : "/signup";
-  const { phoneNumber } = useSelector((state) => state.auth);
+  const isLoggedIn = isAuthenticated()
 
   const header = () => {
     if (location.pathname === "/signup") {
@@ -71,15 +71,15 @@ const AuthLayout = ({ children }) => {
           </Link>
           <h1 className="my-2 lg:text-xl-heading text-olive-500 font-semibold md:text-xl">
             { " " }
-            { header() }
+            { !isLoggedIn ? header() : '' }
           </h1>
           <p className="mb-2 text-gray-900 font-semibold md:text-md">
             { " " }
-            { subHeader() }
+            { !isLoggedIn ? subHeader() : '' }
           </p>
           <div>
             { children }
-            { (location.pathname === "/signup" ||
+            { !isLoggedIn && (location.pathname === "/signup" ||
               location.pathname === "/login") && (
                 <p className=" text-black text-sm font-bold my-1">
                   { location.pathname === "/signup" ? "Have an account?" : "Don't have an Account" }{ " " }
