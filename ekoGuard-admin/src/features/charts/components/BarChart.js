@@ -47,14 +47,14 @@ function BarChart() {
         data: labels.map(() => {
           return Math.random() * 1000 + 500;
         }),
-        backgroundColor: "rgba(205, 97, 85, 1)",
+        backgroundColor: "rgba(255, 99, 255, 1)",
       },
       {
         label: "Yaba",
         data: labels.map(() => {
           return Math.random() * 1000 + 500;
         }),
-        backgroundColor: "rgba(253, 162, 235, 1)",
+        backgroundColor: "rgba(54, 162, 235, 1)",
       },
       {
         label: "Surulere",

@@ -7,7 +7,7 @@ function AmountStats({}) {
         <div className="stat-title">Due Subscriptions</div>
         <div className="stat-value">$25,600</div>
         <div className="stat-actions">
-          <Link to='/app/leads'>
+          <Link to='/app/subscriptions'>
             {" "}
             <button className="btn btn-xs">View Users</button>
           </Link>

@@ -29,7 +29,7 @@ function DoughnutChart() {
     datasets: [
       {
         label: "No of Subs",
-        data: [219, 122, 82],
+        data: [1219, 1122, 482],
         backgroundColor: [
           "rgba(255, 99, 132, 0.8)",
           "rgba(54, 162, 235, 0.8)",

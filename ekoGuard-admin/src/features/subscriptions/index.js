@@ -57,6 +57,13 @@ function Subscriptions() {
       return <div className="badge badge-primary bg-rose-400">Monthly</div>;
     else return <div className="badge badge-ghost">Expired</div>;
   };
+  const getDummyArea = (index) => {
+    if (index % 5 === 0) return <div>Alimosho</div>;
+    else if (index % 5 === 1) return <div>Yaba</div>;
+    else if (index % 5 === 2) return <div>Surulere</div>;
+    else if (index % 5 === 3) return <div>Island</div>;
+    else return <div className="">Lekki</div>;
+  };
 
   const deleteCurrentSubscription = (index) => {
     dispatch(
@@ -118,7 +125,7 @@ function Subscriptions() {
                         .format("DD MMM YY")}
                     </td>
                     <td>{getDummyStatus(k)}</td>
-                    <td>{l.last_name}</td>
+                    <td>{getDummyArea(k)}</td>
                     <td>
                       <button
                         className="btn btn-square btn-ghost"

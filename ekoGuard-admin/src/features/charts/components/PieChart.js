@@ -26,28 +26,28 @@ import {
           },
         };
         
-        const labels = ['India', 'Middle East', 'Europe', 'US', 'Latin America', 'Asia(non-india)'];
+        const labels = ['Alimosho', 'Yaba', 'Surulere', 'Island', 'Lekki'];
         
         const data = {
           labels,
           datasets: [
               {
-                  label: '# of Orders',
-                  data: [122, 219, 30, 51, 82, 13],
+                  label: 'No of Orders',
+                  data: [122, 219, 30, 51, 82],
                   backgroundColor: [
                     'rgba(255, 99, 255, 0.8)',
                     'rgba(54, 162, 235, 0.8)',
-                    'rgba(255, 206, 255, 0.8)',
-                    'rgba(75, 192, 255, 0.8)',
-                    'rgba(153, 102, 255, 0.8)',
+                    'rgba(279, 231, 159, 0.8)',
+                    'rgba(555, 99, 132, 0.8)',
+                    'rgba(23, 165, 137, 0.8)',
                     'rgba(255, 159, 255, 0.8)',
                   ],
                   borderColor: [
                     'rgba(255, 99, 255, 1)',
                     'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 255, 1)',
-                    'rgba(75, 192, 255, 1)',
-                    'rgba(153, 102, 255, 1)',
+                    'rgba(279, 231, 159, 1)',
+                    'rgba(555, 99, 132, 1)',
+                    'rgba(23, 165, 137, 1)',
                     'rgba(255, 159, 255, 1)',
                   ],
                   borderWidth: 1,
