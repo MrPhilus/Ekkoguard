@@ -1,34 +1,67 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import { useSelector } from "react-redux";
-import { getGreeting } from "../../utils";
+import { getGreeting, showToast } from "../../utils";
 import { Form, Formik } from "formik";
 import { TextInput } from "../../components/customInputs/CustomTextInput";
 import * as Yup from "yup"
+import { logout, useUpdateUserMutation } from "../../services/identityService";
+
+const sampleSuccessData = {
+  "status": "OK",
+  "message": "Successful",
+  "error": null,
+  "timestamp": "2023-12-10 15:06",
+  "debugMessage": null,
+  "data": {
+    "id": 0,
+    "firstName": "Seyi",
+    "lastName": "A",
+    "otherName": "",
+    "gender": null,
+    "address": null,
+    "email": "seyitest1@gmail.com",
+    "phoneNumber": "2349050447008",
+    "deleted": false,
+    "subscribed": false
+  }
+}
 
 const Profile = () => {
   const { authData: { firstName, lastName, address, loginDate, email, gender } } = useSelector(state => state.auth)
   const greeting = getGreeting()
-  let formikAttributes = {
-    initialValues: {
-      firstName: firstName || '',
-      lastName: lastName || '',
-      address: address || '',
-      email: email || '',
-      gender: gender || '',
-    },
-    validationSchema: Yup.object({
-      firstName: Yup.string(),
-      lastName: Yup.string(),
-      address: Yup.string(),
-      email: Yup.string().email("Must be a valid email address"),
-      gender: Yup.string(),
-    }),
-    onsubmit: (values) => {
-      console.log(values)
-    }
+
+  const [updateUser, { data: updateUserResponse, error: updateUserFailed, isLoading: updatingUser }] = useUpdateUserMutation()
+  // let formikAttributes = {
+  //   initialValues: {
+  //     firstName: firstName || '',
+  //     lastName: lastName || '',
+  //     address: address || '',
+  //     email: email || '',
+  //     gender: gender || '',
+  //   },
+  //   validationSchema: Yup.object({
+  //     firstName: Yup.string(),
+  //     lastName: Yup.string(),
+  //     address: Yup.string(),
+  //     email: Yup.string().email("Must be a valid email address"),
+  //     gender: Yup.string(),
+  //   }),
+  //   onsubmit: handleUpdateUser
+  // }
+
+  useEffect(() => {
+    if (updateUserResponse?.status === "OK") showToast()
+  }, [updateUserResponse, updateUserFailed, updatingUser])
+
+  function handleUpdateUser(values) {
+    const nonEmptyValues = Object.fromEntries(
+      Object.entries(values).filter(([key, value]) => value !== "")
+    )
+    updateUser(nonEmptyValues)
   }
+
 
   return (
     <div className="flex my-auto items-center h-screen justify-center">
@@ -42,12 +75,20 @@ const Profile = () => {
           </div>
           <div className="divide-y divide-light-blue-400 py-6 px-8">
             <div className="flex py-2 justify-between">
+              <p className="font-bold">First Name</p>
+              <p>{ firstName }</p>
+            </div>
+            <div className="flex py-2 justify-between">
+              <p className="font-bold">Last Name</p>
+              <p>{ lastName }</p>
+            </div>
+            <div className="flex py-2 justify-between">
               <p className="font-bold">Gender</p>
-              <p>{ gender }</p>
+              <p>{ gender || 'update gender' }</p>
             </div>
             <div className="flex py-2 justify-between">
               <p className="font-bold">Address</p>
-              <p>{ address }</p>
+              <p>{ address || 'update address' }</p>
             </div>
             <div className="flex py-2 justify-between">
               <p className="font-bold">Login Date </p>
@@ -61,6 +102,7 @@ const Profile = () => {
             variant={ ButtonState.SECONDARY }
             size={ ButtonSize.md }
             value="Sign Out"
+            onClick={ logout }
           />
           <Button
             variant={ ButtonState.PRIMARY }
