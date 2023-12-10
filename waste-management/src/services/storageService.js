@@ -11,7 +11,7 @@ export default class StorageService {
         // this.#saveItemIfProvided("access_token", authData.accessToken, Number(authData.expires_in) / this.#milliSecondsInDays);
         const expirationTime = new Date(authData.expires_in * 1000);
         this.#saveItemIfProvided("accessToken", authData.accessToken, expirationTime);
-        this.#saveItemIfProvided("userName", authData.userName, expirationTime);
+        this.#saveItemIfProvided("userId", authData.id, expirationTime);
         this.#saveItemIfProvided("firstName", authData.firstName, expirationTime)
         this.#saveItemIfProvided("lastName", authData.lastName, expirationTime)
         this.#saveItemIfProvided("email", authData.email, expirationTime)
@@ -30,7 +30,7 @@ export default class StorageService {
 
     clearAuthData() {
         _removeTokenFromStorage("accessToken");
-        _removeTokenFromStorage("userName");
+        _removeTokenFromStorage("userId");
         _removeTokenFromStorage("firstName");
         _removeTokenFromStorage("lastName");
         _removeTokenFromStorage("email");
@@ -40,7 +40,7 @@ export default class StorageService {
 
     clearCookieData() {
         _removeTokenFromStorage("accessToken");
-        _removeTokenFromStorage("userName");
+        _removeTokenFromStorage("userId");
         _removeTokenFromStorage("firstName");
         _removeTokenFromStorage("lastName");
         _removeTokenFromStorage("email");
@@ -63,13 +63,12 @@ export default class StorageService {
     getAuthData() {
         return {
             accessToken: _getTokenFromStorage("accessToken"),
-            userName: _getTokenFromStorage("userName"),
+            userId: _getTokenFromStorage("userId"),
             firstName: _getTokenFromStorage("firstName"),
             lastName: _getTokenFromStorage("lastName"),
             email: _getTokenFromStorage("email"),
             address: _getTokenFromStorage("address"),
             loginDate: _getTokenFromStorage("loginDate"),
-
         }
     }
 }
