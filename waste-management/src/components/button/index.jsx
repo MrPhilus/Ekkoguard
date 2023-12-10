@@ -1,7 +1,7 @@
-import { ButtonSize, ButtonState } from './enum';
+import { ButtonSize, ButtonState } from "./enum";
 
 const Button = ({
-  value = 'Click Me',
+  value = "Click Me",
   variant = ButtonState.PRIMARY,
   size = ButtonSize.lg,
   icon,
@@ -17,10 +17,10 @@ const Button = ({
       disabled={disabled}
       {...props}
     >
-      {isLoading && <span className="loading loading-spinner"></span>}
-      {icon && <span className={'mr-2'}>{icon}</span>}
+      {isLoading && <span className="loading loading-bars bg-olive-500"></span>}
+      {icon && <span className={"mr-2"}>{icon}</span>}
       <span className={``}>{value}</span>
-      {iconRight && <span className={'ml-2'}>{iconRight}</span>}
+      {iconRight && <span className={"ml-2"}>{iconRight}</span>}
     </button>
   );
 };

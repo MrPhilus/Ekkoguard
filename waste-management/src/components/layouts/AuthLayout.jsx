@@ -82,8 +82,10 @@ const AuthLayout = ({ children }) => {
             { !isLoggedIn && (location.pathname === "/signup" ||
               location.pathname === "/login") && (
                 <p className=" text-black text-sm font-bold my-1">
-                  { location.pathname === "/signup" ? "Have an account?" : "Don't have an Account" }{ " " }
-                  <Link to={ linkTo } className="text-green-500">
+                  { location.pathname === "/signup"
+                    ? "Have an account?"
+                    : "Don't have an Account?" }{ " " }
+                  <Link to={ linkTo } className="text-olive-500">
                     { location.pathname === "/signup" ? "Sign In" : "Sign Up" }
                   </Link>
                 </p>

@@ -12,6 +12,7 @@ const CustomSelect = ({
   options = [],
   errorText,
   value,
+  disabled,
 }) => {
   const hasError = errorText !== undefined;
 
@@ -49,6 +50,7 @@ const CustomSelect = ({
         </label>
 
         <select
+          disabled={disabled}
           name={name}
           onBlur={onBlur}
           onChange={onChange}

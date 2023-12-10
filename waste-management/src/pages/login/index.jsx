@@ -10,7 +10,7 @@ import {
 import { showToast } from "../../utils/toastify";
 import { useEffect, useState } from "react";
 import { _setTokenToStorage } from "../../utils";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { setAuthData } from "../../redux/slices/authSlice";
 import { useDispatch } from "react-redux";
 import { BsXLg } from "react-icons/bs";
