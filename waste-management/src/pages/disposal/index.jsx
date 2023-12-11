@@ -15,6 +15,7 @@ import { addNewSubscription } from "../../redux/slices/subscriptionSlice";
 const Disposal = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
+  const [addingAddress, setAddingAddress] = useState(false)
   const [isModalOpen, setModalOpen] = useState(true);
   const { subscriptions } = useSelector(state => state.subscriptions)
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ const Disposal = () => {
     onSubmit: (values) => {
       console.log(values);
       dispatch(addNewSubscription(values))
+      setAddingAddress(false)
     },
   });
 
@@ -72,12 +74,13 @@ const Disposal = () => {
           <CustomButton
             containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
             buttonText="Add New Location"
+            onClick={ () => setAddingAddress(true) }
           />
         ) }
       </div>
 
       <form onSubmit={ formik.handleSubmit } className="flex flex-col gap-2">
-        { subscriptions.length === 0 ? (
+        { subscriptions.length === 0 || addingAddress ? (
           <>
             <CustomSelect
               name={ "binRequest" }
