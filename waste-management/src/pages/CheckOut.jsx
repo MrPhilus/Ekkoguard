@@ -43,9 +43,9 @@ const CheckOut = () => {
   return (
     <AuthLayout>
       <div className="">
-        {paymentSuccess ? (
+        { paymentSuccess ? (
           <div className="">
-            {/* <p>Hi {fullName}!</p> */}
+            {/* <p>Hi {fullName}!</p> */ }
             <h2>Payment Successful!</h2>
             <p>An email confirmation has been sent to { email }.</p>
             <p>
@@ -62,9 +62,9 @@ const CheckOut = () => {
             <div>
               <h3>Checkout Details</h3>
               <p>
-                you are paying <strong>&#8358;{amount}</strong> for:
+                you are paying <strong>&#8358;{ amount }</strong> for:
               </p>
-              <p>Book Name: {PriceCards.header}</p>
+              <p>Book Name: { PriceCards.header }</p>
             </div>
             <div className="checkout-form">
               <div className="flex flex-col gap-4">
@@ -74,8 +74,8 @@ const CheckOut = () => {
                     <input
                       className="input border border-olive-500"
                       type="text"
-                      value={fullName}
-                      onInput={(e) => setFullName(e.target.value)}
+                      value={ fullName }
+                      onInput={ (e) => setFullName(e.target.value) }
                     />
                   </div>
 
@@ -84,8 +84,8 @@ const CheckOut = () => {
                     <input
                       className="input border border-olive-500"
                       type="text"
-                      value={email}
-                      onInput={(e) => setEmail(e.target.value)}
+                      value={ email }
+                      onInput={ (e) => setEmail(e.target.value) }
                     />
                   </div>
 
@@ -94,12 +94,12 @@ const CheckOut = () => {
                     <input
                       className="input border border-olive-500"
                       type="text"
-                      value={phoneNumber}
-                      onInput={(e) => setPhoneNumber(e.target.value)}
+                      value={ phoneNumber }
+                      onInput={ (e) => setPhoneNumber(e.target.value) }
                     />
                   </div>
                 </div>
-                <p style={{ width: "200px", fontSize: "11px" }}>
+                <p style={ { width: "200px", fontSize: "11px" } }>
                   <strong>Disclaimer:</strong>Lorem ipsum dolor sit amet
                   consectetur adipisicing elit. Necessitatibus, harum!
                 </p>
@@ -108,11 +108,11 @@ const CheckOut = () => {
                   <PaystackButton
                     text="Pay with Paystack"
                     className="btn w-full bg-olive-500 text-white"
-                    email={email}
-                    amount={amount} // Convert to kobo
-                    publicKey={publicKey}
-                    onSuccess={onSuccess}
-                    onClose={onClose}
+                    email={ email }
+                    amount={ amount } // Convert to kobo
+                    publicKey={ publicKey }
+                    onSuccess={ onSuccess }
+                    onClose={ onClose }
                   />
                 </div>
               </div>
