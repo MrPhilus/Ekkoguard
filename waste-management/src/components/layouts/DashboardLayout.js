@@ -4,15 +4,15 @@ import { useGuard } from "../../hooks/useGuard";
 export const DashboardLayout = ({
 	children,
 }) => {
-	useGuard();
+	useGuard("/services");
 	return (
 		<div>
-			<ErrorBoundary 
-				FallbackComponent={ErrorUI}
-				onReset={() => {
+			<ErrorBoundary
+				FallbackComponent={ ErrorUI }
+				onReset={ () => {
 					// reset the state of your app so the error doesn't happen again
-				}}
-			>{children}</ErrorBoundary>
+				} }
+			>{ children }</ErrorBoundary>
 		</div>
 	);
 };

@@ -3,12 +3,14 @@ import { apiSlice } from "./slices/apiSlice";
 import { useSelector } from "react-redux";
 import authReducer from "./slices/authSlice";
 import modalReducer from "./slices/modalSlice";
+import subscriptionsReducer from "./slices/subscriptionSlice";
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
     auth: authReducer,
     modal: modalReducer,
+    subscriptions: subscriptionsReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(apiSlice.middleware),

@@ -22,6 +22,7 @@ import { ToastContainer } from "react-toastify";
 import OTPVerification from "./pages/otpVerification";
 import History from "./pages/history";
 import Protected from "./pages/ProtectedRoute";
+import CheckOut from "./pages/CheckOut";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
         <Route path="/details" element={ <Details /> } />
         <Route path="feedback" element={ <Feedback /> } />
         <Route path="history" element={ <History /> } />
+        <Route path="checkout" element={ <CheckOut /> } />
         {/* <Route path="/services" element={<Services />} /> */ }
         {/* <Route element={<ProtectedRoute />}> */ }
         {/* </Route> */ }
@@ -51,8 +53,10 @@ function App() {
         </Route>
 
         <Route path="/services" element={ <Services /> }>
+
           <Route path="recycling" element={ <WasteRecyclingPage /> } />
           <Route path="disposal" element={ <Disposal /> } />
+
         </Route>
 
         <Route path="*" element={ <PageNotFound /> } />

@@ -17,6 +17,7 @@ const CustomInput = ({
   inputErrorRight,
   className,
   readOnly,
+  onInput
 }) => {
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
