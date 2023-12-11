@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import { useSelector } from "react-redux";
-import { getGreeting, showToast } from "../../utils";
+import { getGreeting } from "../../utils";
 import { Form, Formik } from "formik";
 import { TextInput } from "../../components/customInputs/CustomTextInput";
 import * as Yup from "yup"
 import { logout, useUpdateUserMutation } from "../../services/identityService";
+import { showToast } from "../../utils/toastify";
 
 const sampleSuccessData = {
   "status": "OK",
@@ -52,7 +53,8 @@ const Profile = () => {
   // }
 
   useEffect(() => {
-    if (updateUserResponse?.status === "OK") showToast()
+    if (updateUserResponse?.status === "OK") showToast("Changes will reflect on next login", "success", "Update successful!")
+    if (updateUserFailed) showToast("Update failed! Please try again.", "error")
   }, [updateUserResponse, updateUserFailed, updatingUser])
 
   function handleUpdateUser(values) {
@@ -65,9 +67,8 @@ const Profile = () => {
 
   return (
     <div className="flex my-auto items-center h-screen justify-center">
+
       <div className="card w-[27rem] bg-base-100 shadow-xl">
-
-
         <div className="">
           <div className="px-8">
             <h2 className="card-title capitalize">{ `${greeting}${firstName ? ', ' + firstName : ''}` }!</h2>
@@ -111,6 +112,7 @@ const Profile = () => {
           />
         </div>
       </div>
+
     </div>
 
   );
