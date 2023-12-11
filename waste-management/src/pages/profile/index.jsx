@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import { useSelector } from "react-redux";
-import { getGreeting, showToast } from "../../utils";
+import { getGreeting } from "../../utils";
 import { Form, Formik } from "formik";
 import { TextInput } from "../../components/customInputs/CustomTextInput";
 import * as Yup from "yup";
 import { logout, useUpdateUserMutation } from "../../services/identityService";
+import { showToast } from "../../utils/toastify";
 import { EditProfileSchema } from "../../validations";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import CustomSelect from "../../components/customInputs/CustomSelect";
@@ -95,8 +96,9 @@ const Profile = () => {
   ];
 
   useEffect(() => {
-    if (updateUserResponse?.status === "OK") showToast();
-  }, [updateUserResponse, updateUserFailed, updatingUser]);
+    if (updateUserResponse?.status === "OK") showToast("Changes will reflect on next login", "success", "Update successful!")
+    if (updateUserFailed) showToast("Update failed! Please try again.", "error")
+  }, [updateUserResponse, updateUserFailed, updatingUser])
 
   function handleUpdateUser(values) {
     const nonEmptyValues = Object.fromEntries(
@@ -108,16 +110,17 @@ const Profile = () => {
 
   return (
     <AuthLayout>
-      <Formik {...formikAttributes}>
-        {(formik) => {
+      <Formik { ...formikAttributes }>
+        { (formik) => {
           return (
             <>
               <h2 className="card-title capitalize">
-                {`${greeting}${firstName ? ", " + firstName : ""}`}
+                { `${greeting}${firstName ? ", " + firstName : ""}` }
               </h2>
-              <p>{email ?? "Update your email address"}</p>
+              <p>{ email ?? "Update your email address" }</p>
               <Form>
                 <TextInput
+<<<<<<< HEAD
                   label={"First Name"}
                   readOnly={isUpdating ? false : true}
                   name={"firstName"}
@@ -139,10 +142,31 @@ const Profile = () => {
                   name={"email"}
                   type={"email"}
                   // placeholder={"Enter password"}
+=======
+                  label={ "First Name" }
+                  name={ "firstName" }
+                  type={ "text" }
+                // placeholder={"Enter your email address"}
+                />
+
+                <TextInput
+                  label={ "Last Name" }
+                  name={ "lastName" }
+                  type={ "text" }
+                // placeholder={"Enter password"}
+                />
+
+                <TextInput
+                  label={ "Email" }
+                  name={ "email" }
+                  type={ "email" }
+                // placeholder={"Enter password"}
+>>>>>>> 14465d3236da44389faceea1ac1c1a61703f1c8d
                 />
 
                 <CustomSelect
                   labelText="Gender"
+<<<<<<< HEAD
                   disabled
                   optionText={"Select an option"}
                   options={optionsForGender}
@@ -188,10 +212,39 @@ const Profile = () => {
                     )}
                   </button>
                 </div>
+=======
+                  optionText={ "Select an option" }
+                  options={ optionsForGender }
+                  required={ true }
+                />
+
+                <TextInput
+                  label={ "Address" }
+                  name={ "address" }
+                  type={ "text" }
+                // placeholder={"Enter password"}
+                />
+
+                <button
+                  className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content` }
+                  disabled={
+                    formik.isSubmitting || !formik.isValid || !formik.dirty
+                  }
+                  type="submit"
+                >
+                  { isLoading ? (
+                    <>
+                      <span className={ `loading loading-bars` } />
+                    </>
+                  ) : (
+                    "Update Profile"
+                  ) }
+                </button>
+>>>>>>> 14465d3236da44389faceea1ac1c1a61703f1c8d
               </Form>
             </>
           );
-        }}
+        } }
       </Formik>
     </AuthLayout>
   );

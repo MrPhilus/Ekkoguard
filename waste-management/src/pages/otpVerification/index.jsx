@@ -8,7 +8,8 @@ import { Form, Formik } from "formik"
 import { TextInput } from "../../components/customInputs/CustomTextInput"
 import { setPhoneNumber } from "../../redux/slices/authSlice"
 import * as Yup from 'yup'
-import { showToast } from "../../utils"
+import { showToast } from "../../utils/toastify"
+
 
 const OTPVerification = () => {
     const { otp, phoneNumber } = useSelector(state => state.auth)
@@ -50,15 +51,15 @@ const OTPVerification = () => {
     useEffect(() => {
         if (verificationError) showToast(verificationError.data.detail, 'error', verificationError.data.title)
         if (verificationData && verificationData?.status === "OK") {
-            if (verificationData?.data.verified === true) {
-                showToast("You will be redirected shortly", 'success', "Verification successful!")
-                setTimeout(() => {
-                    navigate('/login')
-                }, 3000)
-            } else {
-                showToast("Provide correct OTP", 'Error', "Verification Failed!")
-            }
+            // if (verificationData?.data.verified === true) {
+            showToast("You will be redirected shortly", 'success', "Verification successful!")
+            setTimeout(() => {
+                navigate('/login')
+            }, 3000)
+        } else {
+            showToast("Provide correct OTP", 'Error', "Verification Failed!")
         }
+        // }
         if (sendingOTP) {
             showToast("Sending OTP", "loading", "Please wait.")
         }
