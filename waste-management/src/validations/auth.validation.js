@@ -32,6 +32,13 @@ export const FeedbackForm = () => {
     feedbackMessage: Yup.string().required("Enter your message"),
   });
 };
+export const paystackSchema = () => {
+  return Yup.object({
+    fullName: Yup.string().required("Required"),
+    email: Yup.string().required("Email is required"),
+    phoneNumber: Yup.string().required("Required"),
+  });
+};
 
 export const SignupSchema = () => {
   return Yup.object({
