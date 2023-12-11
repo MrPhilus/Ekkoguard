@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { PaystackButton } from "react-paystack";
 import { Link } from "react-router-dom";
 import { PriceCards } from "../components/modalCard/Data";
-import CustomInput from "../components/customInputs/CustomInputs";
-import Button from "../components/button";
-import { ButtonSize, ButtonState } from "../components/button/enum";
 import AuthLayout from "../components/layouts/AuthLayout";
 
 const CheckOut = () => {
@@ -13,7 +10,7 @@ const CheckOut = () => {
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const amount = PriceCards.subAmt || 0;
+  const amount = 70000 || 0;
 
   const publicKey = "pk_test_23f26f6e7e1df8a8e8fbf63d7e8e652399a1ab51";
   // Function to format a number as Naira currency
@@ -45,10 +42,10 @@ const CheckOut = () => {
   };
   return (
     <AuthLayout>
-      <div>
-        { paymentSuccess ? (
-          <div>
-            {/* <p>Hi {fullName}!</p> */ }
+      <div className="">
+        {paymentSuccess ? (
+          <div className="">
+            {/* <p>Hi {fullName}!</p> */}
             <h2>Payment Successful!</h2>
             <p>An email confirmation has been sent to { email }.</p>
             <p>
@@ -56,66 +53,69 @@ const CheckOut = () => {
               08012345678 for the keys to the rig you are renting and further
               instructions
             </p>
+            <Link to="/services" className="">
+              back to services
+            </Link>
           </div>
         ) : (
-          <div>
+          <div className="">
             <div>
               <h3>Checkout Details</h3>
               <p>
-                you are paying <strong>&#8358;{ PriceCards.subAmt }</strong> for:
+                you are paying <strong>&#8358;{amount}</strong> for:
               </p>
-              <p>Book Name: { PriceCards.header }</p>
-              <p style={ { width: "200px", fontSize: "11px" } }>
-                <strong>Disclaimer:</strong>Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Necessitatibus, harum!
-              </p>
+              <p>Book Name: {PriceCards.header}</p>
             </div>
-            <div className="">
-              <form action="" className="flex flex-col gap-2">
-                <div>
-                  <div>
-                    <div>
-                      <label>Full Name:</label>
-                      <CustomInput
-                        type={ "text" }
-                        onInput={ (e) => setFullName(e.target.value) }
-                        value={ fullName }
-                      />
-                    </div>
-
-                    <div className="">
-                      <label>Email Address:</label>
-
-                      <CustomInput
-                        type={ "email" }
-                        onInput={ (e) => setEmail(e.target.value) }
-                        value={ email }
-                      />
-                    </div>
-
-                    <div className="">
-                      <label>Phone Number</label>
-                      <CustomInput
-                        type={ "number" }
-                        onInput={ (e) => setPhoneNumber(e.target.value) }
-                        value={ phoneNumber }
-                      />
-                    </div>
+            <div className="checkout-form">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 items-start">
+                  <div className="flex items-center justify-between gap-4">
+                    <label>Full Name:</label>
+                    <input
+                      className="input border border-olive-500"
+                      type="text"
+                      value={fullName}
+                      onInput={(e) => setFullName(e.target.value)}
+                    />
                   </div>
 
-                  <div className="button">
-                    <PaystackButton
-                      text="Pay with Paystack"
-                      className="btn w-full bg-olive-500 text-white"
-                      email={ email }
-                      amount={ amount * 100 * 300 } // Convert to kobo
-                      publicKey={ publicKey }
-                      onSuccess={ onSuccess }
-                      onClose={ onClose }
+                  <div className="checkout-info">
+                    <label>Email Address:</label>
+                    <input
+                      className="input border border-olive-500"
+                      type="text"
+                      value={email}
+                      onInput={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="checkout-info">
+                    <label>Phone Number:</label>
+                    <input
+                      className="input border border-olive-500"
+                      type="text"
+                      value={phoneNumber}
+                      onInput={(e) => setPhoneNumber(e.target.value)}
                     />
                   </div>
                 </div>
-              </form>
+                <p style={{ width: "200px", fontSize: "11px" }}>
+                  <strong>Disclaimer:</strong>Lorem ipsum dolor sit amet
+                  consectetur adipisicing elit. Necessitatibus, harum!
+                </p>
+
+                <div className="">
+                  <PaystackButton
+                    text="Pay with Paystack"
+                    className="btn w-full bg-olive-500 text-white"
+                    email={email}
+                    amount={amount} // Convert to kobo
+                    publicKey={publicKey}
+                    onSuccess={onSuccess}
+                    onClose={onClose}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         ) }
