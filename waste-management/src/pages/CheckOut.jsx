@@ -47,11 +47,11 @@ const CheckOut = () => {
   return (
     <AuthLayout>
       <div>
-        {paymentSuccess ? (
+        { paymentSuccess ? (
           <div>
-            {/* <p>Hi {fullName}!</p> */}
+            {/* <p>Hi {fullName}!</p> */ }
             <h2>Payment Successful!</h2>
-            <p>An email confirmation has been sent to {email}.</p>
+            <p>An email confirmation has been sent to { email }.</p>
             <p>
               Please contact Bab for your van and further instructions b@b.com
               08012345678 for the keys to the rig you are renting and further
@@ -63,10 +63,10 @@ const CheckOut = () => {
             <div>
               <h3>Checkout Details</h3>
               <p>
-                you are paying <strong>&#8358;{PriceCards.subAmt}</strong> for:
+                you are paying <strong>&#8358;{ PriceCards.subAmt }</strong> for:
               </p>
-              <p>Book Name: {PriceCards.header}</p>
-              <p style={{ width: "200px", fontSize: "11px" }}>
+              <p>Book Name: { PriceCards.header }</p>
+              <p style={ { width: "200px", fontSize: "11px" } }>
                 <strong>Disclaimer:</strong>Lorem ipsum dolor sit amet
                 consectetur adipisicing elit. Necessitatibus, harum!
               </p>
@@ -78,9 +78,9 @@ const CheckOut = () => {
                     <div>
                       <label>Full Name:</label>
                       <CustomInput
-                        type={"text"}
-                        onInput={(e) => setFullName(e.target.value)}
-                        value={fullName}
+                        type={ "text" }
+                        onInput={ (e) => setFullName(e.target.value) }
+                        value={ fullName }
                       />
                     </div>
 
@@ -88,18 +88,18 @@ const CheckOut = () => {
                       <label>Email Address:</label>
 
                       <CustomInput
-                        type={"email"}
-                        onInput={(e) => setEmail(e.target.value)}
-                        value={email}
+                        type={ "email" }
+                        onInput={ (e) => setEmail(e.target.value) }
+                        value={ email }
                       />
                     </div>
 
                     <div className="">
                       <label>Phone Number</label>
                       <CustomInput
-                        type={"number"}
-                        onInput={(e) => setPhoneNumber(e.target.value)}
-                        value={phoneNumber}
+                        type={ "number" }
+                        onInput={ (e) => setPhoneNumber(e.target.value) }
+                        value={ phoneNumber }
                       />
                     </div>
                   </div>
@@ -108,18 +108,18 @@ const CheckOut = () => {
                     <PaystackButton
                       text="Pay with Paystack"
                       className="btn w-full bg-olive-500 text-white"
-                      email={email}
-                      amount={amount * 100 * 300} // Convert to kobo
-                      publicKey={publicKey}
-                      onSuccess={onSuccess}
-                      onClose={onClose}
+                      email={ email }
+                      amount={ amount * 100 * 300 } // Convert to kobo
+                      publicKey={ publicKey }
+                      onSuccess={ onSuccess }
+                      onClose={ onClose }
                     />
                   </div>
                 </div>
               </form>
             </div>
           </div>
-        )}
+        ) }
       </div>
     </AuthLayout>
   );
