@@ -51,7 +51,7 @@ module.exports = Object.freeze({
       endTime: moment().add(5, "d").endOf("day"),
     },
     {
-      title: "Pickup at Lekki",
+      title: "Pickup at Alimosho",
       theme: "GREEN",
       startTime: moment().add(8, "d").startOf("day"),
       endTime: moment().add(8, "d").endOf("day"),
@@ -106,7 +106,7 @@ module.exports = Object.freeze({
       avatar: "https://reqres.in/img/faces/1-image.jpg",
       email: "alex@dashwind.com",
       location: "Paris",
-      amount: 100,
+      amount: 7000,
       date: moment().endOf("day"),
     },
     {
@@ -114,7 +114,7 @@ module.exports = Object.freeze({
       avatar: "https://reqres.in/img/faces/2-image.jpg",
       email: "ereena@dashwind.com",
       location: "London",
-      amount: 190,
+      amount: 14000,
       date: moment().add(-1, "d").endOf("day"),
     },
     {
@@ -122,7 +122,7 @@ module.exports = Object.freeze({
       avatar: "https://reqres.in/img/faces/3-image.jpg",
       email: "jhon@dashwind.com",
       location: "Canada",
-      amount: 112,
+      amount: 70000,
       date: moment().add(-1, "d").endOf("day"),
     },
     {
