@@ -9,7 +9,6 @@ import AuthLayout from "../components/layouts/AuthLayout";
 
 const CheckOut = () => {
   const [paymentSuccess, setPaymentSuccess] = useState(false);
-
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");

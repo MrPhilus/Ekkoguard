@@ -70,13 +70,18 @@ const Disposal = () => {
     <AuthLayout>
       <div className="flex items-center justify-between">
         <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
-        { subscriptions.length > 0 && (
+        { subscriptions.length > 0 ? (
           <CustomButton
             containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
             buttonText="Add New Location"
             onClick={ () => setAddingAddress(true) }
           />
-        ) }
+        ) :
+          <CustomButton
+            containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
+            buttonText="Add New Location"
+            onClick={ () => setAddingAddress(false) }
+          /> }
       </div>
 
       <form onSubmit={ formik.handleSubmit } className="flex flex-col gap-2">
