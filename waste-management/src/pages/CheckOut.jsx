@@ -68,8 +68,8 @@ const CheckOut = () => {
               <p>Book Name: {PriceCards.header}</p>
             </div>
             <div className="checkout-form">
-              <div className="border flex flex-col gap-4">
-                <div className="border flex flex-col gap-4 items-start">
+              <div className="flex flex-col gap-4">
+                <div className="flex flex-col gap-4 items-start">
                   <div className="flex items-center justify-between gap-4">
                     <label>Full Name:</label>
                     <input
