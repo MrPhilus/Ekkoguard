@@ -120,30 +120,8 @@ const Profile = () => {
               <p>{ email ?? "Update your email address" }</p>
               <Form>
                 <TextInput
-<<<<<<< HEAD
-                  label={"First Name"}
-                  readOnly={isUpdating ? false : true}
-                  name={"firstName"}
-                  type={"text"}
-                  // placeholder={"Enter your email address"}
-                />
-
-                <TextInput
-                  label={"Last Name"}
-                  readOnly={isUpdating ? false : true}
-                  name={"lastName"}
-                  type={"text"}
-                  // placeholder={"Enter password"}
-                />
-
-                <TextInput
-                  label={"Email"}
-                  readOnly={isUpdating ? false : true}
-                  name={"email"}
-                  type={"email"}
-                  // placeholder={"Enter password"}
-=======
                   label={ "First Name" }
+                  readOnly={ isUpdating }
                   name={ "firstName" }
                   type={ "text" }
                 // placeholder={"Enter your email address"}
@@ -151,6 +129,7 @@ const Profile = () => {
 
                 <TextInput
                   label={ "Last Name" }
+                  readOnly={ isUpdating }
                   name={ "lastName" }
                   type={ "text" }
                 // placeholder={"Enter password"}
@@ -158,61 +137,14 @@ const Profile = () => {
 
                 <TextInput
                   label={ "Email" }
+                  readOnly={ isUpdating }
                   name={ "email" }
                   type={ "email" }
                 // placeholder={"Enter password"}
->>>>>>> 14465d3236da44389faceea1ac1c1a61703f1c8d
                 />
 
                 <CustomSelect
                   labelText="Gender"
-<<<<<<< HEAD
-                  disabled
-                  optionText={"Select an option"}
-                  options={optionsForGender}
-                  required={true}
-                />
-
-                <TextInput
-                  label={"Address"}
-                  readOnly
-                  name={"address"}
-                  type={"text"}
-                  // placeholder={"Enter password"}
-                />
-
-                <div className="flex justify-between">
-                  <button
-                    className={`btn bg-red-500 xl:btn-lg capitalize mt-6 text-neutral-content`}
-                    type="submit"
-                    onClick={logout}
-                  >
-                    {isLoading ? (
-                      <>
-                        <span className={`loading loading-bars`} />
-                      </>
-                    ) : (
-                      "Log Out "
-                    )}
-                  </button>
-                  <button
-                    className={`btn bg-olive-500 xl:btn-lg capitalize mt-6 text-neutral-content`}
-                    type="submit"
-                    onClick={() => {
-                      handleClick();
-                      handleUpdateUser();
-                    }}
-                  >
-                    {isLoading ? (
-                      <>
-                        <span className={`loading loading-bars`} />
-                      </>
-                    ) : (
-                      buttonText
-                    )}
-                  </button>
-                </div>
-=======
                   optionText={ "Select an option" }
                   options={ optionsForGender }
                   required={ true }
@@ -240,7 +172,6 @@ const Profile = () => {
                     "Update Profile"
                   ) }
                 </button>
->>>>>>> 14465d3236da44389faceea1ac1c1a61703f1c8d
               </Form>
             </>
           );
