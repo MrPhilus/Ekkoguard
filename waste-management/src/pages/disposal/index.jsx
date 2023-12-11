@@ -19,10 +19,6 @@ const Disposal = () => {
   const { subscriptions } = useSelector(state => state.subscriptions)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    console.log(subscriptions)
-  }, [subscriptions])
-
   const formik = useFormik({
     initialValues: {
       binRequest: "",
