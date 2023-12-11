@@ -53,8 +53,10 @@ function App() {
         </Route>
 
         <Route path="/services" element={ <Services /> }>
+
           <Route path="recycling" element={ <WasteRecyclingPage /> } />
           <Route path="disposal" element={ <Disposal /> } />
+
         </Route>
 
         <Route path="*" element={ <PageNotFound /> } />

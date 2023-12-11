@@ -11,6 +11,7 @@ import CustomButton from "../../components/CustomButton";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addNewSubscription } from "../../redux/slices/subscriptionSlice";
+import { useGuard } from "../../hooks/useGuard";
 
 const Disposal = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -19,6 +20,7 @@ const Disposal = () => {
   const [isModalOpen, setModalOpen] = useState(true);
   const { subscriptions } = useSelector(state => state.subscriptions)
   const dispatch = useDispatch()
+  const authorized = useGuard("/services")
 
   const formik = useFormik({
     initialValues: {
@@ -66,7 +68,8 @@ const Disposal = () => {
     });
     formik.handleSubmit();
   };
-  return (
+
+  if (authorized) return (
     <AuthLayout>
       <div className="flex items-center justify-between">
         <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
