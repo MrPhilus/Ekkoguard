@@ -64,7 +64,9 @@ export const SignupSchema = () => {
 
 export const LoginSchema = () => {
   return Yup.object({
-    email: Yup.string().required("This field is required").email("Invalid email address"),
+    email: Yup.string()
+      .required("This field is required")
+      .email("Invalid email address"),
     password: Yup.string().required("This field is required"),
   });
 };
@@ -84,14 +86,14 @@ export const ForgotPasswordSchema = () => {
   });
 };
 
-export const CompleteProfileSchema = () => {
+export const EditProfileSchema = () => {
   return Yup.object().shape({
-    organizationAddress: Yup.string().required("This field is required"),
-    adminPhoneNumber: Yup.string().required("This field is required"),
-    countryOfResidence: Yup.string().required("This field is required"),
-    stateOfResidence: Yup.string().required("This field is required"),
-    gender: Yup.string().required("This field is required"),
-    uploadOrganizationLogo: Yup.string().required("This field is required"),
+    firstName: Yup.string().required("This field is required"),
+    lastName: Yup.string().required("This field is required"),
+    gender: Yup.string()
+      .oneOf(["Male", "Female", "Others"], "Please select an option")
+      .required("Required"),
+    address: Yup.string().required("This field is required"),
   });
 };
 
