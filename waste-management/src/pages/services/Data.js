@@ -30,7 +30,7 @@ export const services = [
     imgSrc: cardImages["history"],
     cardTitle: "Schedule History",
     cardHeader: "View History",
-    cardText: "View your past schedules, Check your history...",
+    cardText: "View your past schedules, Check your transaction history...",
     buttonText: "Proceed",
     buttonLink: "/history",
   },
