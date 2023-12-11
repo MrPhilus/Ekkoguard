@@ -1,5 +1,5 @@
 import { BsCheckCircleFill, BsCircleHalf, BsExclamationTriangleFill, BsInfoCircleFill, BsXCircleFill } from "react-icons/bs";
-import { toast } from "react-toastify";
+import { toast, } from "react-toastify";
 
 export const showToast = (
     message = '',

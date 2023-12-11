@@ -2,11 +2,12 @@ import React, { useEffect } from "react";
 import Button from "../../components/button";
 import { ButtonSize, ButtonState } from "../../components/button/enum";
 import { useSelector } from "react-redux";
-import { getGreeting, showToast } from "../../utils";
+import { getGreeting } from "../../utils";
 import { Form, Formik } from "formik";
 import { TextInput } from "../../components/customInputs/CustomTextInput";
 import * as Yup from "yup";
 import { logout, useUpdateUserMutation } from "../../services/identityService";
+import { showToast } from "../../utils/toastify";
 import { EditProfileSchema } from "../../validations";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import CustomSelect from "../../components/customInputs/CustomSelect";
@@ -83,8 +84,9 @@ const Profile = () => {
   ];
 
   useEffect(() => {
-    if (updateUserResponse?.status === "OK") showToast();
-  }, [updateUserResponse, updateUserFailed, updatingUser]);
+    if (updateUserResponse?.status === "OK") showToast("Changes will reflect on next login", "success", "Update successful!")
+    if (updateUserFailed) showToast("Update failed! Please try again.", "error")
+  }, [updateUserResponse, updateUserFailed, updatingUser])
 
   function handleUpdateUser(values) {
     const nonEmptyValues = Object.fromEntries(
@@ -96,69 +98,69 @@ const Profile = () => {
 
   return (
     <AuthLayout>
-      <Formik {...formikAttributes}>
-        {(formik) => {
+      <Formik { ...formikAttributes }>
+        { (formik) => {
           return (
             <>
               <h2 className="card-title capitalize">
-                {`${greeting}${firstName ? ", " + firstName : ""}`}
+                { `${greeting}${firstName ? ", " + firstName : ""}` }
               </h2>
-              <p>{email ?? "Update your email address"}</p>
+              <p>{ email ?? "Update your email address" }</p>
               <Form>
                 <TextInput
-                  label={"First Name"}
-                  name={"firstName"}
-                  type={"text"}
-                  // placeholder={"Enter your email address"}
+                  label={ "First Name" }
+                  name={ "firstName" }
+                  type={ "text" }
+                // placeholder={"Enter your email address"}
                 />
 
                 <TextInput
-                  label={"Last Name"}
-                  name={"lastName"}
-                  type={"text"}
-                  // placeholder={"Enter password"}
+                  label={ "Last Name" }
+                  name={ "lastName" }
+                  type={ "text" }
+                // placeholder={"Enter password"}
                 />
 
                 <TextInput
-                  label={"Email"}
-                  name={"email"}
-                  type={"email"}
-                  // placeholder={"Enter password"}
+                  label={ "Email" }
+                  name={ "email" }
+                  type={ "email" }
+                // placeholder={"Enter password"}
                 />
 
                 <CustomSelect
                   labelText="Gender"
-                  optionText={"Select an option"}
-                  options={optionsForGender}
-                  required={true}
+                  optionText={ "Select an option" }
+                  options={ optionsForGender }
+                  required={ true }
                 />
 
                 <TextInput
-                  label={"Address"}
-                  name={"address"}
-                  type={"text"}
-                  // placeholder={"Enter password"}
+                  label={ "Address" }
+                  name={ "address" }
+                  type={ "text" }
+                // placeholder={"Enter password"}
                 />
 
                 <button
-                  className={`btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content`}
+                  className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content` }
                   disabled={
                     formik.isSubmitting || !formik.isValid || !formik.dirty
                   }
                   type="submit"
                 >
-                  {isLoading ? (
+                  { isLoading ? (
                     <>
-                      <span className={`loading loading-bars`} />
+                      <span className={ `loading loading-bars` } />
                     </>
                   ) : (
                     "Update Profile"
-                  )}
+                  ) }
                 </button>
               </Form>
             </>
           );
-        }}
+        } }
       </Formik>
     </AuthLayout>
   );
