@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { storageService } from '../../services';
 
 const initialState = {
     subscriptions: JSON.parse(sessionStorage.getItem('subscriptions')) || [],
@@ -19,6 +18,6 @@ const subscriptionsSlice = createSlice({
     reducers
 });
 
-export const { setAuthToken, setOTP, setPhoneNumber, setAuthData } = subscriptionsSlice.actions;
+export const { addNewSubscription } = subscriptionsSlice.actions;
 
 export default subscriptionsSlice.reducer;

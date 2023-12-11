@@ -9,12 +9,14 @@ import Modal from "../../components/modal/Index";
 import Subscription from "../../components/subscription/Index";
 import CustomButton from "../../components/CustomButton";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const Disposal = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
   const [isModalOpen, setModalOpen] = useState(true);
-  const firstTime = !true;
+  const { subscriptions } = useSelector(state => state.subscriptions)
+
 
   const formik = useFormik({
     initialValues: {
@@ -65,7 +67,7 @@ const Disposal = () => {
     <AuthLayout>
       <div className="flex items-center justify-between">
         <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
-        { !firstTime && (
+        { subscriptions.length > 0 && (
           <CustomButton
             containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
             buttonText="Add New Location"
@@ -74,7 +76,7 @@ const Disposal = () => {
       </div>
 
       <form onSubmit={ formik.handleSubmit } className="flex flex-col gap-2">
-        { firstTime ? (
+        { subscriptions.length === 0 ? (
           <>
             <CustomSelect
               name={ "binRequest" }
@@ -120,7 +122,7 @@ const Disposal = () => {
           value={ formik.values.location }
           options={ optionsForLocation }
           errorText={ formik.touched.location && formik.errors.location }
-          disabled={ !firstTime }
+          disabled={ subscriptions.length > 0 }
           style={ { cursor: "not-allowed", color: "#999" } }
         />
 
@@ -136,7 +138,7 @@ const Disposal = () => {
           inputError={
             formik.touched.pickupAddress && formik.errors.pickupAddress
           }
-          readOnly={ !firstTime }
+          readOnly={ subscriptions.length > 0 }
         />
 
         <Button
