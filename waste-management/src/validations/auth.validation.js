@@ -5,13 +5,18 @@ export const DisposalForm = () => {
     binRequest: Yup.string()
       .oneOf(["Yes", "No"], "Please select an option")
       .required("Required"),
-    binQuantity: Yup.number()
-      .positive()
-      .integer()
-      .required("Quantity must be a positive number"),
+    binQuantity: Yup.string()
+      .oneOf(["1", "2"], "Please select an option")
+      .test("binQuantity", "Required", function (value) {
+        const { binRequest } = this.parent;
+        if (binRequest === "Yes" && !value) {
+          return false;
+        }
+        return true;
+      }),
     location: Yup.string()
       .oneOf(
-        ["Alimosho", "Yaba", "Ilupeju", "Ketu"],
+        ["Alimosho", "Yaba", "Surulere", "Lagos Island", "Lekki"],
         "Invalid Location Selected"
       )
       .required("Required"),
@@ -28,21 +33,39 @@ export const FeedbackForm = () => {
   });
 };
 
-export const SignupSchemaEmail = () => {
+export const SignupSchema = () => {
   return Yup.object({
-    organizationName: Yup.string().required("This field is required"),
-    adminFirstName: Yup.string().required("This field is required"),
-    adminLastName: Yup.string().required("This field is required"),
+    firstName: Yup.string().required("This field is required"),
+    lastName: Yup.string().required("This field is required"),
+    otherName: Yup.string(),
+    phoneNumber: Yup.string()
+      .required("Enter your phone number")
+      .matches(/^[^0].*$/, "Do not include the leading '0'")
+      .matches(/^[789]\d{9}$/, "Enter a valid phone number"),
     email: Yup.string()
       .required("This field is required")
       .email("Invalid email address"),
     password: Yup.string()
       .required("This field is required")
-      .min(10, "Password must be 10 characters long")
-      .matches(/[A-Z]/, "Password requires an uppercase letter")
-      .matches(/[a-z]/, "Password requires a lowercase letter")
-      .matches(/[0-9]/, "Password requires a number")
-      .matches(/[^\w]/, "Password requires a special character"),
+      .matches(
+        /^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[^\w]).{10,}$/,
+        "Must match the specificatioins below"
+      ),
+    // .min(10, "Password must be 10 characters long")
+    // .matches(/[A-Z]/, "Password requires an uppercase letter")
+    // .matches(/[a-z]/, "Password requires a lowercase letter")
+    // .matches(/[0-9]/, "Password requires a number")
+    // .matches(/[^\w]/, "Password requires a special character"),
+    confirmPassword: Yup.string()
+      .required("Confirm your password")
+      .oneOf([Yup.ref("password"), null], "Passwords must match"),
+  });
+};
+
+export const LoginSchema = () => {
+  return Yup.object({
+    email: Yup.string().required("This field is required").email("Invalid email address"),
+    password: Yup.string().required("This field is required"),
   });
 };
 

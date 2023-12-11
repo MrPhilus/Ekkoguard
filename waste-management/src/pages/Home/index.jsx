@@ -38,12 +38,12 @@ const Home = () => {
             <span></span>
             <span></span>
             <span></span>
-            <span>SERVICES</span>
+            <span>GET STARTED</span>
           </button>
           <CustomButton
             onClick={goToServices}
             containerStyle={styles.altButton}
-            buttonText={"SERVICES"}
+            buttonText={"GET STARTED"}
           />
         </section>
       </main>

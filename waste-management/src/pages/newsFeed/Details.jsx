@@ -10,7 +10,7 @@ const Details = () => {
   }, []);
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center p-10">
-      {isLoading ? (
+      { isLoading ? (
         <div className=" w-full h-full flex flex-col gap-4 justify-evenly p-2">
           <div className="skeleton h-80 w-full"></div>
           <div className="skeleton h-4 w-28"></div>
@@ -23,13 +23,15 @@ const Details = () => {
           </div>
         </div>
       ) : (
-        <div className=" w-full h-full flex flex-col gap-4 justify-between">
-          <div className="h-80 w-full">
-            <img className="w-full h-full" src={img} alt="" />
+        <div className=" w-full h-full flex flex-col gap-4 items-center justify-between p-8">
+          <div className="text-4xl font-bold">
+            Lorem, ipsum consectetur adipisicing elit.
           </div>
-          <div className="flex flex-col gap-4">
-          <div className="">Lorem, ipsum.</div>
-            <div className=" h-full w-full">
+          <div className="h-80 w-full">
+            <img className="w-full h-full" src={ img } alt="" />
+          </div>
+          <div className="flex flex-col items-center justify-center">
+            <div className="h-full w-full">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
               eaque quibusdam voluptate hic ut omnis, itaque at sed pariatur
               repellendus quasi amet harum nihil vel libero nostrum porro
@@ -71,13 +73,13 @@ const Details = () => {
               eius enim voluptates perspiciatis accusamus excepturi ut, ipsam
               aliquam dolorum eveniet explicabo culpa blanditiis vitae tenetur.
               Sint laborum esse sit doloribus ratione reprehenderit itaque sequi
-              blanditiis impedit nobis distinctio, reiciendis obcaecati, omnis
-              debitis sapiente vitae harum? Quod assumenda quos ad officiis fuga
-              vitae itaque quasi, doloremque
+              blanditiis impedit nobis distinctio, reiciendis obcaecati
             </div>
           </div>
+
+          <h1 className="text-black">COMMENTS</h1>
         </div>
-      )}
+      ) }
     </div>
   );
 };

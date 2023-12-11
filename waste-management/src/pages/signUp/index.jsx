@@ -1,163 +1,169 @@
-import { useFormik } from "formik";
+import { Form, Formik } from "formik";
 import AuthLayout from "../../components/layouts/AuthLayout";
-import CustomInput from "../../components/customInputs/CustomInputs";
-import ErrorFields from "../../components/error/ErrorFields";
-import { SignupSchemaEmail } from "../../validations";
-import Button from "../../components/button";
-import { ButtonSize, ButtonState } from "../../components/button/enum";
-import { showToast } from "../../utils";
+import { SignupSchema } from "../../validations";
+import { InputCriteria, TextInput } from "../../components/customInputs/CustomTextInput";
+import { useSignUpMutation } from "../../services/identityService";
+import { showToast } from "../../utils/toastify";
+import { useEffect, useState } from "react";
+import { Link, Navigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { setPhoneNumber } from "../../redux/slices/authSlice";
 
 const GettingStarted = () => {
-  const formik = useFormik({
+  const validationSchema = SignupSchema()
+  const [formError, setFormError] = useState()
+  const [signUp, { data, error, isLoading }] = useSignUpMutation()
+  const dispatch = useDispatch()
+
+  const formikAttributes = {
     initialValues: {
-      firstName: "",
-      lastName: "",
-      otherName: "",
-      email: "",
-      password: "",
+      firstName: '',
+      lastName: '',
+      otherName: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
+      phoneNumber: '',
     },
-    validationSchema: SignupSchemaEmail,
-    onSubmit: handleSubmit,
-  });
-
-  function handleSubmit(values) {
-    showToast(
-      <>
-        Complete Profile Error <br />
-        <span className="font-normal"> Incomplete profile input fields</span>
-      </>,
-      "error",
-      {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "rgba(253, 232, 232, 1)",
-          color: "rgba(200, 30, 30, 1)",
-          fontWeight: "bold",
-        },
+    validationSchema,
+    onSubmit: async (values) => {
+      setFormError(null)
+      const v = {
+        firstName: values.firstName,
+        lastName: values.lastName,
+        otherName: values.otherName,
+        email: values.email,
+        phoneNumber: '234' + values.phoneNumber,
+        password: values.password,
       }
-    );
+      dispatch(setPhoneNumber(v.phoneNumber))
 
-    showToast(
-      <>
-        Email already in use
-        <br />
-        <span className="font-normal">
-          {" "}
-          Login to your account, if registered.
-        </span>
-      </>,
-      "error",
-      {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "rgba(253, 232, 232, 1)",
-          color: "rgba(200, 30, 30, 1)",
-          fontWeight: "bold",
-        },
+      try {
+        await signUp(v)
+      } catch (err) {
+        console.log(err.message)
+        setFormError(err.message)
       }
-    );
-
-    showToast(
-      <>
-        Registration Successful
-        <br />
-      </>,
-      "success",
-      {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "rgba(4, 108, 78, 0.1)",
-          color: "#148519",
-          fontWeight: "bold",
-        },
-      }
-    );
-    console.log(values);
+    },
   }
+
+  useEffect(() => {
+    if (error) showToast(error.data.detail, 'error', error.data.title)
+    if (data && data?.status === "CREATED") (
+      dispatch(setPhoneNumber(data.data.phoneNumber)),
+      showToast("Verify phone number to continue!", 'success', "Account Created Successfully")
+    )
+    // console.log(auth.phoneNumber)
+  }, [error, data])
+
+  if (data && data?.status === "CREATED") return <Navigate to={ '/verification' } />
 
   return (
     <AuthLayout>
-      <form className="flex flex-col gap-1" onSubmit={formik.handleSubmit}>
-        <CustomInput
-          inputError={formik.touched.firstName && formik.errors.firstName}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.firstName}
-          type="text"
-          labelText="First Name"
-          placeholder={"Enter first name"}
-          name="firstName"
-        />
+      { formError || error ?
+        <div div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
+          <strong>An error occured!</strong>
+          { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
+          }
+        </div> : ''
+      }
 
-        <CustomInput
-          inputError={formik.touched.lastName && formik.errors.lastName}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.lastName}
-          type="text"
-          labelText="Last Name"
-          placeholder={"Enter last name"}
-          name="lastName"
-        />
-
-        <CustomInput
-          inputError={formik.touched.otherName && formik.errors.otherName}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.otherName}
-          type="text"
-          labelText="Other Name"
-          placeholder={"Enter other name"}
-          name="otherName"
-        />
-
-        <CustomInput
-          inputError={formik.touched.email && formik.errors.email}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          type="email"
-          labelText="Email Address"
-          placeholder={"Enter email address"}
-          name="email"
-        />
-
-        <CustomInput
-          inputError={formik.touched.password && formik.errors.password}
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          type="password"
-          labelText="Password"
-          placeholder={"Enter Password"}
-          name="password"
-        />
-
-        <ErrorFields password={formik.values.password} formik={formik} />
-
-        <Button
-          value={"Sign Up"}
-          size={ButtonSize.lg}
-          variant={ButtonState.PRIMARY}
-          type={"Button"}
-          onClick={() => formik.handleSubmit()}
-          className={"w-full mt-2"}
-          disabled={!formik.isValid || !formik.dirty}
-        />
-      </form>
-    </AuthLayout>
+      <Formik { ...formikAttributes }>
+        {
+          (formik) => {
+            return (
+              <>
+                <Form>
+                  <TextInput
+                    label={ "First Name" }
+                    name={ "firstName" }
+                    placeholder={ "Enter your first name" }
+                  />
+                  <TextInput
+                    label={ "Last Name" }
+                    name={ "lastName" }
+                    placeholder={ "Enter your last name" }
+                  />
+                  <TextInput
+                    label={ "Other Names (optional)" }
+                    name={ "otherName" }
+                    placeholder={ "Enter other names" }
+                  />
+                  <TextInput
+                    label={ "Email address" }
+                    name={ "email" }
+                    type={ "email" }
+                    placeholder={ "Enter your email address" }
+                  />
+                  <TextInput
+                    label={ "Phone number" }
+                    name={ "phoneNumber" }
+                    type={ "tel" }
+                    placeholder={ "eg. 80XXXXXXXX" }
+                  />
+                  <TextInput
+                    label={ "Password" }
+                    name={ "password" }
+                    type={ "password" }
+                    placeholder={ "Choose a password" }
+                  />
+                  <TextInput
+                    label={ "Confirm Password" }
+                    name={ "confirmPassword" }
+                    type={ "password" }
+                    placeholder={ "Re-enter chosen pasword" }
+                  />
+                  <InputCriteria
+                    name={ "password" }
+                    minLength={ 10 }
+                  />
+                  <InputCriteria
+                    name={ "password" }
+                    criteriaText={ "At least one capital letter" }
+                    regex={ /[A-Z]/ }
+                  />
+                  <InputCriteria
+                    name={ "password" }
+                    criteriaText={ "At least one small letter" }
+                    regex={ /[a-z]/ }
+                  />
+                  <InputCriteria
+                    name={ "password" }
+                    criteriaText={ "At least one numeric character" }
+                    regex={ /[0-9]/ }
+                  />
+                  <InputCriteria
+                    name={ "password" }
+                    criteriaText={ "At least special character such as '! # @ $ %' " }
+                    regex={ /[^\w]/ }
+                  />
+                  { formError || error ?
+                    <div div className="mt-4 px-4 py-8 bg-error/25 rounded-box flex flex-col">
+                      <strong>An error occured!</strong>
+                      { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
+                      }
+                    </div> : ''
+                  }
+                  <button
+                    className={ `btn bg-olive-500 xl:btn-lg w-full capitalize mt-6` }
+                    disabled={ formik.isSubmitting || !formik.isValid || !formik.dirty }
+                    type='submit'
+                  >
+                    {
+                      isLoading ?
+                        <>
+                          <span className={ `loading loading-bars` } />
+                        </> :
+                        "sign in"
+                    }
+                  </button>
+                </Form>
+              </>
+            )
+          }
+        }
+      </Formik>
+    </AuthLayout >
   );
 };
 

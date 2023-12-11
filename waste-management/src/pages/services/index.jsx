@@ -6,11 +6,14 @@ import { useNavigate, Link } from "react-router-dom";
 import { IoMdArrowRoundBack } from "react-icons/io";
 import { FaRegUserCircle } from "react-icons/fa";
 import CustomButton from "../../components/CustomButton";
+import { isAuthenticated } from "../../services/identityService";
 
 import { services } from "./Data";
+import { useSelector } from "react-redux";
 
 const Services = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isLoggedIn = isAuthenticated();
+  const { authData } = useSelector((state) => state.auth);
   const navigate = useNavigate();
 
   const handleBackClick = () => {
@@ -27,46 +30,52 @@ const Services = () => {
 
   return (
     <div>
-      <section className={styles.header}>
-        <IoMdArrowRoundBack className={styles.back} onClick={handleBackClick} />
+      <section className={ styles.header }>
+        <IoMdArrowRoundBack
+          className={ `${styles.back} hover:text-olive-500` }
+          onClick={ handleBackClick }
+        />
 
-        {/* <h1 className="text-2xl font-extrabold">SERVICES</h1> */}
-
-        {!isLoggedIn ? (
+        { isLoggedIn ? (
           <>
             <div className="flex items-center gap-4">
               <Link
                 className="font-semibold hover:text-olive-500"
-                to={"/feedback"}
+                to={ "/feedback" }
               >
-                Feedback
+                Suggestions or Complains?
               </Link>
-              <FaRegUserCircle className={styles.user} onClick={goToProfile} />
+              <FaRegUserCircle
+                title={ authData.firstName + " " + authData.lastName }
+                className={ `${styles.user} hover:text-olive-500` }
+                onClick={ goToProfile }
+              />
             </div>
           </>
         ) : (
           <CustomButton
             containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-24"
             buttonText="Log In"
-            onClick={goToLogin}
-            buttonLink={"/login"}
+            onClick={ goToLogin }
+            buttonLink={ "/login" }
           />
-        )}
+        ) }
       </section>
-      <section className={styles.main}>
-        {services.map((service) => {
+
+      <section className={ styles.main }>
+        { services.map((service) => {
           return (
             <Card
-              key={service.cardTitle}
-              src={service.imgSrc}
-              cardTitle={service.cardTitle}
-              cardHeader={service.cardHeader}
-              cardText={service.cardText}
-              buttonText={service.buttonText}
-              buttonLink={service.buttonLink}
+              key={ service.cardTitle }
+              src={ service.imgSrc }
+              cardTitle={ service.cardTitle }
+              cardHeader={ service.cardHeader }
+              cardText={ service.cardText }
+              buttonText={ service.buttonText }
+              buttonLink={ service.buttonLink }
             />
           );
-        })}
+        }) }
       </section>
     </div>
   );

@@ -79,7 +79,9 @@ const PasswordReset = () => {
         <ErrorFields password={formik.values.password} formik={formik} />
 
         <CustomInput
-          inputError={formik.errors.confirmPassword}
+          inputError={
+            formik.touched.confirmPassword && formik.errors.confirmPassword
+          }
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.confirmPassword}
