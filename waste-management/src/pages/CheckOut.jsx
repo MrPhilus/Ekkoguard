@@ -48,7 +48,7 @@ const CheckOut = () => {
           <div className="">
             {/* <p>Hi {fullName}!</p> */}
             <h2>Payment Successful!</h2>
-            <p>An email confirmation has been sent to {email}.</p>
+            <p>An email confirmation has been sent to { email }.</p>
             <p>
               Please contact Bab for your van and further instructions b@b.com
               08012345678 for the keys to the rig you are renting and further
@@ -119,7 +119,7 @@ const CheckOut = () => {
               </div>
             </div>
           </div>
-        )}
+        ) }
       </div>
     </AuthLayout>
   );

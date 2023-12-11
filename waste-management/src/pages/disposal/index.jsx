@@ -9,14 +9,15 @@ import Modal from "../../components/modal/Index";
 import Subscription from "../../components/subscription/Index";
 import CustomButton from "../../components/CustomButton";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addNewSubscription } from "../../redux/slices/subscriptionSlice";
 
 const Disposal = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
   const [selectedDuration, setSelectedDuration] = useState("");
   const [isModalOpen, setModalOpen] = useState(true);
   const { subscriptions } = useSelector(state => state.subscriptions)
-
+  const dispatch = useDispatch()
 
   const formik = useFormik({
     initialValues: {
@@ -30,7 +31,7 @@ const Disposal = () => {
     validationSchema: DisposalForm(),
     onSubmit: (values) => {
       console.log(values);
-
+      dispatch(addNewSubscription(values))
     },
   });
 
