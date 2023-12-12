@@ -3,7 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Services from "./pages/services";
 import Disposal from "./pages/disposal";
-import WasteRecyclingPage from "./pages/recycling";
+// import WasteRecyclingPage from "./pages/recycling";
 import PageNotFound from "./pages/PageNotFound";
 import SignUp from "./pages/signUp";
 import Login from "./pages/login";
@@ -54,7 +54,7 @@ function App() {
         </Route>
 
         <Route path="/services" element={ <Services /> }>
-          <Route path="recycling" element={ <WasteRecyclingPage /> } />
+          {/* <Route path="recycling" element={ <WasteRecyclingPage /> } /> */ }
           <Route path="disposal" element={ <Disposal /> } />
         </Route>
 
