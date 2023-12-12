@@ -23,7 +23,7 @@ const Disposal = () => {
   const { subscriptions } = useSelector((state) => state.subscriptions);
   const dispatch = useDispatch();
   const authorized = useGuard("/services");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
@@ -64,16 +64,15 @@ const Disposal = () => {
     setSelectedPrice(price);
     setSelectedDuration(duration);
     setModalOpen(false);
-    const newSubId = crypto.randomUUID()
+    const newSubId = crypto.randomUUID();
     formik.setValues({
       ...formik.values,
       selectedPrice: price,
       selectedDuration: duration,
-      id: newSubId
+      id: newSubId,
     });
     formik.handleSubmit();
-    setTimeout(() => navigate(`checkout/${newSubId}`), 200)
-
+    setTimeout(() => navigate(`checkout/${newSubId}`), 200);
   };
 
   if (authorized)
@@ -102,7 +101,7 @@ const Disposal = () => {
           ))
         ) : (
           <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
-            {subscriptions.length > 0 || addingAddress ? (
+            {subscriptions.length === 0 || addingAddress ? (
               <>
                 <CustomSelect
                   name={"binRequest"}
