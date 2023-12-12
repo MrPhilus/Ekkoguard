@@ -13,6 +13,7 @@ const TextArea = ({
   inputErrorRight,
   className,
   readOnly,
+  content,
 }) => {
   return (
     <label className="form-control">
@@ -22,6 +23,7 @@ const TextArea = ({
       <textarea
         id={id}
         name={name}
+        value={value}
         // className="textarea textarea-bordered h-24"
         className={`textarea textarea-bordered w-full h-24  ${
           inputError ? "textarea-error" : ""
@@ -30,7 +32,7 @@ const TextArea = ({
         onBlur={onBlur}
         onChange={onChange}
       >
-        {value}
+        {content}
       </textarea>
       {inputError && (
         <label className="label">
