@@ -17,7 +17,6 @@ const OTPVerification = () => {
     const [resendDisabled, setResendDisabled] = useState(false);
     const dispatch = useDispatch()
     const navigate = useNavigate()
-
     const [sendOTP, { data: OTPData, error: sendOTPError, isLoading: sendingOTP }] = useSendOTPMutation()
     const [verifyOTP, { data: verificationData, error: verificationError, isLoading: verifyingOTP }] = useVerifyOTPMutation()
 
@@ -46,6 +45,7 @@ const OTPVerification = () => {
             destinationNumber: phoneNumber,
             pin: otp
         })
+
     }, [otp])
 
     useEffect(() => {
@@ -63,7 +63,8 @@ const OTPVerification = () => {
         if (sendingOTP) {
             showToast("Sending OTP", "loading", "Please wait.")
         }
-        // console.log(sendOTPError)
+        // console.log(verificationData)
+        // console.log(verificationError)
         // console.log(auth.phoneNumber)
     }, [verificationError, verificationData, OTPData])
 

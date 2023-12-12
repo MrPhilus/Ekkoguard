@@ -50,14 +50,14 @@ function App() {
 
         <Route element={ <Protected /> }>
           <Route path="profile" element={ <Profile /> } />
+          <Route path="disposal/checkout/:id" element={ <CheckOut /> } />
         </Route>
 
         <Route path="/services" element={ <Services /> }>
-
           <Route path="recycling" element={ <WasteRecyclingPage /> } />
           <Route path="disposal" element={ <Disposal /> } />
-
         </Route>
+
 
         <Route path="*" element={ <PageNotFound /> } />
       </Routes>
