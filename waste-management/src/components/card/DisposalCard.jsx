@@ -10,6 +10,7 @@ const DisposalCard = () => {
   const cardTitle = sub ? sub.location : "Location";
   const details = sub ? sub.pickupAddress : "Pickup Address";
   const duration = sub ? sub.selectedDuration : "Subscription type";
+
   return (
     <div className="py-4">
       <div className="card w-full bg-base-100 shadow-xl image-full">
@@ -17,13 +18,25 @@ const DisposalCard = () => {
           <img src={bgImg} alt="background" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">{cardTitle}</h2>
-          <p>{details}</p>
-          <p>{`${duration}ly`}</p>
-          <div className="card-actions justify-end">
-            <button className="btn btn-outline bg-olive-500 text-white">
-              Schedule Pick-up
-            </button>
+          <div className="flex flex-col gap-4 md:gap-7 items-start h-full justify-between">
+            <h2 className="card-title text-2xl md:text-4xl lg:text-5xl text-white">
+              {cardTitle}
+            </h2>
+            <p className="text-sm md:text-base lg:text-lg">{details}</p>
+            <div className="w-full flex items-center justify-between">
+              <p
+                className={
+                  "capitalize font-bold text-lg md:text-2xl lg:text-3xl"
+                }
+              >
+                {`${duration}ly`}
+              </p>
+              <div className="card-actions justify-end">
+                <button className="btn btn-ghost bg-olive-500 text-white">
+                  Schedule Pick-up
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
