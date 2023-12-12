@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import AuthLayout from "../../components/layouts/AuthLayout";
 import { useFormik } from "formik";
 import { FeedbackForm } from "../../validations";
@@ -10,37 +10,45 @@ import { showToast } from "../../utils";
 import { useNavigate } from "react-router-dom";
 
 const Feedback = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [isLoading, setLoading] = useState(false);
+
   const formik = useFormik({
     initialValues: {
       feedbackSubject: "",
       feedbackMessage: "",
     },
     validationSchema: FeedbackForm,
-    onSubmit: handleSubmit,
-  });
+    onSubmit: async (values, { resetForm }) => {
+      setLoading(true); // Set loading state to show loader
 
-  function handleSubmit(values) {
-    showToast(
-      <>
-        Submitted <br />
-      </>,
-      "success",
-      {
-        position: "top-right",
-        autoClose: 3000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "rgba(4, 108, 78, 0.1)",
-          color: "#148519",
-          fontWeight: "bold",
-        },
-      }
-    );
-    console.log(values);
-  }
+      // Simulate a 2-second delay using setTimeout
+      setTimeout(() => {
+        showToast(
+          <>
+            Message Sent <br />
+          </>,
+          "success",
+          {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            style: {
+              backgroundColor: "rgba(0, 100%, 0, 0)",
+              color: "#148519",
+              fontWeight: "bold",
+            },
+          }
+        );
+
+        setLoading(false); // Reset loading state
+        console.log(values);
+        resetForm();
+      }, 2000);
+    },
+  });
 
   return (
     <AuthLayout>
@@ -73,15 +81,19 @@ const Feedback = () => {
           }
         />
 
-        <Button
-          value={"Submit"}
-          size={ButtonSize.lg}
-          variant={ButtonState.PRIMARY}
-          type={"Button"}
-          onClick={handleSubmit}
-          className={"w-full mt-2"}
-          disabled={!formik.isValid || !formik.dirty}
-        />
+        <button
+          className={`btn bg-olive-500 xl:btn-lg w-full capitalize mt-6 text-neutral-content`}
+          disabled={formik.isSubmitting || !formik.isValid || !formik.dirty}
+          type="submit"
+        >
+          {isLoading ? (
+            <>
+              <span className={`loading loading-bars`} />
+            </>
+          ) : (
+            "Submit Message"
+          )}
+        </button>
       </form>
     </AuthLayout>
   );

@@ -1,5 +1,6 @@
 import CustomButton from "../CustomButton";
 import styles from "./card.module.css";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({
   src,
@@ -9,8 +10,15 @@ const Card = ({
   disabled,
   buttonText,
   buttonLink,
-  onClick,
+  // onClick,
 }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    if (buttonLink) {
+      navigate(buttonLink);
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.card}>
@@ -21,7 +29,7 @@ const Card = ({
           <p>{cardText}</p>
           <CustomButton
             disabled={disabled}
-            onClick={onClick}
+            onClick={handleCardClick}
             containerStyle={styles.button}
             buttonLink={buttonLink}
             buttonText={buttonText}
