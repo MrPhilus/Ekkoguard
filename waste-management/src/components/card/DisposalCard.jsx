@@ -15,7 +15,7 @@ const DisposalCard = ({ id, cardTitle, details, duration, }) => {
     <div className="py-4">
       <div className="card w-full bg-base-100 shadow-xl image-full">
         <figure>
-          <img src={ bgImg } alt="background" />
+          <img src={ bggImg } alt="background" />
         </figure>
         <div className="card-body">
           <h2 className="card-title">{ cardTitle }</h2>

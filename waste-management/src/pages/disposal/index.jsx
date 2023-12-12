@@ -81,13 +81,7 @@ const Disposal = () => {
               buttonText="Add New Location"
               onClick={ () => setAddingAddress(true) }
             />
-          ) : (
-            <CustomButton
-              containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
-              buttonText="Add New Location"
-              onClick={ () => setAddingAddress(false) }
-            />
-          ) }
+          ) : null }
         </div>
 
         { subscriptions.length > 0 ? (
