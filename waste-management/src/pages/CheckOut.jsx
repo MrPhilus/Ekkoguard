@@ -79,7 +79,7 @@ const CheckOut = () => {
             <p>An email confirmation has been sent to { authData.email }.</p>
 
             <p>
-              The next pickup for { subscription.locatiion } is on
+              Details for the next pickup will  be sent to  { subscription.locatiion }
             </p>
             <Link to="/services" className="">
               back to services
