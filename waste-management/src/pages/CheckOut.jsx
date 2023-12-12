@@ -16,9 +16,9 @@ const CheckOut = () => {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [address, setAddress] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  // const [phoneNumber, setPhoneNumber] = useState("");
   const amount = 70000 || 0;
-  const { authData } = useSelector(state => state.auth)
+  const { authData, phoneNumber } = useSelector(state => state.auth)
   const { subscriptions } = useSelector(state => state.subscriptions)
 
   const [subscription] = subscriptions.map((sub) => {
@@ -27,19 +27,16 @@ const CheckOut = () => {
     }
   })
 
-
-  console.log(subscription)
+  console.log(subscriptions)
 
   const formikAttributes = {
     initialValues: {
       fullName: authData.firstName + ' ' + authData.lastName,
       email: authData.email,
-      phoneNumber: authData.phoneNumber
+      phoneNumber
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values)
-    }
+
   }
 
   const publicKey = "pk_test_23f26f6e7e1df8a8e8fbf63d7e8e652399a1ab51";
@@ -70,6 +67,8 @@ const CheckOut = () => {
     console.log(`Sending confirmation email to ${toEmail}`);
     // Implement email sending logic here
   };
+
+  console.log(Number(subscription.selectedPrice.replace(',', '')) * 100)
   return (
     <AuthLayout>
       <div className="">
@@ -92,9 +91,8 @@ const CheckOut = () => {
             <div>
               <h3>Checkout Details</h3>
               <p>
-                you are paying <strong>&#8358;{ amount }</strong> for: { subscription.selectedDuration }ly Subscription
+                you are paying <strong>&#8358;{ subscription?.selectedPrice }</strong> for: { subscription?.selectedDuration }ly Subscription
               </p>
-              <p>Book Name: { PriceCards.header }</p>
             </div>
             {/* <div className="checkout-form">
               <div className="flex flex-col gap-4">
@@ -155,22 +153,25 @@ const CheckOut = () => {
                       name={ "fullName" }
                       label={ "Full Name" }
                       type={ "text" }
+                      readOnly
                     />
                     <TextInput
                       name={ "email" }
                       label={ "Email Address" }
                       type={ "email" }
+                      readOnly
                     />
                     <TextInput
                       name={ "phoneNumber" }
                       label={ "Phone Number" }
-                      type={ "tel" }
+                      type={ "text" }
+                      readOnly
                     />
                     <PaystackButton
                       text="Pay with Paystack"
                       className="btn w-full bg-olive-500 text-white"
-                      email={ email }
-                      amount={ amount } // Convert to kobo
+                      email={ authData.email }
+                      amount={ Number(subscription.selectedPrice.replace(',', '')) * 100 } // Convert to kobo
                       publicKey={ publicKey }
                       onSuccess={ onSuccess }
                       onClose={ onClose }
