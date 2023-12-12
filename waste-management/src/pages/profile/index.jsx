@@ -152,9 +152,9 @@ const Profile = () => {
 
                 <TextInput
                   label={"Address"}
-                  readOnly
                   name={"address"}
                   type={"text"}
+                  readOnly={isUpdating ? false : true}
                   // placeholder={"Enter password"}
                 />
 
