@@ -7,8 +7,7 @@ const initialState = {
 
 const reducers = {
     addNewSubscription: (state, action) => {
-        const randomId = crypto.randomUUID()
-        const newSubscription = { ...action.payload, id: randomId }
+        const newSubscription = { ...action.payload }
         sessionStorage.setItem('subscriptions', JSON.stringify([...state.subscriptions, newSubscription]))
         state.subscriptions = [...state.subscriptions, newSubscription]
         showToast("Subscription added", "success")

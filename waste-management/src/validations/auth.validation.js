@@ -92,7 +92,7 @@ export const CheckoutSchema = () => {
     phoneNumber: Yup.string()
       .required("Enter your phone number")
       .matches(/^[^0].*$/, "Do not include the leading '0'")
-      .matches(/^[789]\d{9}$/, "Enter a valid phone number"),
+      .matches(/^234[789]\d{9}$/, "Enter a valid phone number"),
   });
 };
 

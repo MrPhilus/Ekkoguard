@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addNewSubscription } from "../../redux/slices/subscriptionSlice";
 import { useGuard } from "../../hooks/useGuard";
 import DisposalCard from "../../components/card/DisposalCard";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const Disposal = () => {
   const [selectedPrice, setSelectedPrice] = useState("");
@@ -22,6 +23,7 @@ const Disposal = () => {
   const { subscriptions } = useSelector((state) => state.subscriptions);
   const dispatch = useDispatch();
   const authorized = useGuard("/services");
+  const navigate = useNavigate()
 
   const formik = useFormik({
     initialValues: {
@@ -62,12 +64,16 @@ const Disposal = () => {
     setSelectedPrice(price);
     setSelectedDuration(duration);
     setModalOpen(false);
+    const newSubId = crypto.randomUUID()
     formik.setValues({
       ...formik.values,
       selectedPrice: price,
       selectedDuration: duration,
+      id: newSubId
     });
     formik.handleSubmit();
+    setTimeout(() => navigate(`checkout/${newSubId}`), 200)
+
   };
 
   if (authorized)
