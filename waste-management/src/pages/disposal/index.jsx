@@ -75,103 +75,111 @@ const Disposal = () => {
       <AuthLayout>
         <div className="flex items-center justify-between">
           <h1 className="font-extrabold text-xl">SCHEDULE DISPOSAL</h1>
-          { subscriptions.length > 0 ? (
+          {subscriptions.length > 0 ? (
             <CustomButton
               containerStyle="btn btn-outline btn-sm text-white bg-olive-500 w-fit"
               buttonText="Add New Location"
-              onClick={ () => setAddingAddress(true) }
+              onClick={console.log("clicked")}
             />
-          ) : null }
+          ) : null}
         </div>
 
-        { subscriptions.length > 0 ? (
-          subscriptions.map((sub) => <DisposalCard key={ sub.id } { ...sub } />)
+        {subscriptions.length > 0 ? (
+          subscriptions.map((sub) => (
+            <DisposalCard
+              cardTitle={sub.location}
+              details={sub.pickupAddress}
+              duration={sub.selectedDuration}
+              key={sub.id}
+              {...sub}
+            />
+          ))
         ) : (
-          <form onSubmit={ formik.handleSubmit } className="flex flex-col gap-2">
-            { subscriptions.length === 0 || addingAddress ? (
+          <form onSubmit={formik.handleSubmit} className="flex flex-col gap-2">
+            {subscriptions.length > 0 || addingAddress ? (
               <>
                 <CustomSelect
-                  name={ "binRequest" }
-                  labelText={ "Do You Want a Bin?" }
-                  optionText={ "Select an option" }
-                  required={ true }
-                  type={ "text" }
-                  onBlur={ formik.handleBlur }
-                  onChange={ formik.handleChange }
-                  value={ formik.values.binRequest }
-                  options={ optionsForBinRequest }
+                  name={"binRequest"}
+                  labelText={"Do You Want a Bin?"}
+                  optionText={"Select an option"}
+                  required={true}
+                  type={"text"}
+                  onBlur={formik.handleBlur}
+                  onChange={formik.handleChange}
+                  value={formik.values.binRequest}
+                  options={optionsForBinRequest}
                   errorText={
                     formik.touched.binRequest && formik.errors.binRequest
                   }
                 />
 
-                { formik.values.binRequest === "Yes" && (
+                {formik.values.binRequest === "Yes" && (
                   <CustomSelect
-                    name={ "binQuantity" }
-                    labelText={ "Quantity of Bins Needed" }
-                    optionText={ "Select an option" }
-                    required={ true }
-                    type={ "text" }
-                    onBlur={ formik.handleBlur }
-                    onChange={ formik.handleChange }
-                    value={ formik.values.binQuantity }
-                    options={ optionsForBinQuantity }
+                    name={"binQuantity"}
+                    labelText={"Quantity of Bins Needed"}
+                    optionText={"Select an option"}
+                    required={true}
+                    type={"text"}
+                    onBlur={formik.handleBlur}
+                    onChange={formik.handleChange}
+                    value={formik.values.binQuantity}
+                    options={optionsForBinQuantity}
                     errorText={
                       formik.touched.binQuantity && formik.errors.binQuantity
                     }
                   />
-                ) }
+                )}
               </>
-            ) : null }
+            ) : null}
 
             <CustomSelect
-              name={ "location" }
-              labelText={ "Area" }
-              placeholder={ "Select Location" }
-              required={ true }
-              optionText={ "Select an option" }
-              type={ "text" }
-              onBlur={ formik.handleBlur }
-              onChange={ formik.handleChange }
-              value={ formik.values.location }
-              options={ optionsForLocation }
-              errorText={ formik.touched.location && formik.errors.location }
-              disabled={ subscriptions.length > 0 }
-              style={ { cursor: "not-allowed", color: "#999" } }
+              name={"location"}
+              labelText={"Area"}
+              placeholder={"Select Location"}
+              required={true}
+              optionText={"Select an option"}
+              type={"text"}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.location}
+              options={optionsForLocation}
+              errorText={formik.touched.location && formik.errors.location}
+              disabled={subscriptions.length > 0}
+              style={{ cursor: "not-allowed", color: "#999" }}
             />
 
             <CustomInput
-              name={ "pickupAddress" }
-              labelText={ "Pickup Address" }
-              placeholder={ "Enter address" }
-              required={ true }
-              type={ "text" }
-              onBlur={ formik.handleBlur }
-              onChange={ formik.handleChange }
-              value={ formik.values.pickupAddress }
+              name={"pickupAddress"}
+              labelText={"Pickup Address"}
+              placeholder={"Enter address"}
+              required={true}
+              type={"text"}
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.pickupAddress}
               inputError={
                 formik.touched.pickupAddress && formik.errors.pickupAddress
               }
-              readOnly={ subscriptions.length > 0 }
+              readOnly={subscriptions.length > 0}
             />
 
             <Button
-              value={ "Submit" }
-              size={ ButtonSize.lg }
-              variant={ ButtonState.PRIMARY }
-              type={ "Button" }
-              onClick={ () => document.getElementById("my_modal_5").showModal() }
-              className={ "w-full mt-2" }
-              disabled={ !formik.isValid || !formik.dirty }
+              value={"Submit"}
+              size={ButtonSize.lg}
+              variant={ButtonState.PRIMARY}
+              type={"Button"}
+              onClick={() => document.getElementById("my_modal_5").showModal()}
+              className={"w-full mt-2"}
+              disabled={!formik.isValid || !formik.dirty}
             />
 
-            { isModalOpen && (
+            {isModalOpen && (
               <Modal modalTitle="Subscription Plans">
-                <Subscription onPriceSelect={ handlePriceSelection } />
+                <Subscription onPriceSelect={handlePriceSelection} />
               </Modal>
-            ) }
+            )}
           </form>
-        ) }
+        )}
       </AuthLayout>
     );
 };
