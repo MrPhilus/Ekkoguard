@@ -86,7 +86,8 @@ const OTPVerification = () => {
     if (sendingOTP) {
       showToast("Sending OTP", "loading", "Please wait.");
     }
-    // console.log(sendOTPError)
+    // console.log(verificationData)
+        // console.log(verificationError)
     // console.log(auth.phoneNumber)
   }, [verificationError, verificationData, OTPData]);
 

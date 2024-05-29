@@ -13,11 +13,14 @@ const extendedApi = apiSlice.injectEndpoints({
         }),
 
         verifyOTP: builder.mutation({
-            query: (credentials) => ({
-                url: "/otp/verifyOtp",
-                method: "POST",
-                body: JSON.stringify(credentials)
-            }),
+            query: (credentials) => {
+                // console.log(credentials)
+                return ({
+                    url: "/otp/verifyOtp",
+                    method: "POST",
+                    body: JSON.stringify(credentials)
+                })
+            },
         }),
 
         async onQueryStarted(_, { queryFulfilled }) {

@@ -37,7 +37,7 @@ const CardSkeleton = ({
         } catch (error) {
           console.error("Error fetching data:", error);
         }
-      }, 3000); // Simulate 3 seconds delay
+      }, 1000);
     };
 
     fetchData();

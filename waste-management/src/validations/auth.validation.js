@@ -85,6 +85,17 @@ export const LoginSchemaEmail = () => {
   });
 };
 
+export const CheckoutSchema = () => {
+  return Yup.object({
+    fullName: Yup.string().required("This field is required"),
+    email: Yup.string().required("This field is required"),
+    phoneNumber: Yup.string()
+      .required("Enter your phone number")
+      .matches(/^[^0].*$/, "Do not include the leading '0'")
+      .matches(/^234[789]\d{9}$/, "Enter a valid phone number"),
+  });
+};
+
 export const ForgotPasswordSchema = () => {
   return Yup.object().shape({
     email: Yup.string()

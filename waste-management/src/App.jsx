@@ -29,35 +29,36 @@ function App() {
     <>
       <ToastContainer />
       <Routes>
-        <Route path="/" element={ <Home /> } />
-        <Route path="/signup" element={ <SignUp /> } />
-        <Route path="/verification" element={ <OTPVerification /> } />
-        <Route path="/login" element={ <Login /> } />
-        <Route path="/forgotpassword" element={ <ForgotPassword /> } />
-        <Route path="/passwordreset" element={ <PasswordReset /> } />
-        <Route path="/pagenotfound" element={ <PageNotFound /> } />
-        <Route path="/comingsoon" element={ <ComingSoon /> } />
-        <Route path="/newsfeed" element={ <NewsFeed /> } />
-        <Route path="/details" element={ <Details /> } />
-        <Route path="feedback" element={ <Feedback /> } />
-        <Route path="history" element={ <History /> } />
-        <Route path="checkout" element={ <CheckOut /> } />
-        {/* <Route path="/services" element={<Services />} /> */ }
-        {/* <Route element={<ProtectedRoute />}> */ }
-        {/* </Route> */ }
+        <Route path="/" element={<Home />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/verification" element={<OTPVerification />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgotpassword" element={<ForgotPassword />} />
+        <Route path="/passwordreset" element={<PasswordReset />} />
+        <Route path="/pagenotfound" element={<PageNotFound />} />
+        <Route path="/comingsoon" element={<ComingSoon />} />
+        <Route path="/newsfeed" element={<NewsFeed />} />
+        <Route path="/details" element={<Details />} />
+        <Route path="feedback" element={<Feedback />} />
+        <Route path="history" element={<History />} />
+        <Route path="checkout" element={<CheckOut />} />
+        {/* <Route path="/services" element={<Services />} /> */}
+        {/* <Route element={<ProtectedRoute />}> */}
+        {/* </Route> */}
 
-        <Route path="disposal" element={ <Disposal /> } />
+        <Route path="disposal" element={<Disposal />} />
 
-        <Route element={ <Protected /> }>
-          <Route path="profile" element={ <Profile /> } />
+        <Route element={<Protected />}>
+          <Route path="profile" element={<Profile />} />
+          <Route path="disposal/checkout/:id" element={<CheckOut />} />
         </Route>
 
-        <Route path="/services" element={ <Services /> }>
-          <Route path="recycling" element={ <WasteRecyclingPage /> } />
-          <Route path="disposal" element={ <Disposal /> } />
+        <Route path="/services" element={<Services />}>
+          <Route path="recycling" element={<WasteRecyclingPage />} />
+          <Route path="disposal" element={<Disposal />} />
         </Route>
 
-        <Route path="*" element={ <PageNotFound /> } />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
     </>
   );

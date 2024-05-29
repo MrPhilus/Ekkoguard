@@ -57,7 +57,7 @@ const Login = () => {
           accessToken: data?.data.token || "",
         })
       );
-      showToast("You will be redirected shortly", "success", "Login Succesful");
+      showToast("success", "Login Succesful");
       setTimeout(() => {
         navigate("/services");
       }, 300);
