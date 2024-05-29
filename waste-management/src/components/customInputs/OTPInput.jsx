@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { setOTP } from '../../redux/slices/authSlice'
 
+
 const OTPInput = () => {
     const [otpValues, setOtpValues] = useState(['', '', '', '']);
     const inputRefs = [useRef(), useRef(), useRef(), useRef()];

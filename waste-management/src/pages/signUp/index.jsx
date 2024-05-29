@@ -61,7 +61,7 @@ const GettingStarted = () => {
   return (
     <AuthLayout>
       { formError || error ?
-        <div div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
+        <div className="px-4 py-8 bg-error/25 rounded-box flex flex-col">
           <strong>An error occured!</strong>
           { (formError || error.data.details) ?? <p>Please <Link to={ `/verification` } className={ `link ` }>Verify your account</Link> or use a different phone number</p>
           }
